@@ -1,0 +1,969 @@
+<title>واژه‌باغ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Lalezar&family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+/* Layout: a phone app. One column per tab (Today / Review / Cards / Garden), fixed bottom tab bar. Garden metaphor: seed = new card, sprout = learning, tree = mature. */
+:root{
+  --bg:#f2f5ef; --surface:#ffffff; --ink:#1d2a20; --muted:#5f6e62; --line:#d9e2d6;
+  --leaf:#2f6b3f; --leaf-soft:#dcebdc; --on-leaf:#ffffff;
+  --pom:#b8433a; --pom-soft:#f7e1dd; --sun:#c98712; --sun-soft:#faecd2;
+  --display:"Lalezar","Vazirmatn",system-ui,sans-serif;
+  --body:"Vazirmatn",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+  --latin:"Fraunces",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1611; --surface:#172119; --ink:#e4ece3; --muted:#98a898; --line:#2a3a2c;
+  --leaf:#6cc283; --leaf-soft:#1d3323; --on-leaf:#0b1a0f;
+  --pom:#e8796d; --pom-soft:#3a1f1c; --sun:#f0b64e; --sun-soft:#3a2e16; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1611; --surface:#172119; --ink:#e4ece3; --muted:#98a898; --line:#2a3a2c;
+  --leaf:#6cc283; --leaf-soft:#1d3323; --on-leaf:#0b1a0f;
+  --pom:#e8796d; --pom-soft:#3a1f1c; --sun:#f0b64e; --sun-soft:#3a2e16; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7}
+.wrap{max-width:560px;margin:0 auto;padding-block:18px calc(96px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.view{display:flex;flex-direction:column;gap:16px}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1{font-family:var(--display);font-weight:400;font-size:2.1rem;line-height:1.15;color:var(--leaf)}
+h2{font-size:1.1rem;font-weight:800}
+h3{font-size:.98rem;font-weight:800}
+p{margin:0}
+.muted{color:var(--muted)} .small{font-size:.8rem;color:var(--muted)}
+.en{direction:ltr;unicode-bidi:isolate}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.head > div{min-width:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{display:inline-block;font-size:.74rem;font-weight:600;padding:1px 10px;border-radius:99px;background:var(--leaf-soft);color:var(--leaf)}
+.chip.sun{background:var(--sun-soft);color:var(--sun)} .chip.pom{background:var(--pom-soft);color:var(--pom)} .chip.gray{background:var(--bg);color:var(--muted)}
+.btn{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:7px 14px;cursor:pointer}
+.btn:hover{border-color:var(--leaf)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.primary{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf);font-weight:700}
+.btn.big{padding:12px 18px;font-size:1.05rem;border-radius:14px}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+.btn.danger{color:var(--pom)}
+:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+input,textarea,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px;width:100%;box-sizing:border-box}
+textarea{resize:vertical;min-height:90px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--muted)}
+
+/* today */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ring{flex:0 0 auto;width:96px;height:96px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .track{stroke:var(--line)} .ring .arc{stroke:var(--leaf);transition:stroke-dashoffset .6s}
+.ring .val{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--display);font-size:1.45rem;line-height:1}
+.ring .val small{display:block;font-family:var(--body);font-size:.66rem;color:var(--muted);margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px;min-width:0}
+.stat b{display:block;font-family:var(--display);font-weight:400;font-size:1.4rem;line-height:1.25}
+.stat span{font-size:.7rem;color:var(--muted)}
+.stat.fire b{color:var(--sun)}
+@media (max-width:380px){.stats{grid-template-columns:repeat(2,1fr)}}
+.banner{border-radius:12px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;background:var(--sun-soft);border:1px solid color-mix(in srgb,var(--sun) 40%,transparent)}
+.banner.ok{background:var(--leaf-soft);border-color:color-mix(in srgb,var(--leaf) 35%,transparent)}
+.banner .dot{flex:0 0 10px;height:10px;border-radius:50%;background:var(--sun);margin-top:8px;animation:pulse 1.6s infinite}
+.banner.ok .dot{background:var(--leaf);animation:none}
+@keyframes pulse{50%{transform:scale(1.5);opacity:.5}}
+.startbox{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.counts{display:flex;gap:18px}
+.counts div{display:flex;flex-direction:column;line-height:1.2}
+.counts b{font-family:var(--display);font-weight:400;font-size:1.7rem}
+.counts .n b{color:var(--leaf)} .counts .d b{color:var(--sun)}
+.counts span{font-size:.75rem;color:var(--muted)}
+
+.tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.task label{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:12px;border:1px solid var(--line);cursor:pointer}
+.task input{appearance:none;flex:0 0 26px;width:26px;height:26px;margin:2px 0 0;padding:0;border:2px solid var(--leaf);border-radius:8px;display:grid;place-items:center;cursor:pointer;background:var(--surface)}
+.task input:checked{background:var(--leaf)}
+.task input:checked::after{content:"";width:7px;height:13px;border:solid var(--on-leaf);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.task .txt{min-width:0;flex:1}
+.task .txt b{display:block;font-weight:600}
+.task .txt small{display:block;color:var(--muted);font-size:.82rem;line-height:1.6}
+.task .tag{flex:0 0 auto;font-size:.68rem;font-weight:700;color:var(--muted);margin-top:4px}
+.task input:checked ~ .txt b{text-decoration:line-through;text-decoration-color:var(--leaf);opacity:.75}
+.task label:has(input:checked){background:var(--leaf-soft)}
+
+/* review */
+.progressbar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.progressbar i{display:block;height:100%;width:0;background:var(--leaf);transition:width .3s}
+.flash{background:var(--surface);border:1px solid var(--line);border-radius:22px;min-height:300px;padding:28px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;cursor:pointer;position:relative}
+.flash .state{position:absolute;top:12px;inset-inline-start:14px}
+.flash .front{font-family:var(--latin);font-weight:800;font-size:2.3rem;line-height:1.15;direction:ltr;overflow-wrap:anywhere;color:var(--ink)}
+.flash .back{font-size:1.25rem;font-weight:700;color:var(--leaf)}
+.flash .ex{direction:ltr;font-family:var(--latin);font-style:italic;font-size:1.05rem;color:var(--muted);max-width:34ch}
+.flash .hint{font-size:.8rem;color:var(--muted)}
+.flash hr{width:60%;border:0;border-top:1px dashed var(--line);margin:4px 0}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.grade{font:inherit;border-radius:14px;border:1px solid var(--line);padding:10px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--surface);color:var(--ink);min-width:0}
+.grade b{font-size:.95rem} .grade span{font-size:.7rem;color:var(--muted)}
+.grade.g1{border-color:var(--pom);background:var(--pom-soft)} .grade.g1 b{color:var(--pom)}
+.grade.g2{border-color:var(--sun);background:var(--sun-soft)} .grade.g2 b{color:var(--sun)}
+.grade.g3{border-color:var(--leaf);background:var(--leaf-soft)} .grade.g3 b{color:var(--leaf)}
+.grade.g4 b{color:var(--ink)}
+.done-box{text-align:center;align-items:center}
+.done-box .big{font-family:var(--display);font-size:3rem;color:var(--leaf);line-height:1}
+
+/* cards */
+.list{display:flex;flex-direction:column;gap:6px}
+.item{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.item .m{min-width:0;flex:1}
+.item .w{font-family:var(--latin);font-weight:600;direction:ltr;text-align:right;overflow-wrap:anywhere}
+.item .t{font-size:.85rem;color:var(--muted);overflow-wrap:anywhere}
+.item .acts{display:flex;gap:2px;flex:0 0 auto}
+.item .acts .btn{padding:4px 8px;font-size:.78rem}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:inherit;font-size:.8rem;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;padding:3px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf)}
+
+/* garden */
+.level{display:flex;flex-direction:column;gap:6px}
+.lvl{font-family:var(--display);font-size:1.3rem;color:var(--sun)}
+.bar{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--leaf));border-radius:99px;transition:width .6s}
+.forest{display:flex;height:16px;border-radius:99px;overflow:hidden;background:var(--line)}
+.forest i{display:block;height:100%}
+.forest .s1{background:var(--sun)} .forest .s2{background:color-mix(in srgb,var(--leaf) 55%,var(--bg))} .forest .s3{background:var(--leaf)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-1px;margin-left:5px}
+.chart{width:100%;height:auto;display:block}
+.chart .b{fill:var(--leaf)} .chart .b.alt{fill:var(--sun)} .chart .base{stroke:var(--line)}
+.chart text{fill:var(--muted);font-family:var(--body);font-size:9px}
+.chart .v{fill:var(--ink);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.cell{font:inherit;font-size:.72rem;aspect-ratio:1;max-width:100%;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;padding:0;display:grid;place-items:center}
+.cell.part{background:var(--sun-soft);color:var(--ink);border-color:color-mix(in srgb,var(--sun) 50%,transparent)}
+.cell.full{background:var(--leaf);color:var(--on-leaf);border-color:var(--leaf)}
+.cell.future{opacity:.5} .cell.now{box-shadow:0 0 0 2px var(--sun)}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.badge{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:10px 6px;border-radius:12px;border:1px dashed var(--line);min-width:0}
+.badge .medal{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:1.1rem;background:var(--bg);color:var(--muted);border:2px solid var(--line)}
+.badge b{font-size:.78rem;line-height:1.4} .badge span{font-size:.68rem;color:var(--muted);line-height:1.4}
+.badge.on{border-style:solid;border-color:color-mix(in srgb,var(--sun) 45%,transparent);background:var(--sun-soft)}
+.badge.on .medal{background:var(--sun);color:var(--on-leaf);border-color:var(--sun)}
+.badge:not(.on){opacity:.65}
+details.card summary{cursor:pointer;font-weight:800}
+.confirm{background:var(--pom-soft);border-radius:10px;padding:10px 12px}
+.sync{font-size:.75rem;color:var(--muted);text-align:center}
+
+/* tab bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:12;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabs nav{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tabs button{font:inherit;font-size:.74rem;background:none;border:0;color:var(--muted);padding:8px 0 10px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;position:relative}
+.tabs svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabs button[aria-selected="true"]{color:var(--leaf);font-weight:700}
+.tabs .badge-n{position:absolute;top:4px;left:calc(50% + 6px);background:var(--pom);color:#fff;font-size:.62rem;border-radius:99px;padding:0 6px;line-height:1.5}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translate(-50%,0);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-weight:600;transition:opacity .25s;z-index:20;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:15;width:100%;height:100%}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="wrap" dir="rtl">
+
+  <!-- TODAY -->
+  <section class="view" id="v-today">
+    <div class="top">
+      <div>
+        <h1>واژه‌باغ</h1>
+        <p class="muted" id="todayLine">برنامه‌ی ۹۰ روزه‌ی لغت انگلیسی</p>
+      </div>
+      <div class="ring" aria-label="پیشرفت امروز">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="track" cx="50" cy="50" r="42" fill="none" stroke-width="10"></circle><circle class="arc" id="ringArc" cx="50" cy="50" r="42" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"></circle></svg>
+        <div class="val"><div><span id="ringPct">۰٪</span><small>کارهای امروز</small></div></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="sDay">۱</b><span>روز از ۹۰</span></div>
+      <div class="stat fire"><b id="sStreak">۰</b><span>زنجیره</span></div>
+      <div class="stat"><b id="sTrees">۰</b><span>لغت آموخته</span></div>
+      <div class="stat"><b id="sXP">۰</b><span>امتیاز XP</span></div>
+    </div>
+    <div id="banner" class="banner"><span class="dot"></span><div id="bannerText">در حال بارگذاری…</div></div>
+    <div class="card">
+      <div class="startbox">
+        <div class="counts">
+          <div class="d"><b id="cDue">۰</b><span>برای مرور</span></div>
+          <div class="n"><b id="cNew">۰</b><span>لغت جدید</span></div>
+        </div>
+        <button class="btn primary big" id="startBtn">شروع مرور</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="head"><div><h2 id="dayTitle">روز ۱</h2><span class="chip" id="dayPhase"></span></div>
+        <div class="row"><button class="btn" id="prevDay" aria-label="روز قبل">→</button><button class="btn" id="todayBtn">امروز</button><button class="btn" id="nextDay" aria-label="روز بعد">←</button></div></div>
+      <ul class="tasks" id="tasks"></ul>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <section class="view" id="v-review" hidden>
+    <div class="head"><h2>مرور</h2><span class="small" id="revCount"></span></div>
+    <div class="progressbar"><i id="revBar"></i></div>
+    <div id="revArea"></div>
+    <p class="small" style="text-align:center">روی کارت بزنید تا جواب نمایش داده شود. صفحه‌کلید: Space و ۱ تا ۴</p>
+  </section>
+
+  <!-- CARDS -->
+  <section class="view" id="v-cards" hidden>
+    <div class="card">
+      <h2 id="formTitle">افزودن لغت</h2>
+      <form id="cardForm" class="view" style="gap:10px">
+        <label class="f" for="fFront">لغت یا عبارت انگلیسی<input id="fFront" class="en" dir="ltr" required autocomplete="off" placeholder="e.g. take a break"></label>
+        <label class="f" for="fBack">معنی<input id="fBack" required autocomplete="off" placeholder="مثلاً: استراحت کردن"></label>
+        <label class="f" for="fEx">جمله‌ی نمونه (اختیاری)<input id="fEx" class="en" dir="ltr" autocomplete="off" placeholder="Let's take a ten-minute break."></label>
+        <div class="row"><button class="btn primary" type="submit" id="fSubmit">افزودن به باغ</button><button class="btn ghost" type="button" id="fCancel" hidden>انصراف</button></div>
+      </form>
+    </div>
+    <details class="card">
+      <summary>افزودن گروهی (چند لغت با هم)</summary>
+      <label class="f" for="bulk">هر خط یک لغت: <span class="en">word | meaning | example</span><textarea id="bulk" dir="auto" placeholder="look after | مراقبت کردن | Can you look after my cat?"></textarea></label>
+      <div class="row"><button class="btn primary" id="bulkBtn">افزودن همه</button><span class="small" id="bulkNote"></span></div>
+    </details>
+    <div class="card">
+      <div class="head"><h2>باغ لغت‌ها</h2><span class="chip gray" id="deckCount"></span></div>
+      <input id="search" type="search" placeholder="جستجو…" aria-label="جستجوی لغت">
+      <div class="seg" id="filters">
+        <button data-f="all" aria-pressed="true">همه</button><button data-f="mine" aria-pressed="false">لغت‌های من</button><button data-f="new" aria-pressed="false">بذر</button><button data-f="young" aria-pressed="false">جوانه</button><button data-f="mature" aria-pressed="false">درخت</button><button data-f="hard" aria-pressed="false">سخت</button><button data-f="sus" aria-pressed="false">معلق</button>
+      </div>
+      <div class="list" id="list"></div>
+      <button class="btn" id="moreBtn" hidden>نمایش بیشتر</button>
+    </div>
+  </section>
+
+  <!-- GARDEN / PROGRESS -->
+  <section class="view" id="v-garden" hidden>
+    <div class="card level">
+      <div class="head"><span><span class="lvl" id="lvlName">سطح ۱</span> <span class="small" id="lvlTitle"></span></span><span class="small" id="xpText"></span></div>
+      <div class="bar"><i id="xpBar"></i></div>
+    </div>
+    <div class="card">
+      <div class="head"><h3>باغ شما</h3><span class="small" id="acc"></span></div>
+      <div class="forest" id="forest"></div>
+      <div class="legend"><span><i style="background:var(--sun)"></i>بذر (جدید): <b id="nSeed">۰</b></span><span><i style="background:color-mix(in srgb,var(--leaf) 55%,var(--bg))"></i>جوانه (در حال یادگیری): <b id="nSprout">۰</b></span><span><i style="background:var(--leaf)"></i>درخت (فاصله‌ی مرور ۲۱ روز یا بیشتر): <b id="nTree">۰</b></span></div>
+    </div>
+    <div class="card">
+      <div class="head"><h3>مرورهای ۱۴ روز اخیر</h3><span class="small" id="totalRev"></span></div>
+      <svg class="chart" id="chartRev" viewBox="0 0 320 120" role="img" aria-label="تعداد مرور در ۱۴ روز اخیر"></svg>
+    </div>
+    <div class="card">
+      <div class="head"><h3>پیش‌بینی ۷ روز آینده</h3><span class="small">کارت‌هایی که باید مرور شوند</span></div>
+      <svg class="chart" id="chartFc" viewBox="0 0 320 120" role="img" aria-label="پیش‌بینی مرور ۷ روز آینده"></svg>
+    </div>
+    <div class="card">
+      <div class="head"><h3>نقشه‌ی ۹۰ روز</h3><span class="chip" id="fullCount"></span></div>
+      <div id="board" class="view" style="gap:14px"></div>
+      <div class="legend"><span><i style="background:var(--leaf)"></i>کامل</span><span><i style="background:var(--sun-soft);border:1px solid var(--sun)"></i>نیمه‌کاره</span><span><i style="box-shadow:0 0 0 2px var(--sun)"></i>امروز</span></div>
+    </div>
+    <div class="card">
+      <div class="head"><h3>نشان‌ها</h3><span class="chip sun" id="badgeCount"></span></div>
+      <div class="badges" id="badges"></div>
+    </div>
+    <details class="card" id="settings">
+      <summary>تنظیمات و یادآور</summary>
+      <label class="f" for="startDate">تاریخ شروع برنامه (میلادی)<input type="date" id="startDate" style="max-width:220px"></label>
+      <label class="f" for="newPer">تعداد لغت جدید در روز<select id="newPer" style="max-width:220px"><option value="">خودکار طبق برنامه (۶، ۸، ۱۰)</option><option>5</option><option>8</option><option>10</option><option>15</option><option>20</option></select></label>
+      <label class="f" for="remindTime">ساعت یادآور روزانه<input type="time" id="remindTime" style="max-width:220px"></label>
+      <div class="row"><button class="btn primary" id="icsBtn">افزودن یادآور به تقویم گوشی</button></div>
+      <p class="small" id="icsNote">یک فایل تقویم ساخته می‌شود که ۹۰ روز، هر روز سر همین ساعت روی گوشی هشدار می‌دهد. فایل را باز کنید و Add to Calendar را بزنید.</p>
+      <div class="row"><button class="btn" id="backupBtn">دانلود نسخه‌ی پشتیبان</button><button class="btn danger" id="resetBtn">پاک کردن همه‌ی پیشرفت</button></div>
+      <div class="confirm" id="confirmBox" hidden><p style="margin-bottom:8px">همه‌ی پیشرفت، تیک‌ها و لغت‌های خودتان پاک می‌شود. مطمئن هستید؟</p><div class="row"><button class="btn danger" id="confirmYes">بله، پاک کن</button><button class="btn" id="confirmNo">انصراف</button></div></div>
+    </details>
+    <p class="sync" id="sync">ذخیره‌سازی: در حال اتصال…</p>
+  </section>
+</div>
+
+<div class="tabs" dir="rtl"><nav role="tablist">
+  <button role="tab" data-v="today" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M12 21V11"/><path d="M12 11c0-4 3-6 7-6 0 4-3 6-7 6z"/><path d="M12 14c0-3-2.5-5-6-5 0 3 2.5 5 6 5z"/></svg>امروز</button>
+  <button role="tab" data-v="review" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="14" height="14" rx="2"/><path d="M8 3h10a2 2 0 0 1 2 2v10"/></svg>مرور<span class="badge-n" id="tabDue" hidden></span></button>
+  <button role="tab" data-v="cards" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>لغت‌ها</button>
+  <button role="tab" data-v="garden" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>پیشرفت</button>
+</nav></div>
+
+<script>
+(function(){
+'use strict';
+const fa = n => Number(n).toLocaleString('fa-IR');
+const $ = id => document.getElementById(id);
+const LS_KEY = 'vajehbagh-v1';
+
+// ---------------- built-in starter garden ----------------
+const STARTER = `appointment|قرار ملاقات، وقت (دکتر)|I have a doctor's appointment at 4.
+available|در دسترس، آزاد|Are you available this afternoon?
+borrow|قرض گرفتن|Can I borrow your pen?
+comfortable|راحت|These shoes are very comfortable.
+decide|تصمیم گرفتن|I decided to study English every day.
+describe|توصیف کردن|Can you describe the man you saw?
+different|متفاوت|My new job is very different.
+during|در طول|I slept during the flight.
+enough|کافی|We don't have enough time.
+expensive|گران|Rent is very expensive in this city.
+explain|توضیح دادن|Could you explain that again, please?
+familiar|آشنا|This street looks familiar.
+forget|فراموش کردن|Don't forget your keys.
+habit|عادت|Reading before bed is a good habit.
+healthy|سالم|I try to eat healthy food.
+improve|بهتر کردن، پیشرفت کردن|I want to improve my speaking.
+instead|به جای آن|Let's walk instead of taking a taxi.
+invite|دعوت کردن|They invited us to dinner.
+journey|سفر (مسیر طولانی)|The journey took six hours.
+lend|قرض دادن|Can you lend me some money?
+lonely|تنها، دلتنگ|He felt lonely in the new city.
+mistake|اشتباه|Everyone makes mistakes.
+neighbor|همسایه|My neighbor is very friendly.
+nervous|مضطرب|I was nervous before the interview.
+noisy|پرسروصدا|The street is too noisy at night.
+order|سفارش دادن|I'd like to order a coffee, please.
+patient|صبور|Be patient. Learning takes time.
+prefer|ترجیح دادن|I prefer tea to coffee.
+prepare|آماده کردن، آماده شدن|I need to prepare for the exam.
+quiet|ساکت، آرام|The library is very quiet.
+recently|اخیراً|I have recently started a new job.
+remember|به یاد آوردن|I can't remember his name.
+remind|یادآوری کردن|Please remind me to call my mom.
+rent|اجاره|How much is the rent?
+save|پس‌انداز کردن؛ نجات دادن|I'm saving money for a car.
+share|به اشتراک گذاشتن|Can I share this table with you?
+similar|شبیه|Our ideas are similar.
+spend|خرج کردن؛ گذراندن (وقت)|I spend an hour on English every day.
+suddenly|ناگهان|Suddenly, the lights went out.
+tired|خسته|I'm too tired to cook tonight.
+traffic|ترافیک|I was late because of the traffic.
+usually|معمولاً|I usually drink tea in the morning.
+weather|آب‌وهوا|The weather is lovely today.
+worried|نگران|She is worried about her exam.
+advice|نصیحت، توصیه|Can you give me some advice?
+afford|استطاعت داشتن|I can't afford a new car.
+allow|اجازه دادن|Smoking is not allowed here.
+almost|تقریباً|I'm almost ready.
+already|قبلاً، تا حالا|I have already eaten.
+anyway|به هر حال|It was raining, but we went anyway.
+argue|بحث کردن، جر و بحث کردن|They often argue about money.
+avoid|اجتناب کردن|I avoid eating late at night.
+belong|متعلق بودن|This bag belongs to me.
+carefully|با دقت|Please read the contract carefully.
+complain|شکایت کردن|He always complains about the food.
+crowded|شلوغ|The bus was very crowded.
+delicious|خوشمزه|This soup is delicious.
+exhausted|خیلی خسته|I was exhausted after the trip.
+deadline|مهلت نهایی|The deadline is next Friday.
+schedule|برنامه‌ی زمانی|My schedule is full this week.
+colleague|همکار|My colleagues are very helpful.
+salary|حقوق|She got a higher salary.
+experience|تجربه|I have five years of experience.
+responsible|مسئول|I'm responsible for the sales team.
+reliable|قابل اعتماد|He is a reliable employee.
+efficient|کارآمد|We need a more efficient system.
+confident|با اعتماد به نفس|She sounds confident on the phone.
+achieve|به دست آوردن، رسیدن به|We achieved our goal this year.
+attend|شرکت کردن (در جلسه)|I will attend the conference.
+solution|راه‌حل|We need to find a solution.
+issue|مسئله، مشکل|There's an issue with the website.
+require|نیاز داشتن، لازم داشتن|This job requires good English.
+suggest|پیشنهاد دادن|I suggest we start early.
+recommend|توصیه کردن|I recommend this hotel.
+estimate|تخمین زدن|I estimate it will cost 500 dollars.
+budget|بودجه|We are over budget.
+customer|مشتری|The customer is always right.
+negotiate|مذاکره کردن|We negotiated a better price.
+opportunity|فرصت|This is a great opportunity.
+priority|اولویت|Safety is our top priority.
+purpose|هدف، منظور|What is the purpose of this meeting?
+request|درخواست|I sent a request to IT.
+review|بررسی کردن|Please review this document.
+update|خبر تازه؛ به‌روزرسانی|Can you give me an update?
+agenda|دستور جلسه|What's on the agenda today?
+brief|کوتاه، مختصر|Let's keep this meeting brief.
+confirm|تأیید کردن|Please confirm your booking.
+deliver|تحویل دادن|We deliver within two days.
+feedback|بازخورد|Thanks for your feedback.
+hire|استخدام کردن|We are hiring new engineers.
+increase|افزایش (دادن)|Sales increased by 10 percent.
+reduce|کاهش دادن|We need to reduce costs.
+launch|راه‌اندازی کردن|We will launch the app in May.
+progress|پیشرفت|We are making good progress.
+resign|استعفا دادن|She resigned last month.
+skill|مهارت|Communication is an important skill.
+goal|هدف|My goal is to speak fluently.
+effort|تلاش|Thanks for your effort.
+mention|اشاره کردن|He mentioned the problem in his email.
+realize|متوجه شدن|I realized I was wrong.
+manage|مدیریت کردن؛ از پسش برآمدن|I managed to finish on time.
+handle|رسیدگی کردن|Can you handle this client?
+appreciate|قدردانی کردن|I really appreciate your help.
+apologize|عذرخواهی کردن|I apologize for the delay.
+postpone|به تعویق انداختن|We postponed the meeting to Monday.
+cancel|لغو کردن|The flight was cancelled.
+arrange|ترتیب دادن|I'll arrange a call with them.
+make a decision|تصمیم گرفتن|We need to make a decision today.
+take responsibility|مسئولیت پذیرفتن|A good leader takes responsibility.
+meet a deadline|کار را سر موعد تمام کردن|We worked late to meet the deadline.
+catch up on|عقب‌افتادگی را جبران کردن|I need to catch up on my emails.
+figure out|فهمیدن، راهش را پیدا کردن|I can't figure out this problem.
+get used to|عادت کردن به|I'm getting used to my new job.
+look forward to|مشتاقانه منتظر بودن|I look forward to hearing from you.
+in charge of|مسئولِ|Who is in charge of this project?
+keep in mind|در نظر داشتن|Keep in mind that the office closes at 5.
+on the same page|هم‌نظر بودن|Let's make sure we're on the same page.
+follow up|پیگیری کردن|I'll follow up with an email.
+run out of|تمام کردن (چیزی)|We've run out of paper.
+point out|گوشزد کردن، اشاره کردن|She pointed out a mistake.
+come up with|(ایده) پیدا کردن|He came up with a great plan.
+set up|راه‌اندازی کردن، ترتیب دادن|Let's set up a meeting.
+give up|دست کشیدن، تسلیم شدن|Don't give up!
+look after|مراقبت کردن|Can you look after my cat?
+find out|فهمیدن، کشف کردن|I found out the truth.
+turn down|رد کردن|She turned down the job offer.
+put off|عقب انداختن|Don't put off your homework.
+deal with|رسیدگی کردن به|I'll deal with this problem.
+get along with|کنار آمدن با|I get along well with my boss.
+take part in|شرکت کردن در|I took part in the workshop.
+pay attention|توجه کردن|Please pay attention to the details.
+make progress|پیشرفت کردن|You are making great progress.
+have a look|نگاهی انداختن|Can you have a look at my CV?
+take a break|استراحت کردن|Let's take a ten-minute break.
+make sense|منطقی بودن، معنی دادن|That makes sense.
+on time|سر وقت|Please be on time.
+by the way|راستی|By the way, how was your trip?
+as soon as possible|در اسرع وقت|Please reply as soon as possible.
+in advance|از قبل|Thanks in advance.
+to be honest|راستش را بخواهی|To be honest, I didn't like it.
+it depends|بستگی دارد|Coffee or tea? It depends.
+no wonder|تعجبی ندارد|No wonder you're tired!
+break the ice|یخ جمع را شکستن|He told a joke to break the ice.
+a piece of cake|خیلی آسان|The test was a piece of cake.
+under the weather|کمی ناخوش|I'm feeling a bit under the weather.
+call it a day|کار را برای امروز تمام کردن|Let's call it a day.
+get the hang of|دستت آمدن، راهش را یاد گرفتن|You'll get the hang of it soon.
+keep up with|هم‌پای چیزی ماندن|It's hard to keep up with the news.
+look up|(در دیکشنری) پیدا کردن|Look up new words in a dictionary.
+work out|ورزش کردن؛ حل شدن|I work out three times a week.`.split('\n').map(l=>l.split('|'));
+
+const PHASES = [
+  {name:'کاشت', en:'Plant', from:1, to:30, n:6, desc:'عادت روزانه را بکار. هر روز ۶ لغت جدید.'},
+  {name:'رشد', en:'Grow', from:31, to:60, n:8, desc:'لغت‌ها را در جمله به کار ببر. هر روز ۸ لغت جدید.'},
+  {name:'برداشت', en:'Harvest', from:61, to:90, n:10, desc:'صحبت کن و بنویس. هر روز ۱۰ لغت جدید.'}
+];
+const SKILLS = [
+  {t:'Listening: گوش دادن', h:'۱۰ دقیقه پادکست یا ویدیوی انگلیسی گوش کن.'},
+  {t:'Reading: خواندن', h:'یک متن کوتاه بخوان و لغت‌های ناآشنا را علامت بزن.'},
+  {t:'Speaking: صحبت کردن', h:'با ۵ لغت امروز با صدای بلند جمله بساز و صدایت را ضبط کن.'},
+  {t:'Writing: نوشتن', h:'یک پاراگراف ۵ جمله‌ای درباره‌ی روزت بنویس و از ۳ لغت جدید استفاده کن.'},
+  {t:'Shadowing: تکرار همزمان', h:'یک ویدیوی کوتاه را جمله‌به‌جمله با گوینده تکرار کن.'},
+  {t:'Speaking: گفت‌وگو', h:'۵ دقیقه با یک دوست یا با خودت انگلیسی صحبت کن.'}
+];
+const LEVELS = ['بذر','جوانه','نهال','شاخه','درخت','بیشه','باغ','باغبان','باغ ایرانی'];
+const phaseOf = d => PHASES[d<=30?0:d<=60?1:2];
+
+// ---------------- dates ----------------
+const edOf = d => Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())/864e5);
+const TODAY = () => edOf(new Date());
+const edFromISO = s => { const [y,m,d]=s.split('-').map(Number); return Date.UTC(y,m-1,d)/864e5; };
+const isoFromEd = e => new Date(e*864e5).toISOString().slice(0,10);
+
+// ---------------- state ----------------
+let meta = {start: isoFromEd(TODAY()), time:'20:00', done:{}, log:{}, newPer:null};
+let saved = {};   // id -> persisted card fields
+let cards = {};   // id -> full card
+try { const raw = localStorage.getItem(LS_KEY); if(raw){ const s=JSON.parse(raw); if(s && s.meta){ meta=Object.assign(meta,s.meta); saved=s.cards||{}; } } } catch(e){}
+
+const blank = () => ({st:'new', due:0, ivl:0, ease:2.5, reps:0, lapses:0, sus:false});
+function rebuild(){
+  cards = {};
+  STARTER.forEach((w,i)=>{ const id='b'+i; cards[id]=Object.assign({id, f:w[0], b:w[1], ex:w[2]||'', custom:false, order:1e6+i}, blank(), saved[id]||{}); });
+  Object.keys(saved).forEach(id=>{ const s=saved[id]; if(s.custom && !s.del) cards[id]=Object.assign({id, ex:'', order:s.created||0}, blank(), s); });
+}
+rebuild();
+
+const planDay = () => TODAY() - edFromISO(meta.start) + 1;
+const clampDay = d => Math.max(1, Math.min(90, d));
+const logOf = ed => meta.log[ed] || (meta.log[ed] = {r:0, ok:0, n:0, a:0});
+const peekLog = ed => meta.log[ed] || {r:0, ok:0, n:0, a:0};
+
+function newQuota(){
+  const d = planDay();
+  if(meta.newPer) return Number(meta.newPer);
+  if(d>=1 && d<=90 && d%7===0) return 0;
+  return phaseOf(clampDay(d)).n;
+}
+const active = () => Object.values(cards).filter(c=>!c.sus);
+const dueCards = () => active().filter(c=>c.st!=='new' && c.due<=TODAY()).sort((a,b)=>a.due-b.due);
+const newPool = () => active().filter(c=>c.st==='new').sort((a,b)=>(b.custom-a.custom)||(a.order-b.order));
+const newLeft = () => Math.max(0, Math.min(newPool().length, newQuota() - peekLog(TODAY()).n));
+const stateOf = c => c.sus ? 'sus' : c.st==='new' ? 'new' : (c.ivl>=21 ? 'mature' : 'young');
+const STATE_FA = {new:'بذر', young:'جوانه', mature:'درخت', sus:'معلق'};
+
+// ---------------- plan tasks ----------------
+function tasksFor(d){
+  const p = phaseOf(d);
+  let list;
+  if(d%7===0){
+    list = [
+      {t:'همه‌ی کارت‌های امروز را مرور کن', h:'امروز روز مرور است و لغت جدید ندارد.', auto:'review'},
+      {t:'لغت‌های سخت را بازنویسی کن', h:'در بخش لغت‌ها فیلتر «سخت» را بزن و برایشان جمله‌ی بهتری بنویس.'},
+      {t:'آمار هفته را ببین', h:'در بخش پیشرفت دقت جواب‌هایت را ببین. بالای ۸۰٪ عالی است.'}
+    ];
+  } else {
+    const s = SKILLS[(d - 1 - Math.floor(d/7)) % SKILLS.length];
+    list = [
+      {t:'همه‌ی کارت‌های امروز را مرور کن', h:d===1?'اولین مرور: صادق باش و اگر یادت نبود «دوباره» را بزن.':'اول مرورها، بعد لغت‌های جدید.', auto:'review'},
+      {t:fa(meta.newPer||p.n)+' لغت جدید یاد بگیر', h:'لغت‌های جدید خودکار وارد مرور امروز می‌شوند.', auto:'new'},
+      {t:'۳ لغت از زندگی خودت اضافه کن', h:'از فیلم، کار یا گفت‌وگوهای امروز. در بخش «لغت‌ها».', auto:'add'},
+      s
+    ];
+  }
+  if(d===30||d===60||d===90) list.push({t:'جشن پایان مرحله‌ی '+fa(PHASES.indexOf(p)+1), h:'۲۰ لغت را بدون نگاه کردن بنویس و درصدت را با ماه قبل مقایسه کن.'});
+  return list;
+}
+const doneArr = d => meta.done[d] || [];
+const countDone = d => doneArr(d).slice(0, tasksFor(d).length).filter(Boolean).length;
+const isFull = d => countDone(d) >= tasksFor(d).length;
+
+function autoTick(){
+  const d = planDay(); if(d<1||d>90) return false;
+  const L = peekLog(TODAY()); const ts = tasksFor(d); let changed=false;
+  const a = doneArr(d).slice();
+  ts.forEach((t,i)=>{
+    if(a[i] || !t.auto) return;
+    let ok=false;
+    if(t.auto==='review') ok = dueCards().length===0 && newLeft()===0 && L.r>0;
+    if(t.auto==='new') ok = L.n>0 && (L.n>=newQuota() || newPool().length===0);
+    if(t.auto==='add') ok = L.a>=3;
+    if(ok){ a[i]=true; changed=true; }
+  });
+  if(changed){ meta.done[d]=a; saveMeta(); }
+  return changed;
+}
+
+// ---------------- stats ----------------
+function computeStats(){
+  const now = planDay();
+  let full=0, ticks=0, best=0, run=0; const phaseFull=[0,0,0];
+  for(let d=1; d<=90; d++){ ticks+=countDone(d); if(isFull(d)){ full++; phaseFull[d<=30?0:d<=60?1:2]++; run++; best=Math.max(best,run);} else run=0; }
+  let streak=0, d=clampDay(now); if(now>=1 && !isFull(d)) d--;
+  while(now>=1 && d>=1 && isFull(d)){ streak++; d--; }
+  let r=0, ok=0, n=0, a=0; Object.values(meta.log).forEach(l=>{ r+=l.r||0; ok+=l.ok||0; n+=l.n||0; a+=l.a||0; });
+  const all = Object.values(cards); const cnt={new:0,young:0,mature:0,sus:0}; all.forEach(c=>cnt[stateOf(c)]++);
+  const xp = r*2 + n*5 + a*3 + ticks*5 + full*30;
+  return {now, full, best, streak, phaseFull, r, ok, n, a, cnt, xp, learned: cnt.young+cnt.mature};
+}
+const levelOf = xp => { const lv=Math.floor(xp/300)+1; return {lv, into:xp%300, title:LEVELS[Math.min(lv-1,LEVELS.length-1)]}; };
+const BADGES = [
+  {g:'۱', t:'اولین بذر', h:'اولین مرور', ok:s=>s.r>=1},
+  {g:'۷', t:'یک هفته', h:'۷ روز پشت سر هم', ok:s=>s.best>=7},
+  {g:'۳۰', t:'ماراتن', h:'۳۰ روز پشت سر هم', ok:s=>s.best>=30},
+  {g:'۵۰', t:'باغچه', h:'۵۰ لغت آموخته', ok:s=>s.learned>=50},
+  {g:'۲۰۰', t:'باغ بزرگ', h:'۲۰۰ لغت آموخته', ok:s=>s.learned>=200},
+  {g:'۲۵', t:'جنگل کوچک', h:'۲۵ درخت (لغت پخته)', ok:s=>s.cnt.mature>=25},
+  {g:'+', t:'باغبان', h:'۳۰ لغت از خودت', ok:s=>s.a>=30},
+  {g:'1K', t:'هزار مرور', h:'۱۰۰۰ مرور', ok:s=>s.r>=1000},
+  {g:'۹۰', t:'افسانه', h:'۸۵ روز کامل از ۹۰', ok:s=>s.full>=85}
+];
+
+// ---------------- scheduling ----------------
+function preview(c, g){
+  if(c.st==='new' || c.st==='learn') return g===1?'الان':g===2?'کمی بعد':g===3?'۱ روز':'۴ روز';
+  if(g===1) return 'الان';
+  return fa(nextIvl(c,g))+' روز';
+}
+function nextIvl(c, g){
+  const i=c.ivl||1;
+  if(g===2) return Math.max(i+1, Math.round(i*1.2));
+  if(g===3) return Math.max(i+1, Math.round(i*c.ease));
+  return Math.max(i+2, Math.round(i*c.ease*1.3));
+}
+function answer(c, g){
+  const t=TODAY(), L=logOf(t);
+  if(c.st==='new'){ L.n++; c.intro=t; }
+  L.r++; if(g>=3) L.ok++;
+  c.reps++;
+  let again=false;
+  if(c.st==='new' || c.st==='learn'){
+    if(g<=2){ c.st='learn'; c.due=t; again=true; }
+    else { c.st='review'; c.ivl = g===4 ? 4 : 1; c.due=t+c.ivl; }
+  } else {
+    if(g===1){ c.lapses++; c.ease=Math.max(1.3, c.ease-0.2); c.ivl=1; c.st='learn'; c.due=t; again=true; }
+    else { if(g===2) c.ease=Math.max(1.3, c.ease-0.15); if(g===4) c.ease+=0.15; c.ivl=nextIvl(c,g); c.due=t+c.ivl; }
+  }
+  saveCard(c.id); saveMeta();
+  return again;
+}
+
+// ---------------- review session ----------------
+let session = null;
+function startSession(){
+  const q = dueCards().map(c=>c.id);
+  const nw = newPool().slice(0, newLeft()).map(c=>c.id);
+  // spread new cards through the reviews
+  const out=[]; let ni=0; const step = nw.length ? Math.max(1, Math.floor(q.length/nw.length)) : 0;
+  q.forEach((id,i)=>{ out.push(id); if(step && (i+1)%step===0 && ni<nw.length) out.push(nw[ni++]); });
+  while(ni<nw.length) out.push(nw[ni++]);
+  session = {queue:out, total:out.length, done:0, shown:false, correct:0};
+  go('review');
+}
+function renderReview(){
+  const area=$('revArea');
+  if(!session || session.queue.length===0){
+    const s = session; const due=dueCards().length, nl=newLeft();
+    $('revBar').style.width = s ? '100%' : '0';
+    $('revCount').textContent='';
+    if(s && s.total>0){
+      area.innerHTML = '<div class="card done-box"><div class="big">آفرین!</div><p>'+fa(s.done)+' کارت مرور شد. دقت: '+fa(Math.round(s.correct/Math.max(1,s.done)*100))+'٪</p><p class="small">باغ امروزت آب خورد. فردا دوباره سر بزن.</p><button class="btn primary" id="backHome">برگشت به امروز</button></div>';
+      $('backHome').onclick=()=>go('today');
+    } else if(due+nl>0){
+      area.innerHTML = '<div class="card done-box"><p>'+fa(due)+' کارت برای مرور و '+fa(nl)+' لغت جدید منتظر شماست.</p><button class="btn primary big" id="goRev">شروع مرور</button></div>';
+      $('goRev').onclick=startSession;
+    } else {
+      area.innerHTML = '<div class="card done-box"><div class="big">✓</div><p>امروز کارتی برای مرور نمانده.</p><p class="small">'+(newPool().length===0?'همه‌ی بذرها کاشته شده‌اند. در بخش «لغت‌ها» لغت جدید اضافه کنید.':'لغت‌های جدید فردا اضافه می‌شوند.')+'</p><button class="btn" id="goAdd">افزودن لغت</button></div>';
+      $('goAdd').onclick=()=>go('cards');
+    }
+    return;
+  }
+  const c = cards[session.queue[0]];
+  if(!c){ session.queue.shift(); return renderReview(); }
+  $('revCount').textContent = fa(session.done)+' از '+fa(session.done+session.queue.length);
+  $('revBar').style.width = (session.done/Math.max(1,session.done+session.queue.length)*100)+'%';
+  const st = stateOf(c);
+  area.innerHTML = '<div class="view"><div class="flash" id="flash" tabindex="0" role="button" aria-label="نمایش جواب">'+
+    '<span class="chip state '+(st==='new'?'sun':st==='mature'?'':'gray')+'">'+STATE_FA[st]+'</span>'+
+    '<div class="front" id="qFront"></div>'+
+    (session.shown ? '<hr><div class="back" id="qBack"></div><div class="ex" id="qEx"></div>' : '<div class="hint">برای دیدن معنی بزنید</div>')+
+    '</div>'+
+    '<div class="row" style="justify-content:center"><button class="btn" id="say">شنیدن تلفظ</button>'+(session.shown?'':'<button class="btn primary" id="show">نمایش جواب</button>')+'</div>'+
+    (session.shown ? '<div class="grades">'+[1,2,3,4].map(g=>'<button class="grade g'+g+'" data-g="'+g+'"><b>'+['دوباره','سخت','خوب','آسان'][g-1]+'</b><span>'+preview(c,g)+'</span></button>').join('')+'</div>' : '')+
+    '</div>';
+  $('qFront').textContent = c.f;
+  if(session.shown){ $('qBack').textContent = c.b; $('qEx').textContent = c.ex || ''; }
+  const reveal = ()=>{ if(!session.shown){ session.shown=true; renderReview(); } };
+  $('flash').onclick = reveal;
+  if($('show')) $('show').onclick = reveal;
+  $('say').onclick = ()=>speak(c.f + (session.shown && c.ex ? '. '+c.ex : ''));
+  area.querySelectorAll('.grade').forEach(b=>b.onclick=()=>grade(Number(b.dataset.g)));
+}
+function grade(g){
+  if(!session || !session.shown || !session.queue.length) return;
+  const id = session.queue.shift(); const c = cards[id];
+  const again = answer(c, g);
+  session.done++; if(g>=3) session.correct++;
+  if(again) session.queue.splice(Math.min(g===1?3:5, session.queue.length), 0, id);
+  session.shown=false;
+  if(session.queue.length===0){
+    autoTick();
+    celebrate(); toast('مرور امروز تمام شد! +'+fa(session.done*2)+' XP');
+  }
+  renderAll(); renderBadgeTab();
+}
+document.addEventListener('keydown', e=>{
+  if($('v-review').hidden || !session || !session.queue.length) return;
+  if(e.target.matches('input,textarea,select')) return;
+  if(e.code==='Space'||e.key==='Enter'){ e.preventDefault(); if(!session.shown){ session.shown=true; renderReview(); } }
+  else if(session.shown && ['1','2','3','4'].includes(e.key)) grade(Number(e.key));
+});
+
+// ---------------- today view ----------------
+let selDay = null;
+function renderToday(){
+  autoTick();
+  const s = computeStats(), now=s.now;
+  if(selDay===null) selDay = clampDay(now);
+  const due=dueCards().length, nl=newLeft();
+  $('cDue').textContent=fa(due); $('cNew').textContent=fa(nl);
+  $('startBtn').disabled = due+nl===0;
+  $('startBtn').textContent = due+nl===0 ? 'امروز تمام است' : 'شروع مرور';
+  $('sDay').textContent = now<1?'—':fa(clampDay(now));
+  $('sStreak').textContent = fa(s.streak);
+  $('sTrees').textContent = fa(s.learned);
+  $('sXP').textContent = fa(s.xp);
+  const td = clampDay(now), tt = tasksFor(td).length, tdn = now>=1&&now<=90 ? countDone(td) : 0;
+  const pct = now>=1&&now<=90 ? Math.round(tdn/tt*100) : 0;
+  $('ringPct').textContent = fa(pct)+'٪';
+  $('ringArc').setAttribute('stroke-dashoffset', (263.9*(1-pct/100)).toFixed(1));
+  $('todayLine').textContent = now<1 ? 'برنامه از '+meta.start+' شروع می‌شود' : now>90 ? '۹۰ روز تمام شد!' : 'روز '+fa(now)+' · مرحله‌ی '+phaseOf(now).name;
+
+  const b=$('banner');
+  if(now<1){ b.className='banner'; $('bannerText').textContent='برنامه هنوز شروع نشده. تاریخ شروع را در تنظیمات عوض کنید.'; }
+  else if(now>90){ b.className='banner ok'; $('bannerText').textContent='تبریک! ۹۰ روز تمام شد و '+fa(s.learned)+' لغت در باغت داری. مرورها را ادامه بده.'; }
+  else if(tdn>=tt){ b.className='banner ok'; $('bannerText').textContent='کارهای امروز کامل شد. زنجیره‌ات '+fa(s.streak)+' روزه است!'; }
+  else {
+    b.className='banner';
+    const late = new Date().getHours() >= Number(meta.time.split(':')[0]);
+    $('bannerText').innerHTML = (late?'<b>وقت باغبانی است!</b> ':'')+'امروز '+fa(tt-tdn)+' کار مانده. '+(s.streak>0?'زنجیره‌ی '+fa(s.streak)+' روزه‌ات را حفظ کن.':'با ۱۰ دقیقه مرور شروع کن.');
+  }
+
+  const p=phaseOf(selDay);
+  $('dayTitle').textContent = 'روز '+fa(selDay)+(selDay===now?' (امروز)':'');
+  $('dayPhase').innerHTML = 'مرحله‌ی '+fa(PHASES.indexOf(p)+1)+': '+p.name+' · <span class="en">'+p.en+'</span>';
+  $('prevDay').disabled = selDay<=1; $('nextDay').disabled = selDay>=90;
+  const ul=$('tasks'); ul.innerHTML='';
+  tasksFor(selDay).forEach((t,i)=>{
+    const li=document.createElement('li'); li.className='task'; const id='tk-'+selDay+'-'+i;
+    li.innerHTML='<label for="'+id+'"><input type="checkbox" id="'+id+'"><span class="txt"><b></b><small></small></span>'+(t.auto?'<span class="tag">خودکار</span>':'')+'</label>';
+    li.querySelector('b').textContent=t.t; li.querySelector('small').textContent=t.h;
+    const cb=li.querySelector('input'); cb.checked=!!doneArr(selDay)[i];
+    cb.onchange=()=>{ const was=isFull(selDay); const a=doneArr(selDay).slice(); a[i]=cb.checked; meta.done[selDay]=a; saveMeta(); renderToday(); renderBadgeTab();
+      if(!was && isFull(selDay)){ celebrate(); toast('روز '+fa(selDay)+' کامل شد! +۳۰ XP'); } };
+    ul.appendChild(li);
+  });
+  const tb=$('tabDue'); tb.hidden = due+nl===0; tb.textContent=fa(due+nl);
+}
+
+// ---------------- cards view ----------------
+let filter='all', shownN=60, editing=null, confirmDel=null;
+function renderCards(){
+  const q=$('search').value.trim().toLowerCase();
+  let arr=Object.values(cards).sort((a,b)=>(b.custom-a.custom)||(a.order-b.order));
+  arr=arr.filter(c=>{
+    const st=stateOf(c);
+    if(filter==='mine' && !c.custom) return false;
+    if(['new','young','mature','sus'].includes(filter) && st!==filter) return false;
+    if(filter==='hard' && !(c.lapses>=2)) return false;
+    return !q || c.f.toLowerCase().includes(q) || c.b.includes(q);
+  });
+  $('deckCount').textContent = fa(Object.keys(cards).length)+' لغت';
+  const list=$('list'); list.innerHTML='';
+  if(!arr.length){ list.innerHTML='<p class="small">لغتی پیدا نشد.</p>'; }
+  arr.slice(0,shownN).forEach(c=>{
+    const st=stateOf(c), el=document.createElement('div'); el.className='item';
+    el.innerHTML='<div class="m"><div class="w"></div><div class="t"></div><div class="row" style="gap:6px;margin-top:2px"><span class="chip '+(st==='new'?'sun':st==='sus'?'pom':st==='young'?'gray':'')+'">'+STATE_FA[st]+'</span>'+(c.st!=='new'&&!c.sus?'<span class="small">مرور بعدی: '+(c.due<=TODAY()?'امروز':fa(c.due-TODAY())+' روز دیگر')+'</span>':'')+(c.custom?'<span class="small">· لغت من</span>':'')+'</div></div>'+
+      '<div class="acts"><button class="btn ghost" data-a="say" aria-label="تلفظ">▶</button><button class="btn ghost" data-a="edit">ویرایش</button><button class="btn ghost" data-a="sus">'+(c.sus?'فعال':'تعلیق')+'</button>'+(c.custom?'<button class="btn ghost danger" data-a="del">'+(confirmDel===c.id?'مطمئنی؟':'حذف')+'</button>':'')+'</div>';
+    el.querySelector('.w').textContent=c.f; el.querySelector('.t').textContent=c.b+(c.ex?' — '+c.ex:'');
+    el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>cardAction(c.id,b.dataset.a));
+    list.appendChild(el);
+  });
+  $('moreBtn').hidden = arr.length<=shownN;
+}
+function cardAction(id,a){
+  const c=cards[id];
+  if(a==='say') return speak(c.f);
+  if(a==='edit'){ editing=id; $('fFront').value=c.f; $('fBack').value=c.b; $('fEx').value=c.ex||''; $('formTitle').textContent='ویرایش لغت'; $('fSubmit').textContent='ذخیره'; $('fCancel').hidden=false; window.scrollTo({top:0,behavior:'smooth'}); return; }
+  if(a==='sus'){ c.sus=!c.sus; saveCard(id); toast(c.sus?'لغت معلق شد و دیگر مرور نمی‌شود.':'لغت دوباره فعال شد.'); }
+  if(a==='del'){ if(confirmDel!==id){ confirmDel=id; renderCards(); return; } confirmDel=null; delete cards[id]; saved[id]={custom:true, del:true}; saveCard(id, true); toast('حذف شد.'); }
+  renderAll();
+}
+function resetForm(){ editing=null; $('cardForm').reset(); $('formTitle').textContent='افزودن لغت'; $('fSubmit').textContent='افزودن به باغ'; $('fCancel').hidden=true; }
+function addCard(f,b,ex){
+  const id='c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  cards[id]=Object.assign({id,f,b,ex,custom:true,created:Date.now(),order:Date.now()},blank());
+  logOf(TODAY()).a++;
+  saveCard(id);
+}
+$('cardForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const f=$('fFront').value.trim(), b=$('fBack').value.trim(), ex=$('fEx').value.trim();
+  if(!f||!b) return;
+  if(editing){ const c=cards[editing]; c.f=f; c.b=b; c.ex=ex; c.edited=true; saveCard(editing); toast('ذخیره شد.'); }
+  else { if(Object.values(cards).some(c=>c.f.toLowerCase()===f.toLowerCase())){ toast('این لغت از قبل در باغ هست.'); return; } addCard(f,b,ex); saveMeta(); toast('بذر «'+f+'» کاشته شد! +۳ XP'); }
+  resetForm(); renderAll();
+});
+$('fCancel').onclick=()=>{ resetForm(); };
+$('bulkBtn').onclick=()=>{
+  const lines=$('bulk').value.split('\n').map(l=>l.trim()).filter(Boolean);
+  let n=0, skip=0; const have=new Set(Object.values(cards).map(c=>c.f.toLowerCase()));
+  lines.forEach(l=>{ const p=l.split(/\s*[|\t]\s*/); if(p.length<2||!p[0]||!p[1]||have.has(p[0].toLowerCase())){ skip++; return; } addCard(p[0],p[1],p[2]||''); have.add(p[0].toLowerCase()); n++; });
+  saveMeta(); $('bulk').value=''; $('bulkNote').textContent=fa(n)+' لغت اضافه شد'+(skip?' · '+fa(skip)+' خط رد شد (تکراری یا بدون معنی)':'');
+  if(n) celebrate(); renderAll();
+};
+$('search').addEventListener('input', ()=>{ shownN=60; renderCards(); });
+$('filters').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; filter=b.dataset.f; shownN=60; $('filters').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', String(x===b))); renderCards(); });
+$('moreBtn').onclick=()=>{ shownN+=60; renderCards(); };
+
+// ---------------- garden view ----------------
+let lastBadges=null, lastLevel=null;
+function renderGarden(){
+  const s=computeStats(), L=levelOf(s.xp);
+  $('lvlName').textContent='سطح '+fa(L.lv); $('lvlTitle').textContent=L.title;
+  $('xpText').textContent=fa(s.xp)+' XP · '+fa(300-L.into)+' تا سطح بعد';
+  $('xpBar').style.width=(L.into/300*100)+'%';
+  const tot=Math.max(1,s.cnt.new+s.cnt.young+s.cnt.mature);
+  $('forest').innerHTML='<i class="s3" style="width:'+(s.cnt.mature/tot*100)+'%"></i><i class="s2" style="width:'+(s.cnt.young/tot*100)+'%"></i><i class="s1" style="width:'+(s.cnt.new/tot*100)+'%"></i>';
+  $('nSeed').textContent=fa(s.cnt.new); $('nSprout').textContent=fa(s.cnt.young); $('nTree').textContent=fa(s.cnt.mature);
+  $('acc').textContent = s.r ? 'دقت کل: '+fa(Math.round(s.ok/s.r*100))+'٪' : '';
+  $('totalRev').textContent = 'جمع: '+fa(s.r)+' مرور';
+  const t=TODAY();
+  bars($('chartRev'), Array.from({length:14},(_,i)=>{ const e=t-13+i; return {v:peekLog(e).r, l:isoFromEd(e).slice(8), hi:e===t}; }));
+  const fc = Array.from({length:7},(_,i)=>({v:0, l:i===0?'امروز':fa(i), hi:i===0}));
+  active().forEach(c=>{ if(c.st==='new') return; const k=Math.max(0,c.due-t); if(k<7) fc[k].v++; });
+  bars($('chartFc'), fc);
+
+  const now=s.now, board=$('board'); board.innerHTML='';
+  $('fullCount').textContent=fa(s.full)+' از ۹۰';
+  PHASES.forEach((ph,pi)=>{
+    const sec=document.createElement('div'); sec.className='view'; sec.style.gap='8px';
+    sec.innerHTML='<div class="head"><h3>مرحله‌ی '+fa(pi+1)+': '+ph.name+' <span class="en small">'+ph.en+'</span></h3><span class="chip">'+fa(s.phaseFull[pi])+' از ۳۰</span></div><p class="small">'+ph.desc+'</p>';
+    const g=document.createElement('div'); g.className='grid';
+    for(let d=ph.from; d<=ph.to; d++){
+      const c=document.createElement('button'); c.className='cell'; c.textContent=fa(d); c.setAttribute('aria-label','روز '+d);
+      if(isFull(d)) c.classList.add('full'); else if(countDone(d)>0) c.classList.add('part');
+      if(d>now) c.classList.add('future'); if(d===now) c.classList.add('now');
+      c.onclick=()=>{ selDay=d; go('today'); };
+      g.appendChild(c);
+    }
+    sec.appendChild(g); board.appendChild(sec);
+  });
+
+  const bx=$('badges'); bx.innerHTML=''; let on=0;
+  BADGES.forEach(bd=>{ const ok=bd.ok(s); if(ok) on++; const el=document.createElement('div'); el.className='badge'+(ok?' on':'');
+    el.innerHTML='<div class="medal en"></div><b></b><span></span>'; el.querySelector('.medal').textContent=bd.g; el.querySelector('b').textContent=bd.t; el.querySelector('span').textContent=bd.h; bx.appendChild(el); });
+  $('badgeCount').textContent=fa(on)+' از '+fa(BADGES.length);
+  $('startDate').value=meta.start; $('remindTime').value=meta.time; $('newPer').value=meta.newPer||'';
+}
+function renderBadgeTab(){
+  const s=computeStats(), L=levelOf(s.xp);
+  const unlocked=BADGES.filter(b=>b.ok(s)).map(b=>b.t);
+  if(lastBadges){ const nb=unlocked.filter(x=>!lastBadges.includes(x)); if(nb.length){ toast('نشان جدید: '+nb[0]); celebrate(); } }
+  if(lastLevel && L.lv>lastLevel){ toast('رسیدی به سطح '+fa(L.lv)+': '+L.title); celebrate(); }
+  lastBadges=unlocked; lastLevel=L.lv;
+}
+function bars(svg, data){
+  const W=320, top=16, base=98, n=data.length, slot=W/n, bw=Math.min(28, slot*0.6);
+  const max=Math.max(5, ...data.map(d=>d.v));
+  let h='<line class="base" x1="0" x2="'+W+'" y1="'+base+'" y2="'+base+'"/>';
+  data.forEach((d,i)=>{
+    const cx = W - slot*(i+0.5);              // right-to-left, like the page
+    const bh = d.v ? Math.max(2, d.v/max*(base-top)) : 0;
+    h+='<rect class="b'+(d.hi?' alt':'')+'" x="'+(cx-bw/2).toFixed(1)+'" y="'+(base-bh).toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="3"/>';
+    if(d.v) h+='<text class="v" x="'+cx.toFixed(1)+'" y="'+(base-bh-4).toFixed(1)+'" text-anchor="middle">'+fa(d.v)+'</text>';
+    h+='<text x="'+cx.toFixed(1)+'" y="113" text-anchor="middle">'+(typeof d.l==='string'&&/^\d+$/.test(d.l)?fa(Number(d.l)):d.l)+'</text>';
+  });
+  svg.innerHTML=h;
+}
+
+// ---------------- navigation ----------------
+let view='today';
+function go(v){
+  view=v;
+  ['today','review','cards','garden'].forEach(k=>$('v-'+k).hidden = k!==v);
+  document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected', String(b.dataset.v===v)));
+  renderAll(); window.scrollTo({top:0});
+}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+function renderAll(){
+  renderToday();
+  if(view==='review') renderReview();
+  if(view==='cards') renderCards();
+  if(view==='garden') renderGarden();
+}
+$('startBtn').onclick=startSession;
+$('prevDay').onclick=()=>{ selDay=clampDay(selDay-1); renderToday(); };
+$('nextDay').onclick=()=>{ selDay=clampDay(selDay+1); renderToday(); };
+$('todayBtn').onclick=()=>{ selDay=clampDay(planDay()); renderToday(); };
+
+// ---------------- settings ----------------
+$('startDate').addEventListener('change', e=>{ if(e.target.value){ meta.start=e.target.value; selDay=null; saveMeta(); renderAll(); } });
+$('remindTime').addEventListener('change', e=>{ if(e.target.value){ meta.time=e.target.value; saveMeta(); renderAll(); } });
+$('newPer').addEventListener('change', e=>{ meta.newPer = e.target.value ? Number(e.target.value) : null; saveMeta(); renderAll(); });
+$('resetBtn').onclick=()=>{ $('confirmBox').hidden=false; };
+$('confirmNo').onclick=()=>{ $('confirmBox').hidden=true; };
+$('confirmYes').onclick=()=>{
+  const ids=Object.keys(saved);
+  meta.done={}; meta.log={}; saved={}; rebuild(); session=null; lastBadges=null; lastLevel=null;
+  ids.forEach(id=>{ saved[id]=null; flushCard(id, true); }); saved={};
+  writeLocal(); saveMeta(); $('confirmBox').hidden=true; renderAll(); toast('همه چیز از نو شروع شد.');
+};
+async function offerFile(name, data, type, noteEl){
+  try{
+    const dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null;
+    if(!dl){ noteEl.textContent='در این نمایش امکان دانلود نیست. صفحه را در اپ یا سایت Claude باز کنید.'; return; }
+    await dl.save({filename:name, data:new Blob([data],{type})});
+    noteEl.textContent='فایل ذخیره شد.';
+  }catch(e){ noteEl.textContent='دانلود انجام نشد یا لغو شد.'; }
+}
+$('icsBtn').onclick=()=>{
+  const [y,m,d]=meta.start.split('-'); const [hh,mm]=meta.time.split(':');
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//vajehbagh//fa','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:vajehbagh-'+meta.start+'@app','DTSTAMP:'+stamp,
+    'DTSTART:'+y+m+d+'T'+hh+mm+'00','DURATION:PT20M','RRULE:FREQ=DAILY;COUNT=90','SUMMARY:Vajehbagh - English words',
+    'DESCRIPTION:Time to water your word garden! Review today\'s cards.','BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Vajehbagh','TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  offerFile('vajehbagh-reminder.ics', ics, 'text/calendar', $('icsNote'));
+};
+$('backupBtn').onclick=()=>offerFile('vajehbagh-backup.json', JSON.stringify({meta, cards:saved}, null, 1), 'application/json', $('icsNote'));
+
+// ---------------- persistence ----------------
+const SCHED = ['st','due','ivl','ease','reps','lapses','sus','intro'];
+function serialize(c){
+  const o={}; SCHED.forEach(k=>{ if(c[k]!==undefined) o[k]=c[k]; });
+  if(c.custom){ o.custom=true; o.f=c.f; o.b=c.b; o.ex=c.ex||''; o.created=c.created||0; }
+  else if(c.edited){ o.edited=true; o.f=c.f; o.b=c.b; o.ex=c.ex||''; }
+  return o;
+}
+function writeLocal(){ try{ localStorage.setItem(LS_KEY, JSON.stringify({meta, cards:saved})); }catch(e){} }
+let db=null, metaRef=null, col=null, metaTimer=null;
+const inflight=new Set(), dirty=new Set();
+function setSync(t){ $('sync').textContent='ذخیره‌سازی: '+t; }
+function saveCard(id, isDelete){
+  if(!isDelete && cards[id]) saved[id]=serialize(cards[id]);
+  writeLocal(); flushCard(id, isDelete);
+}
+async function flushCard(id, isDelete){
+  if(!col) return;
+  if(inflight.has(id)){ dirty.add(id); return; }
+  inflight.add(id);
+  try{
+    if(isDelete || !saved[id] || saved[id].del) await col.doc(id).delete();
+    else await col.doc(id).set(saved[id]);
+  }catch(e){ setSync(e && e.code==='quota_exceeded' ? 'فضای ذخیره پر است.' : 'ذخیره‌ی آنلاین انجام نشد؛ روی همین دستگاه ذخیره شد.'); }
+  inflight.delete(id);
+  if(dirty.delete(id)) flushCard(id, !saved[id] || saved[id].del);
+}
+function saveMeta(){
+  writeLocal();
+  if(!metaRef) return;
+  clearTimeout(metaTimer);
+  metaTimer=setTimeout(async()=>{ try{ await metaRef.set(JSON.parse(JSON.stringify(meta))); setSync('ذخیره شد در حساب شما.'); }catch(e){ setSync('ذخیره‌ی آنلاین انجام نشد؛ روی همین دستگاه ذخیره شد.'); } }, 700);
+}
+async function connect(){
+  let settled=false;
+  const timer=setTimeout(()=>{ if(!settled) setSync('فقط روی همین دستگاه (اتصال برقرار نشد).'); }, 10000);
+  try{
+    if(!window.claude || !window.claude.use){ settled=true; clearTimeout(timer); setSync('فقط روی همین دستگاه.'); return; }
+    const [d, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+    const uid = user ? await user.id() : null;
+    if(!d || !uid){ settled=true; clearTimeout(timer); setSync('فقط روی همین دستگاه (برای همگام‌سازی وارد حساب Claude شوید).'); return; }
+    const mRef=d.doc('data/users/'+uid+'/vajehbagh'), cCol=d.collection('data/users/'+uid+'/vajehbagh/cards');
+    const [m, cs] = await Promise.all([mRef.get(), cCol.get()]);
+    settled=true; clearTimeout(timer);
+    db=d; metaRef=mRef; col=cCol;
+    if(m.exists){
+      const r=m.data()||{};
+      meta=Object.assign({start:meta.start, time:'20:00', done:{}, log:{}, newPer:null}, r);
+      saved={}; cs.docs.forEach(x=>{ saved[x.id]=x.data()||{}; });
+      writeLocal(); rebuild();
+    } else {
+      // first sync: upload what this device already has
+      saveMeta();
+      for(const id of Object.keys(saved)){ if(!saved[id].del) await flushCard(id); }
+    }
+    setSync('متصل؛ پیشرفت در حساب Claude شما ذخیره می‌شود و روی همه‌ی دستگاه‌ها یکی است.');
+    lastBadges=null; lastLevel=null; renderAll(); renderBadgeTab();
+  }catch(e){ settled=true; clearTimeout(timer); setSync('فقط روی همین دستگاه.'); }
+}
+
+// ---------------- effects ----------------
+function speak(text){
+  try{ const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=.9; speechSynthesis.cancel(); speechSynthesis.speak(u); }
+  catch(e){ toast('پخش صدا در این دستگاه پشتیبانی نمی‌شود.'); }
+}
+let toastT;
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600); }
+function celebrate(){
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c=$('fx'), ctx=c.getContext('2d'), dpr=window.devicePixelRatio||1;
+  c.width=innerWidth*dpr; c.height=innerHeight*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+  const cs=getComputedStyle(document.documentElement);
+  const cols=['--leaf','--sun','--pom'].map(k=>cs.getPropertyValue(k).trim());
+  const parts=Array.from({length:110},()=>({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*12,vy:Math.random()*-12-3,r:Math.random()*7+4,c:cols[Math.floor(Math.random()*3)],a:Math.random()*6,s:(Math.random()-.5)*.3}));
+  let f=0;(function tick(){ ctx.clearRect(0,0,innerWidth,innerHeight);
+    parts.forEach(p=>{ p.vy+=.35; p.x+=p.vx; p.y+=p.vy; p.vx*=.99; p.a+=p.s; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle=p.c;
+      ctx.beginPath(); ctx.ellipse(0,0,p.r,p.r/2.4,0,0,Math.PI*2); ctx.fill(); ctx.restore(); }); // leaf-shaped confetti
+    if(++f<110) requestAnimationFrame(tick); else ctx.clearRect(0,0,innerWidth,innerHeight); })();
+}
+
+renderAll(); renderBadgeTab();
+connect();
+})();
+</script>
