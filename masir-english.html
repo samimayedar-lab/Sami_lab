@@ -1,0 +1,1055 @@
+<title>مسیر انگلیسی</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: the user's "Masir" look — dark glass on a violet/navy gradient with soft blobs, emoji tab bar. Five tabs: Today, Plan, Words, Journal, Progress. Bottom sheets for each activity. */
+:root{
+  --bg1:#1B1038; --bg2:#0E2A55; --bg3:#0B1B3A; --tx:#ffffff; --mu:rgba(255,255,255,.68);
+  --g1:rgba(255,255,255,.16); --g2:rgba(255,255,255,.05); --bd:rgba(255,255,255,.22); --in:rgba(255,255,255,.10);
+  --ac:#8E7CFF; --ac2:#00D4C8; --ok:#5CFFB0; --bad:#FF6B8B; --warn:#FFC857; --sheet:#1B1F3B; --blob:.5; --btn-tx:#ffffff;
+  --font:"Vazirmatn",Tahoma,system-ui,sans-serif;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg1:#EEF0FF; --bg2:#E2F6F4; --bg3:#FCEBF3; --tx:#1B1F3B; --mu:rgba(27,31,59,.64);
+  --g1:rgba(255,255,255,.88); --g2:rgba(255,255,255,.58); --bd:rgba(27,31,59,.13); --in:rgba(27,31,59,.06);
+  --ac:#6A55F0; --ac2:#00A79D; --ok:#0E9F6E; --bad:#E11D48; --warn:#B7791F; --sheet:#ffffff; --blob:.3; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg1:#EEF0FF; --bg2:#E2F6F4; --bg3:#FCEBF3; --tx:#1B1F3B; --mu:rgba(27,31,59,.64);
+  --g1:rgba(255,255,255,.88); --g2:rgba(255,255,255,.58); --bd:rgba(27,31,59,.13); --in:rgba(27,31,59,.06);
+  --ac:#6A55F0; --ac2:#00A79D; --ok:#0E9F6E; --bad:#E11D48; --warn:#B7791F; --sheet:#ffffff; --blob:.3; color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+body{margin:0;font-family:var(--font);color:var(--tx);background-color:var(--bg1);background-image:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));background-attachment:fixed;line-height:1.75;font-size:15px;min-height:100%}
+.blob{position:fixed;border-radius:50%;filter:blur(70px);opacity:var(--blob);z-index:0;pointer-events:none}
+.b1{width:280px;height:280px;background:#8E7CFF;top:-80px;right:-60px}.b2{width:260px;height:260px;background:#00D4C8;top:45%;left:-90px}.b3{width:300px;height:300px;background:#FF6FB5;bottom:-110px;right:-60px}
+#wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding-block:10px calc(110px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#top{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 10px;gap:8px}
+#top b{font-size:21px;font-weight:800;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.icon-btn{font:inherit;background:var(--in);border:1px solid var(--bd);color:var(--tx);border-radius:14px;width:40px;height:40px;cursor:pointer;font-size:18px;display:grid;place-items:center}
+.glass{background:linear-gradient(135deg,var(--g1),var(--g2));border:1px solid var(--bd);border-radius:22px;padding:14px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 8px 30px rgba(0,0,0,.16);margin-bottom:12px}
+h1{font-size:24px;margin:0 0 4px;line-height:1.35;text-wrap:balance}
+h2{font-size:18px;margin:0;text-wrap:balance}
+h3{font-size:15.5px;margin:0 0 6px}
+p{margin:0}
+.mu{color:var(--mu)} .sm{font-size:12.5px} .c{text-align:center}
+.en{direction:ltr;unicode-bidi:isolate}
+.ltr{direction:ltr;text-align:left}
+.sec{display:flex;align-items:center;justify-content:space-between;margin:16px 4px 8px;gap:8px}
+.sec h2{font-size:16px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media (max-width:380px){.grid4{grid-template-columns:repeat(2,1fr)}}
+.tile{text-align:center;padding:10px 6px;margin:0}
+.tile b{display:block;font-size:22px;font-weight:800;line-height:1.3}
+.tile span{font-size:11.5px;color:var(--mu)}
+.btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:10px 16px;cursor:pointer;color:var(--btn-tx);background:linear-gradient(90deg,var(--ac),var(--ac2));box-shadow:0 6px 18px rgba(142,124,255,.28)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.sec2{background:var(--in);color:var(--tx);border:1px solid var(--bd);box-shadow:none;font-weight:600}
+.btn.sm{padding:6px 12px;font-size:13px;border-radius:12px}
+.btn.danger{background:var(--in);color:var(--bad);border:1px solid var(--bd);box-shadow:none}
+.btn.wide{width:100%}
+:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+input,textarea,select{font:inherit;color:var(--tx);background:var(--in);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;width:100%}
+textarea{min-height:110px;resize:vertical;line-height:1.8}
+label.f{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--mu);margin-bottom:10px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:1px 10px;border-radius:99px;background:var(--in);border:1px solid var(--bd);color:var(--tx);white-space:nowrap}
+.chip.ok{color:var(--ok)} .chip.ac{color:var(--ac2)} .chip.warn{color:var(--warn)} .chip.bad{color:var(--bad)}
+.bar{height:10px;border-radius:99px;background:var(--in);overflow:hidden}
+.bar>i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .5s}
+.hero{display:flex;align-items:center;gap:14px}
+.hero .ring{flex:0 0 92px;width:92px;height:92px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .tr{stroke:var(--in)} .ring .ar{stroke:url(#gr);transition:stroke-dashoffset .6s}
+.ring .v{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-weight:800;font-size:20px;line-height:1.1}
+.ring .v small{display:block;font-size:10.5px;font-weight:500;color:var(--mu)}
+.hero .txt{min-width:0;flex:1}
+.notice{display:flex;gap:10px;align-items:flex-start}
+.notice .dot{flex:0 0 10px;height:10px;border-radius:50%;background:var(--warn);margin-top:8px;box-shadow:0 0 0 0 var(--warn);animation:pulse 1.8s infinite}
+.notice.ok .dot{background:var(--ok);animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 8px transparent}}
+
+/* tasks */
+.task{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;padding:12px}
+.task .ic{flex:0 0 44px;height:44px;border-radius:14px;background:var(--in);display:grid;place-items:center;font-size:22px}
+.task .body{flex:1;min-width:0}
+.task .body b{display:block;font-size:15px}
+.task .body p{font-size:13px;color:var(--mu);line-height:1.7}
+.task .prompt{margin-top:6px;font-size:13px;padding:6px 10px;border-radius:10px;background:var(--in);direction:ltr;text-align:left}
+.task .acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center}
+.task.done{border-color:color-mix(in srgb,var(--ok) 50%,transparent)}
+.task.done .body b{text-decoration:line-through;text-decoration-color:var(--ok)}
+.tick{appearance:none;flex:0 0 30px;width:30px;height:30px;margin:6px 0 0;border-radius:10px;border:2px solid var(--ac2);background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
+.tick:checked{background:var(--ok);border-color:var(--ok)}
+.tick:checked::after{content:"";width:8px;height:14px;border:solid #0b1b3a;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.tick:disabled{cursor:default}
+.daynav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:14px 4px 8px}
+
+/* plan */
+.phase-h{margin:18px 4px 8px}
+.dayrow{display:flex;align-items:center;gap:12px;padding:10px 12px;margin-bottom:8px;cursor:pointer;width:100%;font:inherit;color:inherit;text-align:right}
+.dayrow .n{flex:0 0 42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:800;background:var(--in)}
+.dayrow.full .n{background:var(--ok);color:#0b1b3a}
+.dayrow.today{outline:2px solid var(--warn);outline-offset:-2px}
+.dayrow.future{opacity:.55}
+.dayrow .m{flex:1;min-width:0}
+.dayrow .m b{display:block;font-size:14px}
+.dayrow .m span{font-size:12px;color:var(--mu)}
+.dayrow .pp{flex:0 0 64px}
+
+/* words / review */
+.wl{display:flex;flex-direction:column;gap:8px}
+.wi{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;padding:10px 12px;margin:0}
+.wi .m{min-width:0;flex:1}
+.wi .w{font-weight:800;direction:ltr;text-align:right;overflow-wrap:anywhere}
+.wi .t{font-size:13px;color:var(--mu);overflow-wrap:anywhere}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.seg button{font:inherit;font-size:12.5px;border:1px solid var(--bd);background:var(--in);color:var(--mu);border-radius:99px;padding:3px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;border-color:transparent}
+.flash{min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;cursor:pointer;padding:24px 16px}
+.flash .front{font-size:32px;font-weight:800;direction:ltr;overflow-wrap:anywhere;line-height:1.3}
+.flash .back{font-size:20px;font-weight:700;color:var(--ac2)}
+.flash .ex{direction:ltr;font-style:italic;color:var(--mu);max-width:34ch}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.grade{font:inherit;border-radius:14px;border:1px solid var(--bd);background:var(--in);color:var(--tx);padding:10px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-width:0}
+.grade b{font-size:14px} .grade span{font-size:11px;color:var(--mu)}
+.grade.g1 b{color:var(--bad)} .grade.g2 b{color:var(--warn)} .grade.g3 b{color:var(--ok)} .grade.g4 b{color:var(--ac2)}
+.timerbox{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.clock{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;direction:ltr}
+
+/* journal */
+.entry{margin-bottom:10px}
+.entry .eh{display:flex;gap:10px;align-items:flex-start}
+.entry .eh .ic{flex:0 0 40px;height:40px;border-radius:12px;background:var(--in);display:grid;place-items:center;font-size:20px}
+.entry .eh .m{flex:1;min-width:0}
+.entry .eh b{display:block;overflow-wrap:anywhere}
+.entry details{margin-top:8px}
+.entry summary{cursor:pointer;color:var(--ac2);font-size:13px;font-weight:700}
+.box{background:var(--in);border-radius:12px;padding:10px 12px;margin-top:8px;overflow-wrap:anywhere;white-space:pre-wrap}
+.box.ltr{direction:ltr;text-align:left}
+.fix{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border-radius:12px;background:var(--in);margin-top:6px}
+.fix .o{direction:ltr;text-align:left;color:var(--bad);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 60%,transparent)}
+.fix .n{direction:ltr;text-align:left;color:var(--ok);font-weight:700}
+.fix .y{font-size:12.5px;color:var(--mu)}
+.wordpick{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.wordpick label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:12px;background:var(--in);cursor:pointer}
+.wordpick input{width:20px;height:20px;flex:0 0 20px;margin-top:3px;accent-color:var(--ac2)}
+.wordpick .w{font-weight:800;direction:ltr;display:inline-block}
+audio{width:100%;margin-top:8px}
+
+/* progress */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vs .col{margin:0;padding:12px}
+.vs .col h3{font-size:14px}
+.vs .k{display:flex;justify-content:space-between;gap:6px;font-size:13px;padding:4px 0;border-bottom:1px dashed var(--bd)}
+.vs .k:last-child{border-bottom:0}
+.vs .k b{font-weight:800}
+.chart{width:100%;height:auto;display:block}
+.chart .grid{stroke:var(--bd)} .chart .ln{fill:none;stroke:var(--ac2);stroke-width:2.5} .chart .ln2{fill:none;stroke:var(--ac);stroke-width:2.5}
+.chart .pt{fill:var(--ac2)} .chart .pt2{fill:var(--ac)} .chart .bb{fill:var(--ac)} .chart .bb.hi{fill:var(--ac2)}
+.chart text{fill:var(--mu);font-family:var(--font);font-size:9px}
+.hm{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.hm i{aspect-ratio:1;border-radius:6px;background:var(--in);display:block;max-width:100%}
+.hm i.p{background:color-mix(in srgb,var(--ac) 45%,transparent)} .hm i.f{background:var(--ok)} .hm i.t{outline:2px solid var(--warn)}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bdg{text-align:center;padding:10px 6px;margin:0;opacity:.5}
+.bdg.on{opacity:1;border-color:color-mix(in srgb,var(--warn) 55%,transparent)}
+.bdg .e{font-size:28px;line-height:1.3;filter:grayscale(1)} .bdg.on .e{filter:none}
+.bdg b{display:block;font-size:12.5px} .bdg span{font-size:11px;color:var(--mu);line-height:1.5;display:block}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mu);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-1px;margin-left:5px}
+
+/* tab bar + sheet */
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:8px max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+#tabs nav{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:6px;border-radius:22px;background:linear-gradient(135deg,var(--g1),var(--g2));border:1px solid var(--bd);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 30px rgba(0,0,0,.25)}
+#tabs button{font:inherit;font-size:11.5px;background:none;border:0;color:var(--mu);padding:4px 0;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.4;position:relative}
+#tabs button span.e{font-size:21px}
+#tabs button[aria-selected="true"]{color:var(--tx);background:var(--in);font-weight:700}
+#tabs .dotn{position:absolute;top:0;left:calc(50% + 6px);min-width:18px;height:18px;border-radius:99px;background:var(--bad);color:#fff;font-size:10.5px;display:grid;place-items:center;padding:0 5px}
+#ov{position:fixed;inset:0;z-index:30;background:rgba(5,6,20,.55);display:flex;align-items:flex-end;justify-content:center}
+#sheet{width:100%;max-width:640px;max-height:92%;overflow-y:auto;background:var(--sheet);color:var(--tx);border-radius:26px 26px 0 0;border:1px solid var(--bd);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:up .25s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+#sheet .grab{width:44px;height:5px;border-radius:99px;background:var(--bd);margin:2px auto 10px}
+#sheet .sh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+#sheet .glass{backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none}
+.thinking{display:flex;align-items:center;gap:10px;color:var(--mu)}
+.thinking::before{content:"";width:16px;height:16px;border-radius:50%;border:2px solid var(--ac2);border-top-color:transparent;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:40;background:var(--sheet);color:var(--tx);border:1px solid var(--bd);padding:10px 18px;border-radius:99px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .25s;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:45;width:100%;height:100%}
+.empty{text-align:center;color:var(--mu);padding:18px 8px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8E7CFF"></stop><stop offset="1" stop-color="#00D4C8"></stop></linearGradient></defs></svg>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status"></div>
+
+<div id="wrap" dir="rtl">
+  <div id="top"><b>مسیر انگلیسی</b><div class="row"><span class="chip" id="syncChip">در حال اتصال…</span><button class="icon-btn" id="themeBtn" aria-label="تغییر تم">🌓</button></div></div>
+  <main id="view"></main>
+</div>
+
+<div id="tabs" dir="rtl"><nav role="tablist">
+  <button role="tab" data-tab="today" aria-selected="true"><span class="e">🏠</span>امروز</button>
+  <button role="tab" data-tab="plan" aria-selected="false"><span class="e">🗓️</span>برنامه</button>
+  <button role="tab" data-tab="words" aria-selected="false"><span class="e">🃏</span>لغت‌ها<span class="dotn" id="dueDot" hidden></span></button>
+  <button role="tab" data-tab="journal" aria-selected="false"><span class="e">📒</span>کارنامه</button>
+  <button role="tab" data-tab="progress" aria-selected="false"><span class="e">📈</span>پیشرفت</button>
+</nav></div>
+
+<div id="ov" hidden dir="rtl"><div id="sheet" role="dialog" aria-modal="true"></div></div>
+
+<script>
+(function(){
+'use strict';
+/* ====================== helpers ====================== */
+const $ = (s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const fa = v => String(v).replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = () => Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const clampDay = d => Math.max(1, Math.min(90, d));
+const edOf = d => Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())/864e5);
+const TODAY = () => edOf(new Date());
+const edFromISO = s => { const [y,m,d]=s.split('-').map(Number); return Date.UTC(y,m-1,d)/864e5; };
+const isoFromEd = e => new Date(e*864e5).toISOString().slice(0,10);
+const jalali = (e, opt) => { try{ return new Date(e*864e5+12*36e5).toLocaleDateString('fa-IR-u-ca-persian', opt||{day:'numeric',month:'long'}); }catch(_){ return isoFromEd(e); } };
+const mmss = s => fa(String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'));
+const countWords = t => (String(t||'').trim().match(/[A-Za-z][A-Za-z'’-]*/g)||[]).length;
+let capCache = {};
+async function use(name){ if(name in capCache) return capCache[name]; try{ capCache[name] = (window.claude && window.claude.use) ? await window.claude.use(name) : null; }catch(_){ capCache[name]=null; } return capCache[name]; }
+
+/* ====================== plan content ====================== */
+const BBC6 = 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english';
+const PHASES = [
+  {n:'پایه', en:'Foundation', from:1, to:30, words:5, write:'۵ جمله', wmin:40, speak:'۱ دقیقه', listen:'یک قسمت 6 Minute English را گوش بده. یک بار بدون متن، بعد با متن.'},
+  {n:'گسترش', en:'Expansion', from:31, to:60, words:7, write:'۸ جمله', wmin:80, speak:'۹۰ ثانیه', listen:'یک قسمت 6 Minute English: اول بدون متن خلاصه بنویس، بعد با متن چک کن.'},
+  {n:'روانی', en:'Fluency', from:61, to:90, words:10, write:'۱۲۰ کلمه', wmin:120, speak:'۲ دقیقه', listen:'6 Minute English یا یک پادکست دلخواه. بعد از گوش دادن، با صدای بلند خلاصه‌اش را بگو.'}
+];
+const phaseOf = d => PHASES[d<=30?0:d<=60?1:2];
+const CHECKIN_DAYS = [1,30,60,90];
+const CHECKIN = 'Introduce yourself: who you are, what you do every day, and why you are learning English. What are your goals?';
+const TOPICS = [
+  'Describe your morning routine.','Talk about your job or your studies.','Describe your hometown.','What did you do last weekend?',
+  'Talk about your favourite food and how to make it.','Describe a person you admire and why.','What are your plans for next month?',
+  'Talk about a film or series you like.','Describe your ideal weekend.','What makes a good boss or colleague?','Talk about a difficult day you had.',
+  'Describe your favourite place to relax.','What technology do you use every day?','Talk about a trip you remember.',
+  'What are the pros and cons of working from home?','Describe a skill you want to learn.','Talk about your best friend.',
+  'What would you do with a free day?','Describe a problem at work and how you solved it.','Talk about healthy habits.',
+  'What is a goal you achieved?','Describe your dream job.','Talk about a book or podcast you like.','How do you manage stress?',
+  'Describe a celebration in your culture, like Nowruz.','What advice would you give to a new English learner?',
+  'Money: are you a saver or a spender?','Describe a change you want to make in your life.','What have you learned in this program so far?'
+];
+const topicOf = d => CHECKIN_DAYS.includes(d) ? CHECKIN : TOPICS[(d-2+TOPICS.length*4) % TOPICS.length];
+const isRest = d => d%7===0 && !CHECKIN_DAYS.includes(d);
+
+function tasksFor(d){
+  const p = phaseOf(d), ck = CHECKIN_DAYS.includes(d), T = [];
+  if(d===1) T.push({id:'words', ic:'➕', t:'لغت‌نامه‌ات را بساز', h:'حداقل ۵ لغت اضافه کن، یا بسته‌ی آماده‌ی ۶۰ لغت پرکاربرد را با یک دکمه اضافه کن.', act:'starter'});
+  else T.push({id:'review', ic:'⏱️', t:'۱۰ دقیقه مرور لغت‌ها', h:'تایمر هنگام مرور کارت‌ها خودش می‌شمارد. سر ۱۰ دقیقه، این کار خودکار تیک می‌خورد.', act:'review'});
+  if(isRest(d)){
+    T.push({id:'listen', ic:'🎧', t:'گوش دادن آزاد', h:'هر چیزی که دوست داری: یک قسمت 6 Minute English، پادکست یا سکانسی از یک فیلم. بنویس چه گوش دادی.', act:'listen'});
+    T.push({id:'report', ic:'🧭', t:'گزارش هفته', h:'Claude کارهای این هفته‌ات را می‌خواند و نقاط قوت و چیزهایی را که باید تمرین کنی می‌گوید.', act:'report'});
+    return T;
+  }
+  T.push({id:'listen', ic:'🎧', t:'گوش دادن: 6 Minute English', h:p.listen+' بعد بنویس چه گوش دادی و چه لغاتی یاد گرفتی.', act:'listen'});
+  if(d!==1) T.push({id:'words', ic:'➕', t:'حداقل '+fa(p.words)+' لغت جدید اضافه کن', h:'از چیزی که گوش دادی یا خواندی. Claude می‌تواند لغات را از متن برایت دربیاورد.', act:'addword'});
+  T.push({id:'speak', ic:'🎙️', t:(ck?'آزمون صحبت: ':'صحبت کن: ')+p.speak, h:ck?'همین موضوع در روزهای ۱، ۳۰، ۶۰ و ۹۰ تکرار می‌شود تا پیشرفتت را بشنوی.':'صدایت را ضبط کن. اگر متنش را هم بنویسی، Claude اشتباه‌هایت را می‌گوید.', act:'speak', prompt:topicOf(d), ck});
+  T.push({id:'write', ic:'✍️', t:(ck?'آزمون نوشتن: ':'بنویس: ')+p.write, h:ck?'با روز اولت مقایسه می‌شود.':'Claude متنت را تصحیح می‌کند: نسخه‌ی اصلی و درست را کنار هم می‌بینی.', act:'write', prompt:topicOf(d), ck});
+  return T;
+}
+
+const STARTER = `appointment|قرار ملاقات، وقت (دکتر)|I have a doctor's appointment at 4.
+available|در دسترس، آزاد|Are you available this afternoon?
+borrow|قرض گرفتن|Can I borrow your pen?
+comfortable|راحت|These shoes are very comfortable.
+decide|تصمیم گرفتن|I decided to study English every day.
+describe|توصیف کردن|Can you describe the man you saw?
+enough|کافی|We don't have enough time.
+expensive|گران|Rent is very expensive in this city.
+explain|توضیح دادن|Could you explain that again, please?
+familiar|آشنا|This street looks familiar.
+habit|عادت|Reading before bed is a good habit.
+improve|بهتر کردن، پیشرفت کردن|I want to improve my speaking.
+instead|به جای آن|Let's walk instead of taking a taxi.
+mistake|اشتباه|Everyone makes mistakes.
+nervous|مضطرب|I was nervous before the interview.
+patient|صبور|Be patient. Learning takes time.
+prefer|ترجیح دادن|I prefer tea to coffee.
+prepare|آماده کردن، آماده شدن|I need to prepare for the exam.
+recently|اخیراً|I have recently started a new job.
+remind|یادآوری کردن|Please remind me to call my mom.
+spend|خرج کردن؛ گذراندن (وقت)|I spend an hour on English every day.
+suddenly|ناگهان|Suddenly, the lights went out.
+usually|معمولاً|I usually drink tea in the morning.
+worried|نگران|She is worried about her exam.
+advice|نصیحت، توصیه|Can you give me some advice?
+afford|استطاعت داشتن|I can't afford a new car.
+avoid|اجتناب کردن|I avoid eating late at night.
+complain|شکایت کردن|He always complains about the food.
+crowded|شلوغ|The bus was very crowded.
+exhausted|خیلی خسته|I was exhausted after the trip.
+deadline|مهلت نهایی|The deadline is next Friday.
+schedule|برنامه‌ی زمانی|My schedule is full this week.
+colleague|همکار|My colleagues are very helpful.
+responsible|مسئول|I'm responsible for the sales team.
+reliable|قابل اعتماد|He is a reliable employee.
+efficient|کارآمد|We need a more efficient system.
+confident|با اعتماد به نفس|She sounds confident on the phone.
+achieve|به دست آوردن، رسیدن به|We achieved our goal this year.
+solution|راه‌حل|We need to find a solution.
+issue|مسئله، مشکل|There's an issue with the website.
+suggest|پیشنهاد دادن|I suggest we start early.
+recommend|توصیه کردن|I recommend this hotel.
+opportunity|فرصت|This is a great opportunity.
+priority|اولویت|Safety is our top priority.
+feedback|بازخورد|Thanks for your feedback.
+appreciate|قدردانی کردن|I really appreciate your help.
+postpone|به تعویق انداختن|We postponed the meeting to Monday.
+make a decision|تصمیم گرفتن|We need to make a decision today.
+figure out|فهمیدن، راهش را پیدا کردن|I can't figure out this problem.
+get used to|عادت کردن به|I'm getting used to my new job.
+look forward to|مشتاقانه منتظر بودن|I look forward to hearing from you.
+keep in mind|در نظر داشتن|Keep in mind that the office closes at 5.
+come up with|(ایده) پیدا کردن|He came up with a great plan.
+give up|دست کشیدن، تسلیم شدن|Don't give up!
+find out|فهمیدن، کشف کردن|I found out the truth.
+deal with|رسیدگی کردن به|I'll deal with this problem.
+take a break|استراحت کردن|Let's take a ten-minute break.
+make sense|منطقی بودن|That makes sense.
+to be honest|راستش را بخواهی|To be honest, I didn't like it.
+a piece of cake|خیلی آسان|The test was a piece of cake.`.split('\n').map(l=>l.split('|'));
+
+/* ====================== state ====================== */
+const LS='masir-english-v1';
+const S = { meta:{start:isoFromEd(TODAY()), time:'20:00', manual:{}, timer:{}, compare:null, made:Date.now()}, entries:{}, words:{} };
+try{ const r=JSON.parse(localStorage.getItem(LS)||'null'); if(r && r.meta){ Object.assign(S.meta, r.meta); S.entries=r.entries||{}; S.words=r.words||{}; } }catch(_){}
+const planDay = () => TODAY() - edFromISO(S.meta.start) + 1;
+const curDay = () => clampDay(planDay());
+let selDay = null, tab = 'today';
+
+/* ====================== storage ====================== */
+let REF=null, metaT=null;
+const inflight=new Set(), dirty=new Set();
+function writeLocal(){ try{ localStorage.setItem(LS, JSON.stringify({meta:S.meta, entries:S.entries, words:S.words})); }catch(_){} }
+function setSync(t, ok){ const c=$('#syncChip'); c.textContent=t; c.className='chip '+(ok?'ok':'warn'); }
+function saveMeta(){ writeLocal(); if(!REF) return; clearTimeout(metaT); metaT=setTimeout(async()=>{ try{ await REF.meta.set(JSON.parse(JSON.stringify(S.meta))); setSync('ذخیره شد ✓',true); }catch(e){ setSync('ذخیره‌ی آنلاین نشد',false); } }, 800); }
+function put(kind, id){ writeLocal(); flush(kind, id); }
+function drop(kind, id){ delete S[kind][id]; writeLocal(); flush(kind, id); }
+async function flush(kind, id){
+  if(!REF) return; const key=kind+'/'+id;
+  if(inflight.has(key)){ dirty.add(key); return; }
+  inflight.add(key);
+  try{ const ref=REF[kind].doc(id); if(S[kind][id]) await ref.set(JSON.parse(JSON.stringify(S[kind][id]))); else await ref.delete(); setSync('ذخیره شد ✓',true); }
+  catch(e){ setSync(e && e.code==='quota_exceeded'?'فضای ذخیره پر است':'ذخیره‌ی آنلاین نشد',false); }
+  inflight.delete(key); if(dirty.delete(key)) flush(kind, id);
+}
+async function connect(){
+  let done=false; const t=setTimeout(()=>{ if(!done) setSync('فقط روی این دستگاه',false); }, 10000);
+  try{
+    const [db, user] = await Promise.all([use('db'), use('user')]);
+    const id = user ? await user.id() : null;
+    if(!db || !id){ done=true; clearTimeout(t); setSync('فقط روی این دستگاه',false); return; }
+    const base='data/users/'+id+'/masir-english';
+    const R={meta:db.doc(base), entries:db.collection(base+'/entries'), words:db.collection(base+'/words')};
+    const [m, es, ws] = await Promise.all([R.meta.get(), R.entries.get(), R.words.get()]);
+    done=true; clearTimeout(t); REF=R;
+    if(m.exists){
+      Object.assign(S.meta, m.data()||{});
+      S.entries={}; es.docs.forEach(d=>S.entries[d.id]=d.data()); S.words={}; ws.docs.forEach(d=>S.words[d.id]=d.data());
+      writeLocal();
+    } else {
+      saveMeta();
+      for(const k of Object.keys(S.entries)) await flush('entries',k);
+      for(const k of Object.keys(S.words)) await flush('words',k);
+    }
+    setSync('همگام با حساب ✓',true); badgeSeen=null; render();
+  }catch(e){ done=true; clearTimeout(t); setSync('فقط روی این دستگاه',false); }
+}
+
+/* ====================== derived ====================== */
+const entriesOf = (type, d) => Object.values(S.entries).filter(e=>(!type||e.type===type) && (d==null||e.day===d)).sort((a,b)=>a.at-b.at);
+const wordsOfDay = d => Object.values(S.words).filter(w=>w.day===d);
+function autoDone(d, task){
+  switch(task.id){
+    case 'review': return (S.meta.timer[d]||0) >= 600;
+    case 'listen': return entriesOf('listen', d).length>0;
+    case 'words': return wordsOfDay(d).length >= (d===1?5:phaseOf(d).words);
+    case 'speak': return entriesOf('speak', d).length>0;
+    case 'write': return entriesOf('write', d).length>0;
+    case 'report': return entriesOf('report', d).length>0;
+  }
+  return false;
+}
+const isDone = (d, task) => autoDone(d,task) || !!(S.meta.manual[d] && S.meta.manual[d][task.id]);
+const dayCount = d => { const ts=tasksFor(d); return {done:ts.filter(t=>isDone(d,t)).length, total:ts.length}; };
+const isFull = d => { const c=dayCount(d); return c.done===c.total; };
+function stats(){
+  const now=planDay(); let full=0, tdone=0, ttot=0, best=0, run=0;
+  for(let d=1; d<=90; d++){ const c=dayCount(d); tdone+=c.done; ttot+=c.total; if(c.done===c.total){ full++; run++; best=Math.max(best,run);} else run=0; }
+  let streak=0, d=clampDay(now); if(now>=1 && !isFull(d)) d--; while(now>=1 && d>=1 && isFull(d)){ streak++; d--; }
+  const W=Object.values(S.words); const learned=W.filter(w=>w.st==='review'&&w.ivl>=7).length;
+  const minutes=Math.round(Object.values(S.meta.timer).reduce((a,b)=>a+b,0)/60);
+  return {now, full, pct:Math.round(tdone/ttot*100), best, streak, words:W.length, learned, minutes,
+    listens:entriesOf('listen').length, writes:entriesOf('write').length, speaks:entriesOf('speak').length, files:entriesOf('file').length};
+}
+
+/* ====================== SRS ====================== */
+const dueWords = () => Object.values(S.words).filter(w=>w.due<=TODAY()).sort((a,b)=>a.due-b.due);
+function nextIvl(w,g){ const i=w.ivl||1; if(g===2) return Math.max(i+1,Math.round(i*1.2)); if(g===3) return Math.max(i+1,Math.round(i*w.ease)); return Math.max(i+2,Math.round(i*w.ease*1.3)); }
+function preview(w,g){ if(w.st!=='review') return g===1?'الان':g===2?'کمی بعد':g===3?'۱ روز':'۴ روز'; return g===1?'الان':fa(nextIvl(w,g))+' روز'; }
+function grade(w,g){
+  const t=TODAY(); w.reps=(w.reps||0)+1; let again=false;
+  if(w.st!=='review'){ if(g<=2){ w.st='learn'; w.due=t; again=true; } else { w.st='review'; w.ivl=g===4?4:1; w.due=t+w.ivl; } }
+  else if(g===1){ w.lapses=(w.lapses||0)+1; w.ease=Math.max(1.3,w.ease-0.2); w.ivl=1; w.st='learn'; w.due=t; again=true; }
+  else { if(g===2) w.ease=Math.max(1.3,w.ease-0.15); if(g===4) w.ease+=0.15; w.ivl=nextIvl(w,g); w.due=t+w.ivl; }
+  put('words', w.id); return again;
+}
+function addWord(f,b,ex,src,day){
+  f=String(f||'').trim(); if(!f) return null;
+  if(Object.values(S.words).some(w=>w.f.toLowerCase()===f.toLowerCase())) return null;
+  const id='w'+uid();
+  S.words[id]={id,f,b:String(b||'').trim()||'—',ex:String(ex||'').trim(),src:src||'',day:day||curDay(),at:Date.now(),st:'new',due:TODAY(),ivl:0,ease:2.5,reps:0,lapses:0};
+  put('words', id); return S.words[id];
+}
+
+/* ====================== Claude ====================== */
+const LEVEL_NOTE = 'The learner is a Persian (Farsi) speaker, about A2-B1 level, following a 90-day English plan. Be warm and encouraging. Write every explanation for the learner in simple Persian (Farsi); keep English examples in English.';
+function errCopy(e){
+  const c=e&&e.code;
+  if(c==='not_granted') return 'اجازه‌ی استفاده از Claude داده نشد. از منوی Permissions صفحه می‌توانید اجازه بدهید.';
+  if(c==='rate_limited') return 'کمی صبر کنید و دوباره امتحان کنید.';
+  if(c==='prompt_too_large') return 'متن خیلی طولانی است. بخشی از آن را بفرستید.';
+  if(c==='cancelled') return 'متوقف شد.';
+  if(c==='images_unavailable'||c==='image_rejected') return 'این تصویر قابل ارسال نبود. تصویر دیگری امتحان کنید.';
+  if(c==='unavailable_here') return 'Claude در این نمایش در دسترس نیست. صفحه را در اپ یا سایت Claude باز کنید.';
+  return 'بررسی انجام نشد. دوباره امتحان کنید.';
+}
+let askCtl=null;
+async function askJSON(prompt, images){
+  const sample = await use('sample');
+  if(!sample) throw {code:'unavailable_here'};
+  askCtl = new AbortController();
+  const opts={signal:askCtl.signal, modelTier:'default'}; if(images && images.length) opts.images=images;
+  return await sample.json(prompt, opts);
+}
+const arr = v => Array.isArray(v) ? v : [];
+const str = v => typeof v==='string' ? v : (v==null?'':String(v));
+const cleanWords = v => arr(v).filter(x=>x && (x.w||x.word)).slice(0,15).map(x=>({w:str(x.w||x.word).slice(0,80), m:str(x.m||x.meaning).slice(0,120), ex:str(x.ex||x.example).slice(0,200)}));
+
+function writingPrompt(kind, topic, text){
+  return LEVEL_NOTE+'\n\nTask: review this learner '+(kind==='speak'?'SPOKEN answer (it was typed by phone dictation, so ignore capitalisation and punctuation; focus on grammar, word choice and natural phrasing)':'WRITING')+'.\nTopic: '+topic+'\nLearner text:\n"""\n'+text.slice(0,8000)+'\n"""\n\nReply with only JSON in this shape:\n{"score": 0-100 integer for overall quality at this level, "cefr": "A1|A2|B1|B2|C1", "corrected": "the full corrected, natural version in English", "mistakes": [{"original": "exact wrong part", "corrected": "fixed part", "why": "very short reason in Persian"}], "good": "one sentence in Persian about what was good", "tips": ["up to 3 short tips in Persian"], "words": [{"w": "useful English word or phrase to upgrade this text", "m": "Persian meaning", "ex": "short English example"}]}\nList at most 8 mistakes and at most 5 words. If there are no mistakes, return an empty list.';
+}
+
+/* ====================== rendering ====================== */
+function setTab(t){ tab=t; $$('#tabs button').forEach(b=>b.setAttribute('aria-selected', String(b.dataset.tab===t))); window.scrollTo({top:0}); render(); }
+function render(){
+  const v=$('#view');
+  if(tab==='today') v.innerHTML=viewToday();
+  if(tab==='plan') v.innerHTML=viewPlan();
+  if(tab==='words') v.innerHTML=viewWords();
+  if(tab==='journal') v.innerHTML=viewJournal();
+  if(tab==='progress') v.innerHTML=viewProgress();
+  const due=dueWords().length, dd=$('#dueDot'); dd.hidden=!due; dd.textContent=fa(due);
+  if(tab==='plan'){ const t=$('.dayrow.today'); if(t) t.scrollIntoView({block:'center'}); }
+  checkBadges();
+}
+
+function viewToday(){
+  const s=stats(), now=s.now; if(selDay===null) selDay=curDay();
+  const d=selDay, p=phaseOf(d), c=dayCount(d), future=d>now;
+  const tc=dayCount(curDay()); const left=tc.total-tc.done;
+  const late=new Date().getHours()>=Number(S.meta.time.split(':')[0]);
+  let note;
+  if(now<1) note='<div class="glass notice"><span class="dot"></span><p>برنامه از '+esc(jalali(edFromISO(S.meta.start),{day:'numeric',month:'long'}))+' شروع می‌شود.</p></div>';
+  else if(now>90) note='<div class="glass notice ok"><span class="dot"></span><p>۹۰ روز تمام شد! به بخش «پیشرفت» برو و خودت را با روز اول مقایسه کن.</p></div>';
+  else if(left===0) note='<div class="glass notice ok"><span class="dot"></span><p><b>آفرین!</b> همه‌ی کارهای امروز انجام شد. زنجیره‌ات '+fa(s.streak)+' روزه است 🔥</p></div>';
+  else note='<div class="glass notice"><span class="dot"></span><p>'+(late?'<b>وقت انگلیسی است!</b> ':'')+'امروز '+fa(left)+' کار مانده. '+(s.streak?'زنجیره‌ی '+fa(s.streak)+' روزه‌ات را حفظ کن.':'از کوچک‌ترین کار شروع کن.')+'</p></div>';
+  const R=263.9, off=(R*(1-s.pct/100)).toFixed(1);
+  let h='<div class="glass hero"><div class="ring"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="tr" cx="50" cy="50" r="42" fill="none" stroke-width="10"></circle><circle class="ar" cx="50" cy="50" r="42" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="'+R+'" stroke-dashoffset="'+off+'"></circle></svg><div class="v"><div>'+fa(s.pct)+'٪<small>کل برنامه</small></div></div></div>'+
+    '<div class="txt"><h1>روز '+fa(clampDay(now))+' از ۹۰</h1><p class="mu sm">'+esc(jalali(TODAY(),{weekday:'long',day:'numeric',month:'long'}))+' · مرحله‌ی '+esc(phaseOf(clampDay(now)).n)+'</p>'+
+    '<div class="row" style="margin-top:6px"><span class="chip warn">🔥 '+fa(s.streak)+' روز</span><span class="chip ac">🃏 '+fa(s.words)+' لغت</span><span class="chip">⏱️ '+fa(s.minutes)+' دقیقه</span></div></div></div>';
+  h+=note;
+  h+='<div class="daynav"><button class="btn sec2 sm" data-act="day" data-d="'+(d-1)+'" '+(d<=1?'disabled':'')+' aria-label="روز قبل">→ قبلی</button><div class="c"><h2>روز '+fa(d)+(d===clampDay(now)&&now>=1&&now<=90?' · امروز':'')+'</h2><span class="mu sm">'+esc(jalali(edFromISO(S.meta.start)+d-1,{weekday:'long',day:'numeric',month:'long'}))+' · '+fa(c.done)+' از '+fa(c.total)+' کار</span></div><button class="btn sec2 sm" data-act="day" data-d="'+(d+1)+'" '+(d>=90?'disabled':'')+' aria-label="روز بعد">بعدی ←</button></div>';
+  if(future) h+='<p class="mu sm c" style="margin-bottom:8px">این روز هنوز نرسیده. می‌توانی کارهایش را ببینی.</p>';
+  if(isRest(d)) h+='<p class="mu sm c" style="margin-bottom:8px">امروز روز سبک هفته است: مرور، گوش دادن آزاد و گزارش هفته.</p>';
+  tasksFor(d).forEach(t=>{
+    const done=isDone(d,t), auto=autoDone(d,t);
+    let extra='';
+    if(t.id==='review'){ const sec=S.meta.timer[d]||0; extra='<div class="bar" style="margin-top:8px"><i style="width:'+Math.min(100,sec/6)+'%"></i></div><span class="mu sm">'+mmss(Math.min(sec,600))+' از ۱۰:۰۰</span>'; }
+    if(t.id==='words'){ const n=wordsOfDay(d).length, need=d===1?5:phaseOf(d).words; extra='<span class="mu sm">'+fa(n)+' از '+fa(need)+' لغت امروز</span>'; }
+    const btnLabel={review:'شروع مرور',listen:'ثبت چیزی که گوش دادم',addword:'افزودن لغت',speak:'ضبط و بازخورد',write:'نوشتن',report:'گرفتن گزارش',starter:'افزودن لغت'}[t.act];
+    h+='<div class="glass task'+(done?' done':'')+'"><div class="ic">'+t.ic+'</div><div class="body"><b>'+esc(t.t)+'</b><p>'+esc(t.h)+'</p>'+
+      (t.prompt?'<div class="prompt">'+esc(t.prompt)+'</div>':'')+extra+
+      '<div class="acts">'+(future?'':'<button class="btn sm" data-act="'+t.act+'" data-d="'+d+'"'+(t.prompt?' data-ck="'+(t.ck?1:0)+'"':'')+'>'+btnLabel+'</button>')+(t.act==='starter'&&!future?'<button class="btn sec2 sm" data-act="starterpack" data-d="'+d+'">بسته‌ی ۶۰ لغت آماده</button>':'')+(auto?'<span class="chip ok">✓ ثبت خودکار</span>':'')+'</div></div>'+
+      '<input type="checkbox" class="tick" aria-label="انجام شد: '+esc(t.t)+'" data-act="tick" data-d="'+d+'" data-t="'+t.id+'" '+(done?'checked':'')+' '+(auto||future?'disabled':'')+'></div>';
+  });
+  h+='<div class="sec"><h2>کارهای آزاد</h2></div><div class="grid2">'+
+    '<button class="glass btn sec2" data-act="file" data-d="'+d+'" style="margin:0">📎 فایل برای بررسی</button>'+
+    '<button class="glass btn sec2" data-act="listen" data-d="'+d+'" style="margin:0">🎧 ثبت گوش دادن</button>'+
+    '<button class="glass btn sec2" data-act="write" data-d="'+d+'" data-free="1" style="margin:0">✍️ نوشتن آزاد</button>'+
+    '<button class="glass btn sec2" data-act="speak" data-d="'+d+'" data-free="1" style="margin:0">🎙️ ضبط آزاد</button></div>';
+  return h;
+}
+
+function viewPlan(){
+  const now=planDay(); let h='<div class="glass"><h1>برنامه‌ی ۹۰ روزه</h1><p class="mu sm">روزها به ترتیب. روی هر روز بزن تا کارهایش را ببینی. روزهای ۱، ۳۰، ۶۰ و ۹۰ روز آزمون هستند و هر هفتم روز سبک‌تر است.</p></div>';
+  PHASES.forEach((p,i)=>{
+    let f=0; for(let d=p.from; d<=p.to; d++) if(isFull(d)) f++;
+    h+='<div class="sec phase-h"><h2>مرحله‌ی '+fa(i+1)+': '+p.n+' <span class="mu sm en">'+p.en+'</span></h2><span class="chip ok">'+fa(f)+' از ۳۰</span></div>';
+    for(let d=p.from; d<=p.to; d++){
+      const c=dayCount(d), full=c.done===c.total, ck=CHECKIN_DAYS.includes(d);
+      const label = ck ? '🏁 روز آزمون و مقایسه' : isRest(d) ? '🌿 روز سبک: مرور و گزارش هفته' : topicOf(d);
+      h+='<button class="glass dayrow'+(full?' full':'')+(d===now?' today':'')+(d>now?' future':'')+'" data-act="openday" data-d="'+d+'"><span class="n">'+(full?'✓':fa(d))+'</span><span class="m"><b'+(ck||isRest(d)?'':' class="en" style="display:block;text-align:right"')+'>'+esc(label)+'</b><span>'+esc(jalali(edFromISO(S.meta.start)+d-1,{weekday:'short',day:'numeric',month:'short'}))+' · '+fa(c.done)+' از '+fa(c.total)+'</span></span><span class="pp"><span class="bar" style="display:block"><i style="width:'+(c.done/c.total*100)+'%"></i></span></span></button>';
+    }
+  });
+  return h;
+}
+
+let wFilter='all', wSearch='';
+function viewWords(){
+  const W=Object.values(S.words), due=dueWords().length;
+  const st={n:W.filter(w=>w.st==='new').length, l:W.filter(w=>w.st==='learn'||(w.st==='review'&&w.ivl<7)).length, m:W.filter(w=>w.st==='review'&&w.ivl>=7).length};
+  let h='<div class="glass"><div class="timerbox"><div><h1>لغت‌نامه‌ی من</h1><p class="mu sm">امروز '+fa(due)+' کارت برای مرور. تایمر مرور: '+mmss(Math.min(S.meta.timer[curDay()]||0,600))+' از ۱۰:۰۰</p></div><button class="btn" data-act="review">شروع مرور</button></div></div>';
+  h+='<div class="grid4"><div class="glass tile"><b>'+fa(W.length)+'</b><span>همه</span></div><div class="glass tile"><b>'+fa(st.n)+'</b><span>جدید</span></div><div class="glass tile"><b>'+fa(st.l)+'</b><span>در حال یادگیری</span></div><div class="glass tile"><b style="color:var(--ok)">'+fa(st.m)+'</b><span>یاد گرفته</span></div></div>';
+  h+='<div class="row" style="margin:10px 0"><button class="btn sec2 sm" data-act="addword">➕ افزودن لغت</button><button class="btn sec2 sm" data-act="bulk">📋 افزودن گروهی</button>'+(W.length<60?'<button class="btn sec2 sm" data-act="starterpack">📦 بسته‌ی آماده</button>':'')+'</div>';
+  h+='<input type="search" id="wsearch" placeholder="جستجو…" value="'+esc(wSearch)+'" aria-label="جستجوی لغت" style="margin-bottom:8px">';
+  h+='<div class="seg" id="wseg">'+[['all','همه'],['due','امروز'],['new','جدید'],['hard','سخت'],['done','یاد گرفته']].map(([k,l])=>'<button data-act="wf" data-f="'+k+'" aria-pressed="'+(wFilter===k)+'">'+l+'</button>').join('')+'</div>';
+  let list=W.filter(w=>{ if(wFilter==='due'&&w.due>TODAY()) return false; if(wFilter==='new'&&w.st!=='new') return false; if(wFilter==='hard'&&!(w.lapses>=2)) return false; if(wFilter==='done'&&!(w.st==='review'&&w.ivl>=7)) return false;
+    const q=wSearch.toLowerCase(); return !q || w.f.toLowerCase().includes(q) || w.b.includes(wSearch); }).sort((a,b)=>b.at-a.at);
+  if(!list.length) h+='<div class="glass empty">'+(W.length?'لغتی با این فیلتر نیست.':'هنوز لغتی نداری. از دکمه‌های بالا اضافه کن یا بعد از گوش دادن، Claude لغات را برایت دربیاورد.')+'</div>';
+  h+='<div class="wl">'+list.slice(0,200).map(w=>'<div class="glass wi"><div class="m"><div class="w">'+esc(w.f)+'</div><div class="t">'+esc(w.b)+(w.ex?' — <span class="en">'+esc(w.ex)+'</span>':'')+'</div><div class="row" style="margin-top:4px;gap:6px">'+(w.src?'<span class="chip">'+esc(w.src.slice(0,40))+'</span>':'')+'<span class="mu sm">روز '+fa(w.day||1)+' · '+(w.due<=TODAY()?'مرور امروز':'مرور '+fa(w.due-TODAY())+' روز دیگر')+'</span></div></div><div class="row" style="flex:0 0 auto;gap:4px"><button class="btn sec2 sm" data-act="say" data-w="'+w.id+'" aria-label="تلفظ">🔊</button><button class="btn sec2 sm" data-act="editword" data-w="'+w.id+'" aria-label="ویرایش">✏️</button></div></div>').join('')+'</div>';
+  if(list.length>200) h+='<p class="mu sm c">'+fa(list.length-200)+' لغت دیگر. با جستجو پیدا کن.</p>';
+  return h;
+}
+
+let jFilter='all';
+const TYPE={listen:['🎧','گوش دادن'],write:['✍️','نوشتن'],speak:['🎙️','صحبت'],file:['📎','فایل'],report:['🧭','گزارش هفته']};
+function viewJournal(){
+  let h='<div class="glass"><h1>کارنامه</h1><p class="mu sm">همه‌ی چیزهایی که گوش دادی، نوشتی، ضبط کردی و فرستادی. Claude هم با خواندن همین‌ها می‌فهمد چه چیزهایی یاد گرفته‌ای.</p></div>';
+  h+='<div class="seg">'+[['all','همه'],['listen','🎧 شنیدن'],['write','✍️ نوشتن'],['speak','🎙️ صحبت'],['file','📎 فایل'],['report','🧭 گزارش']].map(([k,l])=>'<button data-act="jf" data-f="'+k+'" aria-pressed="'+(jFilter===k)+'">'+l+'</button>').join('')+'</div>';
+  const list=Object.values(S.entries).filter(e=>jFilter==='all'||e.type===jFilter).sort((a,b)=>b.at-a.at);
+  if(!list.length) h+='<div class="glass empty">هنوز چیزی ثبت نشده. از صفحه‌ی «امروز» شروع کن.</div>';
+  list.forEach(e=>{ h+=entryCard(e); });
+  return h;
+}
+function fbHTML(fb){
+  if(!fb) return '';
+  let h='';
+  if(fb.score!=null) h+='<div class="row" style="margin-top:8px"><span class="chip ac">امتیاز '+fa(fb.score)+' از ۱۰۰</span>'+(fb.cefr?'<span class="chip">سطح '+esc(fb.cefr)+'</span>':'')+'</div>';
+  if(fb.good) h+='<p style="margin-top:8px">👍 '+esc(fb.good)+'</p>';
+  if(fb.feedback) h+='<div class="box">'+esc(fb.feedback)+'</div>';
+  if(fb.answer) h+='<div class="box">'+esc(fb.answer)+'</div>';
+  if(arr(fb.mistakes).length) h+='<h3 style="margin-top:10px">اشتباه‌ها و نسخه‌ی درست</h3>'+fb.mistakes.map(m=>'<div class="fix"><span class="o">'+esc(m.original)+'</span><span class="n">'+esc(m.corrected)+'</span>'+(m.why?'<span class="y">'+esc(m.why)+'</span>':'')+'</div>').join('');
+  if(fb.corrected) h+='<h3 style="margin-top:10px">متن درست‌شده</h3><div class="box ltr">'+esc(fb.corrected)+'</div>';
+  if(arr(fb.tips).length) h+='<h3 style="margin-top:10px">نکته‌ها</h3><ul style="margin:0;padding-inline-start:20px">'+fb.tips.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>';
+  if(arr(fb.list).length) h+=fb.list.map(x=>'<h3 style="margin-top:10px">'+esc(x.t)+'</h3><ul style="margin:0;padding-inline-start:20px">'+arr(x.items).map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>').join('');
+  return h;
+}
+function entryCard(e){
+  const [ic,tl]=TYPE[e.type]||['•','']; const words=arr(e.words);
+  let h='<div class="glass entry"><div class="eh"><div class="ic">'+ic+'</div><div class="m"><b>'+esc(e.title||tl)+'</b><span class="mu sm">'+tl+' · روز '+fa(e.day)+' · '+esc(jalali(edOf(new Date(e.at)),{day:'numeric',month:'long'}))+(e.ck?' · 🏁 آزمون':'')+'</span></div>'+(e.fb&&e.fb.score!=null?'<span class="chip ac">'+fa(e.fb.score)+'</span>':'')+'</div>';
+  if(e.asset){ if(e.assetKind==='audio') h+='<audio controls preload="none" src="/_blob/'+esc(e.asset)+'"></audio>'; else if(e.assetKind==='image') h+='<img src="/_blob/'+esc(e.asset)+'" alt="" style="border-radius:12px;margin-top:8px;max-height:260px">'; }
+  if(words.length) h+='<div class="row" style="margin-top:8px;gap:6px">'+words.slice(0,12).map(w=>'<span class="chip en">'+esc(w.w)+'</span>').join('')+'</div>';
+  h+='<details><summary>جزئیات</summary>';
+  if(e.prompt) h+='<div class="box ltr">'+esc(e.prompt)+'</div>';
+  if(e.text) h+='<h3 style="margin-top:10px">'+(e.type==='listen'?'چیزی که فهمیدم':e.type==='speak'?'متن صحبت':'متن من')+'</h3><div class="box" dir="auto">'+esc(e.text)+'</div>';
+  if(e.question) h+='<h3 style="margin-top:10px">سؤال من</h3><div class="box">'+esc(e.question)+'</div>';
+  h+=fbHTML(e.fb);
+  h+='<div class="row" style="margin-top:10px">'+(e.type==='write'||e.type==='speak'?'<button class="btn sec2 sm" data-act="refb" data-e="'+e.id+'">🤖 بازخورد دوباره</button>':'')+'<button class="btn danger sm" data-act="delentry" data-e="'+e.id+'">'+(pendingDel===e.id?'مطمئنی؟ دوباره بزن':'حذف')+'</button></div></details></div>';
+  return h;
+}
+let pendingDel=null;
+
+/* ====================== progress ====================== */
+function firstAndLast(type){
+  const all=entriesOf(type); if(!all.length) return [null,null];
+  const ck=all.filter(e=>e.ck); const first=(ck.length?ck[0]:all[0]); const last=all[all.length-1];
+  return [first, last===first?null:last];
+}
+function viewProgress(){
+  const s=stats();
+  const [w1,w2]=firstAndLast('write'), [s1,s2]=firstAndLast('speak');
+  const d1Words=Object.values(S.words).filter(w=>(w.day||1)<=1).length;
+  const sc=e=>e&&e.fb&&e.fb.score!=null?fa(e.fb.score):'—', lv=e=>e&&e.fb&&e.fb.cefr?esc(e.fb.cefr):'—';
+  let h='<div class="glass"><h1>پیشرفت من</h1><p class="mu sm">مقایسه‌ی تو با روز اولت، نمودارها و نشان‌ها.</p></div>';
+  h+='<div class="grid4"><div class="glass tile"><b>'+fa(s.full)+'</b><span>روز کامل</span></div><div class="glass tile"><b>'+fa(s.best)+'</b><span>بهترین زنجیره</span></div><div class="glass tile"><b>'+fa(s.listens)+'</b><span>فایل شنیده</span></div><div class="glass tile"><b>'+fa(s.writes+s.speaks)+'</b><span>نوشتن و صحبت</span></div></div>';
+  h+='<div class="sec"><h2>🆚 من در روز اول و امروز</h2></div><div class="vs">'+
+    '<div class="glass col"><h3>روز اول</h3><div class="k"><span>امتیاز نوشتن</span><b>'+sc(w1)+'</b></div><div class="k"><span>سطح نوشتن</span><b>'+lv(w1)+'</b></div><div class="k"><span>امتیاز صحبت</span><b>'+sc(s1)+'</b></div><div class="k"><span>لغت‌ها</span><b>'+fa(d1Words)+'</b></div><div class="k"><span>طول نوشته</span><b>'+(w1?fa(countWords(w1.text))+' کلمه':'—')+'</b></div></div>'+
+    '<div class="glass col"><h3>آخرین بار</h3><div class="k"><span>امتیاز نوشتن</span><b>'+sc(w2||w1)+'</b></div><div class="k"><span>سطح نوشتن</span><b>'+lv(w2||w1)+'</b></div><div class="k"><span>امتیاز صحبت</span><b>'+sc(s2||s1)+'</b></div><div class="k"><span>لغت‌ها</span><b>'+fa(s.words)+'</b></div><div class="k"><span>طول نوشته</span><b>'+((w2||w1)?fa(countWords((w2||w1).text))+' کلمه':'—')+'</b></div></div></div>';
+  if(s1&&s1.asset || s2&&s2.asset){
+    h+='<div class="glass"><h3>🎧 صدای تو: روز اول و آخرین ضبط</h3>'+(s1&&s1.asset?'<p class="mu sm">روز '+fa(s1.day)+'</p><audio controls preload="none" src="/_blob/'+esc(s1.asset)+'"></audio>':'')+(s2&&s2.asset?'<p class="mu sm" style="margin-top:8px">روز '+fa(s2.day)+'</p><audio controls preload="none" src="/_blob/'+esc(s2.asset)+'"></audio>':'')+'</div>';
+  }
+  const cmp=S.meta.compare;
+  h+='<div class="glass"><div class="timerbox"><div><h3>🤖 مقایسه‌ی دقیق با Claude</h3><p class="mu sm">'+(w1&&(w2||s2)?'Claude اولین و آخرین نوشته و صحبتت را مقایسه می‌کند.':'بعد از اینکه حداقل دو بار نوشتی یا صحبت کردی فعال می‌شود.')+'</p></div><button class="btn sm" data-act="compare" '+(w1&&(w2||s2)||(s1&&s2)?'':'disabled')+'>مقایسه کن</button></div>'+
+    (cmp?'<p class="mu sm" style="margin-top:6px">آخرین مقایسه: '+esc(jalali(edOf(new Date(cmp.at)),{day:'numeric',month:'long'}))+'</p>'+fbHTML(cmp.fb):'')+'</div>';
+  // charts
+  const scored=Object.values(S.entries).filter(e=>(e.type==='write'||e.type==='speak')&&e.fb&&e.fb.score!=null).sort((a,b)=>a.at-b.at);
+  h+='<div class="glass"><h3>امتیاز نوشتن و صحبت</h3>'+(scored.length?lineChart(scored):'<p class="mu sm">با اولین بازخورد Claude، نمودار اینجا ظاهر می‌شود.</p>')+'<div class="legend"><span><i style="background:var(--ac2)"></i>نوشتن</span><span><i style="background:var(--ac)"></i>صحبت</span></div></div>';
+  h+='<div class="glass"><h3>دقیقه‌های مرور در ۱۴ روز اخیر</h3>'+barChart()+'</div>';
+  h+='<div class="glass"><h3>نقشه‌ی ۹۰ روز</h3><div class="hm">';
+  for(let d=1; d<=90; d++){ const c=dayCount(d); h+='<i class="'+(c.done===c.total?'f':c.done?'p':'')+(d===s.now?' t':'')+'" title="روز '+d+'"></i>'; }
+  h+='</div><div class="legend"><span><i style="background:var(--ok)"></i>کامل</span><span><i style="background:color-mix(in srgb,var(--ac) 45%,transparent)"></i>نیمه‌کاره</span><span><i style="outline:2px solid var(--warn)"></i>امروز</span></div></div>';
+  h+='<div class="sec"><h2>🏅 نشان‌ها</h2><span class="chip warn">'+fa(BADGES.filter(b=>b.ok(s)).length)+' از '+fa(BADGES.length)+'</span></div><div class="badges">'+BADGES.map(b=>'<div class="glass bdg'+(b.ok(s)?' on':'')+'"><div class="e">'+b.e+'</div><b>'+b.t+'</b><span>'+b.h+'</span></div>').join('')+'</div>';
+  h+='<div class="sec"><h2>⚙️ تنظیمات</h2></div><div class="glass">'+
+    '<label class="f" for="setStart">تاریخ شروع برنامه (میلادی)<input type="date" id="setStart" value="'+esc(S.meta.start)+'" style="max-width:240px"></label>'+
+    '<label class="f" for="setTime">ساعت یادآور روزانه<input type="time" id="setTime" value="'+esc(S.meta.time)+'" style="max-width:240px"></label>'+
+    '<div class="row"><button class="btn sm" data-act="ics">📅 یادآور در تقویم گوشی</button><button class="btn sec2 sm" data-act="backup">💾 نسخه‌ی پشتیبان</button><button class="btn danger sm" data-act="reset">پاک کردن همه</button></div>'+
+    '<p class="mu sm" id="setNote" style="margin-top:8px">فایل تقویم ۹۰ روز، هر روز سر ساعت انتخابی روی گوشی هشدار می‌دهد. بعد از دانلود بازش کن و Add to Calendar را بزن.</p>'+
+    '<div id="resetBox" hidden class="box" style="margin-top:8px">همه‌ی کارها، لغت‌ها و کارنامه پاک می‌شود. مطمئنی؟<div class="row" style="margin-top:8px"><button class="btn danger sm" data-act="resetyes">بله، پاک کن</button><button class="btn sec2 sm" data-act="resetno">انصراف</button></div></div></div>';
+  return h;
+}
+function lineChart(list){
+  const W=320,H=140,L=24,B=118,T=10; const maxD=Math.max(10,...list.map(e=>e.day));
+  const x=d=>L+(d-1)/(Math.max(1,maxD-1))*(W-L-10), y=v=>B-(v/100)*(B-T);
+  let g=''; [0,50,100].forEach(v=>{ g+='<line class="grid" x1="'+L+'" x2="'+(W-6)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text x="'+(L-4)+'" y="'+(y(v)+3)+'" text-anchor="end">'+fa(v)+'</text>'; });
+  [1,Math.round(maxD/2),maxD].forEach(d=>{ g+='<text x="'+x(d).toFixed(1)+'" y="'+(B+14)+'" text-anchor="middle">روز '+fa(d)+'</text>'; });
+  ['write','speak'].forEach((t,i)=>{ const pts=list.filter(e=>e.type===t).map(e=>[x(e.day),y(Math.max(0,Math.min(100,Number(e.fb.score)||0)))]);
+    if(pts.length>1) g+='<polyline class="'+(i?'ln2':'ln')+'" points="'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')+'"/>';
+    pts.forEach(p=>{ g+='<circle class="'+(i?'pt2':'pt')+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.5"/>'; }); });
+  return '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="نمودار امتیازها" style="direction:ltr">'+g+'</svg>';
+}
+function barChart(){
+  const W=320,H=120,B=96,T=14, n=14, slot=W/n, bw=slot*.58, now=curDay();
+  const data=Array.from({length:n},(_,i)=>{ const d=now-n+1+i; return {d, v:d>=1?Math.round((S.meta.timer[d]||0)/60):0}; });
+  const max=Math.max(10,...data.map(x=>x.v)); let g='<line class="grid" x1="0" x2="'+W+'" y1="'+B+'" y2="'+B+'"/>';
+  data.forEach((x,i)=>{ const cx=W-slot*(i+.5), bh=x.v?Math.max(2,x.v/max*(B-T)):0;
+    g+='<rect class="bb'+(x.d===now?' hi':'')+'" x="'+(cx-bw/2).toFixed(1)+'" y="'+(B-bh).toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="3"/>';
+    if(x.v) g+='<text x="'+cx.toFixed(1)+'" y="'+(B-bh-3).toFixed(1)+'" text-anchor="middle">'+fa(x.v)+'</text>';
+    if(x.d>=1) g+='<text x="'+cx.toFixed(1)+'" y="'+(B+14)+'" text-anchor="middle">'+fa(x.d)+'</text>'; });
+  return '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="دقیقه‌های مرور">'+g+'</svg><p class="mu sm">عدد زیر هر ستون شماره‌ی روز برنامه است.</p>';
+}
+const BADGES=[
+  {e:'🌱',t:'شروع',h:'اولین روز کامل',ok:s=>s.full>=1},
+  {e:'🔥',t:'یک هفته',h:'۷ روز پشت سر هم',ok:s=>s.best>=7},
+  {e:'⚡',t:'یک ماه',h:'۳۰ روز پشت سر هم',ok:s=>s.best>=30},
+  {e:'🎧',t:'شنونده',h:'۱۰ فایل شنیده',ok:s=>s.listens>=10},
+  {e:'📻',t:'گوش طلایی',h:'۵۰ فایل شنیده',ok:s=>s.listens>=50},
+  {e:'✍️',t:'نویسنده',h:'۱۰ نوشته',ok:s=>s.writes>=10},
+  {e:'🎙️',t:'سخنران',h:'۱۰ بار صحبت',ok:s=>s.speaks>=10},
+  {e:'📚',t:'۱۰۰ لغت',h:'۱۰۰ لغت در لغت‌نامه',ok:s=>s.words>=100},
+  {e:'🧠',t:'حافظه‌ی قوی',h:'۵۰ لغت یاد گرفته',ok:s=>s.learned>=50},
+  {e:'⏱️',t:'۵۰۰ دقیقه',h:'۵۰۰ دقیقه مرور',ok:s=>s.minutes>=500},
+  {e:'🆚',t:'آینه',h:'اولین مقایسه با روز اول',ok:()=>!!S.meta.compare},
+  {e:'🏆',t:'قهرمان ۹۰',h:'۸۰ روز کامل',ok:s=>s.full>=80}
+];
+let badgeSeen=null;
+function checkBadges(){ const s=stats(); const on=BADGES.filter(b=>b.ok(s)).map(b=>b.t); if(badgeSeen){ const n=on.find(x=>!badgeSeen.includes(x)); if(n){ toast('🏅 نشان جدید: '+n); celebrate(); } } badgeSeen=on; }
+
+/* ====================== sheet ====================== */
+function openSheet(html, onMount, onClose){
+  $('#sheet').innerHTML='<div class="grab"></div>'+html; $('#ov').hidden=false; document.body.style.overflow='hidden';
+  sheetClose=onClose||null; if(onMount) onMount($('#sheet'));
+}
+let sheetClose=null;
+function closeSheet(){ if(askCtl){ try{askCtl.abort();}catch(_){} askCtl=null; } if(sheetClose) sheetClose(); sheetClose=null; $('#ov').hidden=true; $('#sheet').innerHTML=''; document.body.style.overflow=''; render(); }
+$('#ov').addEventListener('click', e=>{ if(e.target.id==='ov') closeSheet(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !$('#ov').hidden) closeSheet(); });
+const head = (t, sub) => '<div class="sh"><div><h2>'+t+'</h2>'+(sub?'<p class="mu sm">'+sub+'</p>':'')+'</div><button class="icon-btn" data-act="close" aria-label="بستن">✕</button></div>';
+function thinking(el, msg){ el.innerHTML='<div class="thinking">'+(msg||'Claude در حال بررسی است… (ممکن است تا یک دقیقه طول بکشد)')+'</div><button class="btn sec2 sm" data-act="stop" style="margin-top:8px">توقف</button>'; }
+function wordPicker(words, src, day){
+  if(!words.length) return '';
+  return '<h3 style="margin-top:12px">لغت‌های پیشنهادی برای لغت‌نامه</h3><div class="wordpick">'+words.map((w,i)=>{ const have=Object.values(S.words).some(x=>x.f.toLowerCase()===w.w.toLowerCase());
+    return '<label><input type="checkbox" data-wi="'+i+'" '+(have?'disabled':'checked')+'><span><span class="w">'+esc(w.w)+'</span> — '+esc(w.m)+(w.ex?'<br><span class="mu sm en">'+esc(w.ex)+'</span>':'')+(have?' <span class="chip ok">قبلاً داری</span>':'')+'</span></label>'; }).join('')+
+    '</div><button class="btn wide" style="margin-top:10px" data-act="pickadd">افزودن لغت‌های انتخاب‌شده</button>';
+}
+let pickCtx=null;
+
+/* ---------- review sheet ---------- */
+let rv=null, tickI=null, lastAct=0;
+function openReview(){
+  const due=dueWords();
+  const all=Object.values(S.words);
+  if(!all.length){ openSheet(head('مرور لغت‌ها')+'<div class="empty">هنوز لغتی نداری. اول چند لغت اضافه کن یا بسته‌ی آماده را بگیر.</div><div class="row" style="justify-content:center"><button class="btn" data-act="starterpack">📦 بسته‌ی ۶۰ لغت آماده</button><button class="btn sec2" data-act="addword">➕ افزودن لغت</button></div>'); return; }
+  rv={queue:due.map(w=>w.id), cram:false, shown:false, done:0, ok:0};
+  if(!rv.queue.length) startCram();
+  lastAct=Date.now();
+  openSheet('<div id="rvBox"></div>', ()=>{ renderReview(); }, ()=>{ clearInterval(tickI); tickI=null; rv=null; saveMeta(); });
+  clearInterval(tickI);
+  tickI=setInterval(()=>{
+    if(!rv || document.visibilityState!=='visible' || Date.now()-lastAct>90000) return;
+    const d=curDay(); if(planDay()<1) return;
+    const before=S.meta.timer[d]||0; S.meta.timer[d]=before+1;
+    if(before<600 && before+1>=600){ toast('⏱️ ۱۰ دقیقه مرور کامل شد! تیک خورد ✓'); celebrate(); }
+    const c=$('#rvClock'); if(c) c.textContent=mmss(Math.min(S.meta.timer[d],600))+(S.meta.timer[d]>=600?' ✓':'');
+    if((S.meta.timer[d])%15===0) saveMeta();
+  },1000);
+}
+function startCram(){ const all=Object.values(S.words).map(w=>w.id); for(let i=all.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [all[i],all[j]]=[all[j],all[i]]; } rv.queue=all; rv.cram=true; }
+function renderReview(){
+  const box=$('#rvBox'); if(!box||!rv) return;
+  const sec=S.meta.timer[curDay()]||0;
+  let h=head('مرور لغت‌ها', rv.cram?'مرور آزاد: کارت امروز تمام شده، برای تکمیل ۱۰ دقیقه همه‌ی لغت‌ها را تمرین کن (زمان‌بندی تغییر نمی‌کند).':'کارت‌های امروز')+
+    '<div class="glass timerbox"><div><span class="mu sm">تایمر امروز</span><div class="clock" id="rvClock">'+mmss(Math.min(sec,600))+(sec>=600?' ✓':'')+'</div></div><div class="mu sm">'+fa(rv.done)+' کارت مرور شد · '+fa(rv.queue.length)+' مانده</div></div>';
+  if(!rv.queue.length){
+    h+='<div class="glass c"><h2>آفرین! 🎉</h2><p class="mu">کارت‌های امروز تمام شد'+(sec<600?'. برای کامل شدن ۱۰ دقیقه، مرور آزاد را ادامه بده.':'.')+'</p><div class="row" style="justify-content:center;margin-top:10px"><button class="btn" data-act="cram">ادامه با مرور آزاد</button><button class="btn sec2" data-act="close">بستن</button></div></div>';
+    box.innerHTML=h; return;
+  }
+  const w=S.words[rv.queue[0]]; if(!w){ rv.queue.shift(); return renderReview(); }
+  h+='<div class="glass flash" data-act="reveal" role="button" tabindex="0" aria-label="نمایش معنی"><span class="chip">'+(w.st==='new'?'جدید':w.st==='learn'?'در حال یادگیری':'مرور')+'</span><div class="front">'+esc(w.f)+'</div>'+
+    (rv.shown?'<div class="back">'+esc(w.b)+'</div>'+(w.ex?'<div class="ex">'+esc(w.ex)+'</div>':'')+(w.src?'<span class="mu sm">منبع: '+esc(w.src)+'</span>':''):'<span class="mu sm">بزن تا معنی را ببینی</span>')+'</div>'+
+    '<div class="row" style="justify-content:center;margin-bottom:10px"><button class="btn sec2 sm" data-act="say" data-w="'+w.id+'">🔊 تلفظ</button>'+(rv.shown?'':'<button class="btn sm" data-act="reveal">نمایش معنی</button>')+'</div>';
+  if(rv.shown) h+='<div class="grades">'+[1,2,3,4].map(g=>'<button class="grade g'+g+'" data-act="grade" data-g="'+g+'"><b>'+['دوباره','سخت','خوب','آسان'][g-1]+'</b><span>'+(rv.cram?'—':preview(w,g))+'</span></button>').join('')+'</div>';
+  box.innerHTML=h;
+}
+function doGrade(g){
+  if(!rv||!rv.shown||!rv.queue.length) return; lastAct=Date.now();
+  const id=rv.queue.shift(), w=S.words[id]; rv.done++; if(g>=3) rv.ok++;
+  if(rv.cram){ if(g===1) rv.queue.splice(Math.min(4,rv.queue.length),0,id); }
+  else if(grade(w,g)) rv.queue.splice(Math.min(g===1?3:5,rv.queue.length),0,id);
+  rv.shown=false; renderReview();
+}
+
+/* ---------- add word / bulk / edit ---------- */
+function openAddWord(d, wid){
+  const w=wid?S.words[wid]:null;
+  openSheet(head(w?'ویرایش لغت':'افزودن لغت')+
+    '<label class="f" for="nwF">لغت یا عبارت انگلیسی<input id="nwF" dir="ltr" value="'+esc(w?w.f:'')+'" placeholder="e.g. procrastinate" autocomplete="off"></label>'+
+    '<label class="f" for="nwB">معنی فارسی<input id="nwB" value="'+esc(w?w.b:'')+'" placeholder="اگر خالی بگذاری، Claude پر می‌کند" autocomplete="off"></label>'+
+    '<label class="f" for="nwE">جمله‌ی نمونه (اختیاری)<input id="nwE" dir="ltr" value="'+esc(w?w.ex:'')+'" autocomplete="off"></label>'+
+    '<label class="f" for="nwS">منبع (اختیاری)<input id="nwS" value="'+esc(w?w.src:'')+'" placeholder="مثلاً 6 Minute English: Sleep" autocomplete="off"></label>'+
+    '<div class="row"><button class="btn" data-act="savenw" data-d="'+(d||curDay())+'" data-w="'+(wid||'')+'">'+(w?'ذخیره':'افزودن')+'</button>'+(w?'<button class="btn danger" data-act="delword" data-w="'+wid+'">حذف</button>':'')+'</div><div id="nwOut" style="margin-top:10px"></div>');
+}
+async function saveNewWord(d, wid){
+  const f=$('#nwF').value.trim(), b=$('#nwB').value.trim(), ex=$('#nwE').value.trim(), src=$('#nwS').value.trim();
+  if(!f){ toast('لغت را بنویس.'); return; }
+  if(wid){ Object.assign(S.words[wid],{f,b:b||'—',ex,src}); put('words',wid); toast('ذخیره شد ✓'); closeSheet(); return; }
+  if(!b){
+    const out=$('#nwOut'); thinking(out,'Claude معنی را پیدا می‌کند…');
+    try{ const r=await askJSON(LEVEL_NOTE+'\nGive the Persian meaning and one short, natural English example sentence for: "'+f+'"'+(src?' (heard in: '+src+')':'')+'. Reply with only JSON: {"m":"Persian meaning","ex":"English example"}');
+      const w=addWord(f, str(r&&r.m), ex||str(r&&r.ex), src, Number(d)); if(!w){ out.innerHTML='<p class="mu">این لغت از قبل در لغت‌نامه هست.</p>'; return; }
+      toast('«'+f+'» اضافه شد ✓'); closeSheet();
+    }catch(e){ out.innerHTML='<p class="mu">'+esc(errCopy(e))+' می‌توانی معنی را خودت بنویسی.</p>'; }
+    return;
+  }
+  if(!addWord(f,b,ex,src,Number(d))){ toast('این لغت از قبل هست.'); return; }
+  toast('«'+f+'» اضافه شد ✓'); closeSheet();
+}
+function openBulk(){
+  openSheet(head('افزودن گروهی','هر خط یک لغت. معنی و مثال اختیاری است؛ Claude جاهای خالی را پر می‌کند.')+
+    '<label class="f" for="bulkT">لغت‌ها<textarea id="bulkT" dir="auto" placeholder="procrastinate | به تعویق انداختن\nmake a habit of\nworkload - حجم کار"></textarea></label>'+
+    '<label class="f" for="bulkS">منبع (اختیاری)<input id="bulkS" placeholder="مثلاً 6 Minute English: Habits"></label>'+
+    '<button class="btn wide" data-act="bulkgo">افزودن</button><div id="bulkOut" style="margin-top:10px"></div>');
+}
+function parseLines(t){ return String(t||'').split('\n').flatMap(l=>/[|\t]/.test(l)?[l]:l.split(',')).map(l=>l.trim()).filter(Boolean).map(l=>{ const p=l.split(/\s*(?:\||\t|:| - | – )\s*/); return {w:p[0], m:p[1]||'', ex:p[2]||''}; }).filter(x=>/[A-Za-z]/.test(x.w)); }
+async function bulkGo(){
+  const items=parseLines($('#bulkT').value), src=$('#bulkS').value.trim(), out=$('#bulkOut');
+  if(!items.length){ toast('حداقل یک لغت انگلیسی بنویس.'); return; }
+  const missing=items.filter(x=>!x.m);
+  if(missing.length){
+    thinking(out,'Claude معنی '+fa(missing.length)+' لغت را پیدا می‌کند…');
+    try{ const r=await askJSON(LEVEL_NOTE+'\nFor each English word or phrase, give the Persian meaning and one short English example. Words: '+JSON.stringify(missing.map(x=>x.w))+'\nReply with only a JSON array: [{"w":"word","m":"Persian meaning","ex":"example"}] in the same order.');
+      cleanWords(r).forEach(x=>{ const it=missing.find(m=>m.w.toLowerCase()===x.w.toLowerCase()); if(it){ it.m=x.m; it.ex=it.ex||x.ex; } });
+    }catch(e){ out.innerHTML='<p class="mu">'+esc(errCopy(e))+' لغت‌ها بدون معنی اضافه می‌شوند و بعداً می‌توانی ویرایششان کنی.</p>'; }
+  }
+  let n=0; items.forEach(x=>{ if(addWord(x.w,x.m,x.ex,src,curDay())) n++; });
+  toast(fa(n)+' لغت اضافه شد ✓'); if(n) celebrate(); closeSheet();
+}
+function starterPack(d){ let n=0; STARTER.forEach(r=>{ if(addWord(r[0],r[1],r[2],'بسته‌ی آماده',Number(d)||curDay())) n++; }); toast(n?fa(n)+' لغت آماده اضافه شد ✓':'این لغت‌ها را قبلاً داری.'); if(n) celebrate(); if(!$('#ov').hidden) closeSheet(); else render(); }
+
+/* ---------- listening ---------- */
+function openListen(d){
+  openSheet(head('🎧 ثبت گوش دادن','بنویس چه گوش دادی تا لغت‌هایش در لغت‌نامه و کارنامه‌ات بماند.')+
+    '<a class="btn sec2 sm" href="'+BBC6+'" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;margin-bottom:10px">باز کردن سایت 6 Minute English ↗</a>'+
+    '<label class="f" for="lsT">اسم قسمت یا فایل<input id="lsT" dir="auto" placeholder="مثلاً: 6 Minute English – Why do we procrastinate?"></label>'+
+    '<label class="f" for="lsU">چه فهمیدی؟ (ترجیحاً به انگلیسی، چند جمله)<textarea id="lsU" dir="auto" placeholder="The episode was about…"></textarea></label>'+
+    '<label class="f" for="lsW">لغت‌هایی که شنیدی (هر خط یکی، معنی اختیاری)<textarea id="lsW" dir="auto" style="min-height:80px" placeholder="procrastinate\nput something off | عقب انداختن"></textarea></label>'+
+    '<details style="margin-bottom:10px"><summary class="mu sm" style="cursor:pointer">متن کامل (Transcript) را هم دارم</summary><label class="f" for="lsX" style="margin-top:8px">متن را اینجا بچسبان یا فایل PDF/TXT آن را انتخاب کن<textarea id="lsX" dir="ltr" placeholder="Paste the transcript here…"></textarea></label><input type="file" id="lsF" accept=".txt,.md,.srt,.vtt,.pdf,text/plain,application/pdf" aria-label="فایل متن"><p class="mu sm" id="lsFN"></p></details>'+
+    '<div class="row"><button class="btn" data-act="listengo" data-d="'+d+'" data-ai="1">ذخیره و بررسی با Claude</button><button class="btn sec2" data-act="listengo" data-d="'+d+'" data-ai="0">فقط ذخیره</button></div><div id="lsOut" style="margin-top:12px"></div>',
+    root=>{ $('#lsF',root).addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; $('#lsFN').textContent='در حال خواندن فایل…'; try{ const t=await readTextFile(f); $('#lsX').value=t.slice(0,40000); $('#lsFN').textContent='متن «'+f.name+'» خوانده شد ('+fa(countWords(t))+' کلمه).'; }catch(err){ $('#lsFN').textContent='این فایل خوانده نشد. متن را کپی کن و بچسبان.'; } }); });
+}
+async function listenGo(d, ai){
+  const title=$('#lsT').value.trim(), und=$('#lsU').value.trim(), wl=parseLines($('#lsW').value), tr=$('#lsX').value.trim(), out=$('#lsOut');
+  if(!title){ toast('اسم چیزی که گوش دادی را بنویس.'); return; }
+  const e={id:'e'+uid(), type:'listen', day:Number(d), at:Date.now(), title, text:und, transcript:tr.slice(0,30000), words:wl.map(x=>({w:x.w,m:x.m,ex:x.ex}))};
+  S.entries[e.id]=e; put('entries', e.id);
+  if(ai!=='1'){ wl.forEach(x=>addWord(x.w, x.m, x.ex, title, Number(d))); toast('ثبت شد ✓'); closeSheet(); return; }
+  thinking(out);
+  try{
+    const r=await askJSON(LEVEL_NOTE+'\n\nThe learner listened to: "'+title+'".\nYou cannot hear or open the audio. '+(tr?'Use the transcript below as the source of truth.':'There is no transcript: do NOT invent what the episode said. Base vocabulary only on the learner\'s own notes and word list; you may add common words strongly tied to the title only if you are confident.')+
+      '\nLearner\'s summary of what they understood:\n"""\n'+(und||'(none)')+'\n"""\nWords the learner wrote down: '+JSON.stringify(wl.map(x=>x.w))+(tr?'\nTranscript:\n"""\n'+tr.slice(0,30000)+'\n"""':'')+
+      '\n\nReply with only JSON: {"feedback":"Persian: short encouraging feedback on their summary; if it has English mistakes, show each as original → corrected","summary_corrected":"their summary rewritten in correct natural English, or empty if they wrote none","words":[{"w":"English word/phrase","m":"Persian meaning","ex":"example (from transcript if possible)"}],"check":["2-3 short English comprehension questions they can answer next time"]}\nInclude every word the learner wrote (with meanings) plus up to 8 more of the most useful words or phrases'+(tr?' from the transcript':'')+'.');
+    const words=cleanWords(r&&r.words);
+    e.fb={feedback:str(r&&r.feedback), corrected:str(r&&r.summary_corrected), list:arr(r&&r.check).length?[{t:'سؤال‌هایی برای خودت',items:arr(r.check).map(str)}]:[]};
+    e.words=words; put('entries', e.id);
+    out.innerHTML=fbHTML(e.fb)+wordPicker(words);
+    pickCtx={words, src:title, day:Number(d)};
+  }catch(err){ wl.forEach(x=>addWord(x.w,x.m,x.ex,title,Number(d))); out.innerHTML='<p class="mu">'+esc(errCopy(err))+' چیزی که نوشتی ذخیره شد و لغت‌هایت به لغت‌نامه اضافه شد.</p>'; }
+}
+
+/* ---------- writing ---------- */
+function openWrite(d, free, ck){
+  const topic = free ? '' : topicOf(Number(d));
+  openSheet(head('✍️ نوشتن', free?'درباره‌ی هر موضوعی بنویس.':'هدف امروز: '+phaseOf(Number(d)).write)+
+    '<label class="f" for="wrP">موضوع<input id="wrP" dir="ltr" value="'+esc(topic)+'" placeholder="Your topic"></label>'+
+    '<label class="f" for="wrT">متن تو (انگلیسی)<textarea id="wrT" dir="ltr" style="min-height:200px" placeholder="Start writing here…"></textarea></label>'+
+    '<p class="mu sm" id="wrC">۰ کلمه</p>'+
+    '<div class="row" style="margin-top:8px"><button class="btn" data-act="writego" data-d="'+d+'" data-ck="'+(ck?1:0)+'" data-ai="1">ارسال برای Claude</button><button class="btn sec2" data-act="writego" data-d="'+d+'" data-ck="'+(ck?1:0)+'" data-ai="0">فقط ذخیره</button></div><div id="wrOut" style="margin-top:12px"></div>',
+    root=>{ const t=$('#wrT',root); t.addEventListener('input',()=>{ $('#wrC').textContent=fa(countWords(t.value))+' کلمه'; }); try{ const dr=localStorage.getItem('masir-draft'); if(dr){ t.value=dr; $('#wrC').textContent=fa(countWords(dr))+' کلمه'; } }catch(_){} t.addEventListener('input',()=>{ try{ localStorage.setItem('masir-draft', t.value); }catch(_){} }); });
+}
+async function feedbackFor(e, out){
+  thinking(out);
+  try{
+    const r=await askJSON(writingPrompt(e.type, e.prompt||'free topic', e.text));
+    e.fb={score:Math.max(0,Math.min(100,Math.round(Number(r&&r.score)||0))), cefr:str(r&&r.cefr).slice(0,3), corrected:str(r&&r.corrected), good:str(r&&r.good),
+      mistakes:arr(r&&r.mistakes).slice(0,10).map(m=>({original:str(m.original),corrected:str(m.corrected),why:str(m.why)})), tips:arr(r&&r.tips).slice(0,3).map(str)};
+    e.words=cleanWords(r&&r.words); put('entries', e.id);
+    out.innerHTML=fbHTML(e.fb)+wordPicker(e.words);
+    pickCtx={words:e.words, src:(e.type==='speak'?'صحبت':'نوشتن')+' روز '+e.day, day:e.day};
+    celebrate();
+  }catch(err){ out.innerHTML='<p class="mu">'+esc(errCopy(err))+' متنت ذخیره شد؛ بعداً از «کارنامه» دوباره بازخورد بگیر.</p>'; }
+}
+async function writeGo(d, ck, ai){
+  const text=$('#wrT').value.trim(), prompt=$('#wrP').value.trim();
+  if(countWords(text)<3){ toast('کمی بیشتر بنویس.'); return; }
+  const e={id:'e'+uid(), type:'write', day:Number(d), at:Date.now(), title:prompt||'نوشتن آزاد', prompt, text, ck:ck==='1'};
+  S.entries[e.id]=e; put('entries', e.id); try{ localStorage.removeItem('masir-draft'); }catch(_){}
+  if(ai!=='1'){ toast('ذخیره شد ✓'); closeSheet(); return; }
+  $$('[data-act="writego"]').forEach(b=>b.disabled=true);
+  await feedbackFor(e, $('#wrOut'));
+}
+
+/* ---------- speaking ---------- */
+let rec=null, recBlob=null, recURL=null;
+function openSpeak(d, free, ck){
+  const topic = free ? '' : topicOf(Number(d));
+  recBlob=null;
+  openSheet(head('🎙️ صحبت کردن', free?'درباره‌ی هر چیزی صحبت کن.':'هدف امروز: '+phaseOf(Number(d)).speak+' صحبت')+
+    '<label class="f" for="spP">موضوع<input id="spP" dir="ltr" value="'+esc(topic)+'" placeholder="Your topic"></label>'+
+    '<div class="glass" style="margin-bottom:10px"><h3>۱. صدایت را ضبط کن</h3>'+
+    '<div class="row"><button class="btn" data-act="recstart" id="recBtn">⏺️ ضبط در برنامه</button><label class="btn sec2" for="spFile" style="cursor:pointer">📱 ضبط با گوشی یا انتخاب فایل</label><input type="file" id="spFile" accept="audio/*" capture hidden></div>'+
+    '<p class="mu sm" id="recNote" style="margin-top:6px">اگر ضبط در برنامه اجازه نداشت، دکمه‌ی دوم ضبط‌کننده‌ی صدای گوشی را باز می‌کند.</p><div id="recPrev"></div></div>'+
+    '<div class="glass" style="margin-bottom:10px"><h3>۲. متن حرف‌هایت (برای بازخورد Claude)</h3><p class="mu sm">روی کیبورد گوشی دکمه‌ی میکروفون 🎤 را بزن و همان حرف‌ها را انگلیسی بگو تا خودش تایپ شود. Claude صدا را نمی‌شنود و فقط این متن را بررسی می‌کند.</p>'+
+    '<label class="f" for="spT" style="margin-top:8px">متن<textarea id="spT" dir="ltr" placeholder="Hi, my name is…"></textarea></label></div>'+
+    '<div class="row"><button class="btn" data-act="speakgo" data-d="'+d+'" data-ck="'+(ck?1:0)+'" data-ai="1">ذخیره و بازخورد Claude</button><button class="btn sec2" data-act="speakgo" data-d="'+d+'" data-ck="'+(ck?1:0)+'" data-ai="0">فقط ذخیره</button></div><div id="spOut" style="margin-top:12px"></div>',
+    root=>{ $('#spFile',root).addEventListener('change', e=>{ const f=e.target.files[0]; if(f) setRecording(f, f.name); }); },
+    ()=>{ stopRec(true); if(recURL){ URL.revokeObjectURL(recURL); recURL=null; } });
+}
+function setRecording(blob, name){
+  recBlob=blob; if(recURL) URL.revokeObjectURL(recURL); recURL=URL.createObjectURL(blob);
+  $('#recPrev').innerHTML='<audio controls src="'+recURL+'"></audio><p class="mu sm">'+esc(name||'ضبط جدید')+' · '+fa(Math.round(blob.size/1024))+' کیلوبایت</p>';
+}
+async function startRec(){
+  const btn=$('#recBtn');
+  if(rec){ stopRec(); return; }
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    const type=['audio/webm;codecs=opus','audio/webm','audio/mp4'].find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t))||'';
+    const mr=new MediaRecorder(stream, type?{mimeType:type}:undefined); const chunks=[]; const t0=Date.now();
+    mr.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+    mr.onstop=()=>{ stream.getTracks().forEach(t=>t.stop()); if(rec&&rec.discard){ rec=null; return; } rec=null; const b=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); setRecording(b,'ضبط '+fa(Math.round((Date.now()-t0)/1000))+' ثانیه'); if(btn){ btn.textContent='⏺️ ضبط دوباره'; } };
+    mr.start(); rec={mr, t0};
+    btn.textContent='⏹️ توقف ضبط'; $('#recNote').textContent='در حال ضبط… صحبت کن.';
+    rec.iv=setInterval(()=>{ if(!rec) return; const s=Math.round((Date.now()-rec.t0)/1000); $('#recNote').textContent='در حال ضبط… '+mmss(s); if(s>=300) stopRec(); },500);
+  }catch(e){ $('#recNote').innerHTML='ضبط داخل برنامه در این نمایش اجازه ندارد. دکمه‌ی <b>«ضبط با گوشی»</b> را بزن: ضبط‌کننده‌ی صدای گوشی باز می‌شود و فایل اینجا برمی‌گردد.'; }
+}
+function stopRec(discard){ if(!rec) return; clearInterval(rec.iv); if(discard) rec.discard=true; try{ rec.mr.stop(); }catch(_){ rec=null; } }
+async function toStorable(blob){
+  const t=(blob.type||'').toLowerCase(), n=(blob.name||'').toLowerCase();
+  if(t.includes('webm')||n.endsWith('.webm')) return new Blob([blob],{type:'video/webm'});
+  if(t.includes('mp4')||t.includes('m4a')||t.includes('aac')&&n.endsWith('.m4a')||n.endsWith('.m4a')||n.endsWith('.mp4')) return new Blob([blob],{type:'video/mp4'});
+  // other formats (mp3, wav, ogg, 3gp…): decode and re-record as webm, in real time
+  const AC=window.AudioContext||window.webkitAudioContext; if(!AC||!window.MediaRecorder) throw new Error('no-transcode');
+  const ctx=new AC(); const buf=await ctx.decodeAudioData(await blob.arrayBuffer());
+  if(buf.duration>300) throw new Error('too-long');
+  const dest=ctx.createMediaStreamDestination(), src=ctx.createBufferSource(); src.buffer=buf; src.connect(dest);
+  const mr=new MediaRecorder(dest.stream); const chunks=[];
+  return await new Promise((res,rej)=>{ mr.ondataavailable=e=>e.data.size&&chunks.push(e.data); mr.onstop=()=>{ ctx.close(); res(new Blob(chunks,{type:'video/webm'})); }; mr.onerror=rej; src.onended=()=>mr.stop(); mr.start(); src.start(); });
+}
+async function speakGo(d, ck, ai){
+  const prompt=$('#spP').value.trim(), text=$('#spT').value.trim(), out=$('#spOut');
+  if(!recBlob && countWords(text)<3){ toast('صدایت را ضبط کن یا متنش را بنویس.'); return; }
+  $$('[data-act="speakgo"]').forEach(b=>b.disabled=true);
+  const e={id:'e'+uid(), type:'speak', day:Number(d), at:Date.now(), title:prompt||'صحبت آزاد', prompt, text, ck:ck==='1'};
+  if(recBlob){
+    out.innerHTML='<div class="thinking">در حال ذخیره‌ی صدا…'+((recBlob.type||'').match(/webm|mp4|m4a/)?'':' (تبدیل فرمت به اندازه‌ی طول صدا وقت می‌گیرد)')+'</div>';
+    const assets=await use('assets');
+    if(!assets){ out.innerHTML='<p class="mu">ذخیره‌ی صدا فقط وقتی برنامه به حساب Claude وصل است ممکن است. متن ذخیره می‌شود.</p>'; }
+    else{ try{ const b=await toStorable(recBlob); const up=await assets.upload(b); e.asset=up.id; e.assetKind='audio'; }
+      catch(err){ out.innerHTML='<p class="mu">صدا ذخیره نشد'+(err&&err.code==='too_large'?' (فایل بیشتر از ۲۰ مگابایت است)':err&&err.message==='too-long'?' (بیشتر از ۵ دقیقه است)':' (این فرمت پشتیبانی نمی‌شود؛ با ضبط‌کننده‌ی گوشی m4a ضبط کن)')+'. متن ذخیره می‌شود.</p>'; } }
+  }
+  S.entries[e.id]=e; put('entries', e.id);
+  if(ai!=='1' || countWords(text)<3){ toast(e.asset?'صدایت ذخیره شد ✓':'ذخیره شد ✓'); if(ai==='1') { out.innerHTML+='<p class="mu">برای بازخورد Claude باید متن حرف‌هایت را هم بنویسی.</p>'; return; } closeSheet(); return; }
+  const o2=document.createElement('div'); out.appendChild(o2); await feedbackFor(e, o2);
+}
+
+/* ---------- any file for review ---------- */
+let fileData=null;
+function openFile(d){
+  fileData=null;
+  openSheet(head('📎 فایل برای بررسی','عکس (مثلاً تمرین یا دست‌نوشته)، PDF یا فایل متنی بفرست تا Claude بررسی کند.')+
+    '<input type="file" id="fiF" accept="image/*,.pdf,.txt,.md,.srt,.vtt,application/pdf,text/plain" aria-label="انتخاب فایل" style="margin-bottom:8px"><div id="fiPrev" class="mu sm"></div>'+
+    '<label class="f" for="fiQ" style="margin-top:10px">از Claude چه می‌خواهی؟<textarea id="fiQ" style="min-height:80px">این را بررسی کن، اشتباه‌هایم را بگو و لغت‌های مفیدش را برایم دربیاور.</textarea></label>'+
+    '<button class="btn wide" data-act="filego" data-d="'+d+'">ارسال برای بررسی</button><div id="fiOut" style="margin-top:12px"></div>',
+    root=>{ $('#fiF',root).addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; const p=$('#fiPrev'); p.textContent='در حال آماده‌سازی…';
+      try{
+        if(f.type.startsWith('image/')){ const img=await shrinkImage(f); fileData={kind:'image', blob:img, name:f.name}; p.innerHTML='<img src="'+URL.createObjectURL(img)+'" alt="" style="border-radius:12px;max-height:220px">'; }
+        else { const t=await readTextFile(f); fileData={kind:'text', text:t.slice(0,60000), name:f.name, pdf:/pdf/i.test(f.type)||/\.pdf$/i.test(f.name), raw:f}; p.textContent='«'+f.name+'» خوانده شد: '+fa(countWords(t))+' کلمه.'; }
+      }catch(err){ fileData=null; p.textContent='این فایل خوانده نشد. یک عکس، PDF یا فایل متنی امتحان کن.'; } }); });
+}
+async function fileGo(d){
+  const q=$('#fiQ').value.trim(), out=$('#fiOut');
+  if(!fileData){ toast('اول یک فایل انتخاب کن.'); return; }
+  $('[data-act="filego"]').disabled=true;
+  const e={id:'e'+uid(), type:'file', day:Number(d), at:Date.now(), title:fileData.name, question:q};
+  const assets=await use('assets');
+  if(assets){ try{ if(fileData.kind==='image'){ const up=await assets.upload(fileData.blob); e.asset=up.id; e.assetKind='image'; } else if(fileData.pdf){ const up=await assets.upload(new Blob([fileData.raw],{type:'application/pdf'})); e.asset=up.id; e.assetKind='pdf'; } }catch(_){} }
+  if(fileData.kind==='text') e.text=fileData.text.slice(0,20000);
+  S.entries[e.id]=e; put('entries', e.id);
+  thinking(out);
+  try{
+    const prompt=LEVEL_NOTE+'\n\nThe learner sent '+(fileData.kind==='image'?'an image (attached)':'a file named "'+fileData.name+'". Its text:\n"""\n'+fileData.text.slice(0,60000)+'\n"""')+'\nThe learner asks (in Persian): "'+q+'"\n\nReply with only JSON: {"answer":"your full answer in Persian (use line breaks, keep English examples in English, show corrections as original → corrected)","words":[{"w":"useful English word/phrase from the file","m":"Persian meaning","ex":"example"}]}\nGive at most 10 words.';
+    const r=await askJSON(prompt, fileData.kind==='image'?[fileData.blob]:null);
+    e.fb={answer:str(r&&r.answer)}; e.words=cleanWords(r&&r.words); put('entries', e.id);
+    out.innerHTML=fbHTML(e.fb)+wordPicker(e.words); pickCtx={words:e.words, src:fileData.name, day:Number(d)};
+  }catch(err){ out.innerHTML='<p class="mu">'+esc(errCopy(err))+' فایل در کارنامه ذخیره شد.</p>'; }
+}
+async function shrinkImage(f){
+  const url=URL.createObjectURL(f); const img=new Image(); await new Promise((r,j)=>{ img.onload=r; img.onerror=j; img.src=url; });
+  const k=Math.min(1,1600/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*k); c.height=Math.round(img.height*k);
+  c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(url);
+  return await new Promise(r=>c.toBlob(r,'image/jpeg',.85));
+}
+let pdfLoading=null;
+function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+async function readTextFile(f){
+  if(/pdf/i.test(f.type)||/\.pdf$/i.test(f.name)){
+    const base='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+    if(!pdfLoading) pdfLoading=loadScript(base+'pdf.min.js').then(()=>loadScript(base+'pdf.worker.min.js'));
+    await pdfLoading; const lib=window.pdfjsLib; lib.GlobalWorkerOptions.workerSrc=base+'pdf.worker.min.js';
+    const doc=await lib.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise; let out='';
+    for(let i=1;i<=Math.min(doc.numPages,40);i++){ const pg=await doc.getPage(i); const tc=await pg.getTextContent(); out+=tc.items.map(x=>x.str).join(' ')+'\n'; if(out.length>60000) break; }
+    return out.trim();
+  }
+  let t=await f.text();
+  if(/\.(srt|vtt)$/i.test(f.name)) t=t.replace(/^WEBVTT.*$/m,'').replace(/^\d+\s*$/gm,'').replace(/^[\d:.,]+\s*-->.*$/gm,'').replace(/<[^>]+>/g,'').replace(/\n{2,}/g,'\n');
+  return t.trim();
+}
+
+/* ---------- weekly report & compare ---------- */
+async function openReport(d){
+  openSheet(head('🧭 گزارش هفته')+'<div id="rpOut"></div>');
+  const out=$('#rpOut'); const from=Math.max(1,Number(d)-6);
+  const es=Object.values(S.entries).filter(e=>e.day>=from&&e.day<=Number(d)&&e.type!=='report').sort((a,b)=>a.at-b.at);
+  const ws=Object.values(S.words).filter(w=>(w.day||1)>=from&&(w.day||1)<=Number(d));
+  const mins=[...Array(7)].reduce((a,_,i)=>a+Math.round((S.meta.timer[from+i]||0)/60),0);
+  if(!es.length && !ws.length){ out.innerHTML='<p class="mu">این هفته هنوز چیزی ثبت نشده. هر وقت چیزی گوش دادی یا نوشتی، گزارش معنی‌دار می‌شود.</p><button class="btn sec2" data-act="reportsave" data-d="'+d+'">ثبت گزارش خالی و تیک زدن</button>'; return; }
+  thinking(out);
+  try{
+    const data=es.map(e=>({type:e.type, day:e.day, title:e.title, text:(e.text||'').slice(0,1500), score:e.fb&&e.fb.score, mistakes:e.fb&&arr(e.fb.mistakes).slice(0,5)}));
+    const r=await askJSON(LEVEL_NOTE+'\n\nWrite a weekly report for days '+from+'-'+d+'. Review minutes this week: '+mins+'. New words: '+JSON.stringify(ws.map(w=>w.f).slice(0,80))+'.\nActivities:\n'+JSON.stringify(data)+'\n\nReply with only JSON: {"summary":"3-4 sentences in Persian","wins":["Persian"],"focus":["Persian: the most repeated mistakes or weak skills, with an English example"],"plan":["Persian: 3 concrete things to do next week"]}');
+    const e={id:'e'+uid(), type:'report', day:Number(d), at:Date.now(), title:'گزارش روزهای '+fa(from)+' تا '+fa(d), fb:{feedback:str(r&&r.summary), list:[{t:'✅ نقاط قوت',items:arr(r&&r.wins).map(str)},{t:'🎯 روی این‌ها کار کن',items:arr(r&&r.focus).map(str)},{t:'🗓️ برنامه‌ی هفته‌ی بعد',items:arr(r&&r.plan).map(str)}]}};
+    S.entries[e.id]=e; put('entries', e.id); out.innerHTML=fbHTML(e.fb); celebrate();
+  }catch(err){ out.innerHTML='<p class="mu">'+esc(errCopy(err))+'</p>'; }
+}
+async function doCompare(){
+  openSheet(head('🆚 مقایسه با روز اول')+'<div id="cmOut"></div>'); const out=$('#cmOut'); thinking(out);
+  const [w1,w2]=firstAndLast('write'), [s1,s2]=firstAndLast('speak'); const s=stats();
+  const pack=e=>e?{day:e.day, prompt:e.prompt, text:(e.text||'').slice(0,3000), score:e.fb&&e.fb.score, cefr:e.fb&&e.fb.cefr}:null;
+  try{
+    const r=await askJSON(LEVEL_NOTE+'\n\nCompare the learner at the START with the learner NOW. Be specific and quote short examples from their texts.\nFirst writing: '+JSON.stringify(pack(w1))+'\nLatest writing: '+JSON.stringify(pack(w2))+'\nFirst speaking transcript: '+JSON.stringify(pack(s1))+'\nLatest speaking transcript: '+JSON.stringify(pack(s2))+'\nStats now: '+JSON.stringify({day:s.now, words:s.words, learnedWords:s.learned, listened:s.listens, reviewMinutes:s.minutes})+
+      '\n\nReply with only JSON: {"headline":"one encouraging sentence in Persian","level_then":"CEFR","level_now":"CEFR","improved":["Persian, with a then → now English example"],"work_on":["Persian"],"next":["Persian: 3 next steps"]}');
+    const fb={feedback:str(r&&r.headline)+(r&&r.level_then?'\nسطح شروع: '+str(r.level_then)+' ← سطح الان: '+str(r.level_now):''), list:[{t:'📈 پیشرفت‌ها',items:arr(r&&r.improved).map(str)},{t:'🎯 هنوز تمرین لازم دارد',items:arr(r&&r.work_on).map(str)},{t:'👣 قدم‌های بعدی',items:arr(r&&r.next).map(str)}]};
+    S.meta.compare={at:Date.now(), fb}; saveMeta(); out.innerHTML=fbHTML(fb); celebrate();
+  }catch(err){ out.innerHTML='<p class="mu">'+esc(errCopy(err))+'</p>'; }
+}
+
+/* ---------- downloads ---------- */
+async function offer(name, data, type){
+  const note=$('#setNote');
+  try{ const dl=await use('downloads'); if(!dl){ if(note) note.textContent='دانلود در این نمایش ممکن نیست. صفحه را در اپ یا سایت Claude باز کن.'; return; }
+    await dl.save({filename:name, data:new Blob([data],{type})}); if(note) note.textContent='فایل ذخیره شد ✓'; }
+  catch(_){ if(note) note.textContent='دانلود انجام نشد یا لغو شد.'; }
+}
+function ics(){
+  const [y,m,d]=S.meta.start.split('-'), [hh,mm]=S.meta.time.split(':'); const stamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//masir-english//fa','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:masir-english-'+S.meta.start+'@app','DTSTAMP:'+stamp,'DTSTART:'+y+m+d+'T'+hh+mm+'00','DURATION:PT30M','RRULE:FREQ=DAILY;COUNT=90',
+    'SUMMARY:English time - Masir','DESCRIPTION:10 min review + 6 Minute English + speak + write.','BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:English time!','TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+}
+
+/* ====================== events ====================== */
+function speak(t){ try{ const u=new SpeechSynthesisUtterance(t); u.lang='en-GB'; u.rate=.9; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(_){ toast('پخش صدا روی این دستگاه پشتیبانی نمی‌شود.'); } }
+document.addEventListener('click', e=>{
+  const tb=e.target.closest('#tabs button'); if(tb){ setTab(tb.dataset.tab); return; }
+  const a=e.target.closest('[data-act]'); if(!a) return; const act=a.dataset.act, d=a.dataset.d!=null?Number(a.dataset.d):curDay();
+  lastAct=Date.now();
+  switch(act){
+    case 'close': closeSheet(); break;
+    case 'stop': if(askCtl) askCtl.abort(); break;
+    case 'day': selDay=clampDay(d); render(); break;
+    case 'openday': selDay=d; setTab('today'); break;
+    case 'tick': { if(a.disabled) return; const m=S.meta.manual[a.dataset.d]||(S.meta.manual[a.dataset.d]={}); const was=isFull(d); m[a.dataset.t]=a.checked; saveMeta(); render(); if(!was&&isFull(d)){ toast('🎉 روز '+fa(d)+' کامل شد!'); celebrate(); } break; }
+    case 'review': openReview(); break;
+    case 'cram': startCram(); renderReview(); break;
+    case 'reveal': if(rv&&!rv.shown){ rv.shown=true; renderReview(); } break;
+    case 'grade': doGrade(Number(a.dataset.g)); break;
+    case 'say': { const w=S.words[a.dataset.w]; if(w) speak(w.f+(w.ex?'. '+w.ex:'')); break; }
+    case 'addword': openAddWord(d); break;
+    case 'editword': openAddWord(curDay(), a.dataset.w); break;
+    case 'savenw': saveNewWord(a.dataset.d, a.dataset.w); break;
+    case 'delword': drop('words', a.dataset.w); toast('حذف شد.'); closeSheet(); break;
+    case 'bulk': openBulk(); break;
+    case 'bulkgo': bulkGo(); break;
+    case 'starter': openAddWord(d); break;
+    case 'starterpack': starterPack(a.dataset.d); break;
+    case 'wf': wFilter=a.dataset.f; render(); break;
+    case 'jf': jFilter=a.dataset.f; pendingDel=null; render(); break;
+    case 'listen': openListen(d); break;
+    case 'listengo': listenGo(a.dataset.d, a.dataset.ai); break;
+    case 'write': openWrite(d, a.dataset.free==='1', a.dataset.ck==='1'); break;
+    case 'writego': writeGo(a.dataset.d, a.dataset.ck, a.dataset.ai); break;
+    case 'speak': openSpeak(d, a.dataset.free==='1', a.dataset.ck==='1'); break;
+    case 'recstart': startRec(); break;
+    case 'speakgo': speakGo(a.dataset.d, a.dataset.ck, a.dataset.ai); break;
+    case 'file': openFile(d); break;
+    case 'filego': fileGo(a.dataset.d); break;
+    case 'report': openReport(d); break;
+    case 'reportsave': { const en={id:'e'+uid(), type:'report', day:d, at:Date.now(), title:'گزارش هفته', fb:{feedback:'این هفته فعالیتی ثبت نشد.'}}; S.entries[en.id]=en; put('entries',en.id); closeSheet(); break; }
+    case 'pickadd': { if(!pickCtx) return; let n=0; $$('.wordpick input[data-wi]').forEach(cb=>{ if(cb.checked&&!cb.disabled){ const w=pickCtx.words[Number(cb.dataset.wi)]; if(w&&addWord(w.w,w.m,w.ex,pickCtx.src,pickCtx.day)){ n++; cb.disabled=true; } } }); toast(n?fa(n)+' لغت به لغت‌نامه اضافه شد ✓':'لغت جدیدی انتخاب نشده.'); if(n) celebrate(); a.disabled=true; break; }
+    case 'refb': { const en=S.entries[a.dataset.e]; if(!en) return; openSheet(head('🤖 بازخورد Claude', en.title)+'<div id="rfOut"></div>'); feedbackFor(en, $('#rfOut')); break; }
+    case 'delentry': { const id=a.dataset.e; if(pendingDel!==id){ pendingDel=id; render(); return; } pendingDel=null; const en=S.entries[id]; drop('entries', id); if(en&&en.asset){ use('assets').then(as=>as&&as.delete(en.asset).catch(()=>{})); } toast('حذف شد.'); render(); break; }
+    case 'compare': doCompare(); break;
+    case 'ics': offer('masir-english-reminder.ics', ics(), 'text/calendar'); break;
+    case 'backup': offer('masir-english-backup.json', JSON.stringify({meta:S.meta, entries:S.entries, words:S.words},null,1), 'application/json'); break;
+    case 'reset': $('#resetBox').hidden=false; break;
+    case 'resetno': $('#resetBox').hidden=true; break;
+    case 'resetyes': { const es=Object.keys(S.entries), ws=Object.keys(S.words); S.entries={}; S.words={}; S.meta.manual={}; S.meta.timer={}; S.meta.compare=null; es.forEach(k=>flush('entries',k)); ws.forEach(k=>flush('words',k)); saveMeta(); badgeSeen=null; toast('همه چیز پاک شد.'); render(); break; }
+  }
+});
+document.addEventListener('input', e=>{ if(e.target.id==='wsearch'){ wSearch=e.target.value; const pos=e.target.selectionStart; render(); const s=$('#wsearch'); if(s){ s.focus(); try{ s.setSelectionRange(pos,pos); }catch(_){} } } });
+document.addEventListener('change', e=>{
+  if(e.target.id==='setStart' && e.target.value){ S.meta.start=e.target.value; selDay=null; saveMeta(); render(); }
+  if(e.target.id==='setTime' && e.target.value){ S.meta.time=e.target.value; saveMeta(); render(); }
+});
+document.addEventListener('keydown', e=>{
+  if(!rv || $('#ov').hidden || e.target.matches('input,textarea')) return;
+  if((e.code==='Space'||e.key==='Enter') && !rv.shown){ e.preventDefault(); rv.shown=true; lastAct=Date.now(); renderReview(); }
+  else if(rv.shown && ['1','2','3','4'].includes(e.key)) doGrade(Number(e.key));
+});
+['pointerdown','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,()=>{ lastAct=Date.now(); },{passive:true}));
+
+/* theme */
+function applyTheme(t){ if(t) document.documentElement.setAttribute('data-theme',t); else document.documentElement.removeAttribute('data-theme'); }
+try{ const t=localStorage.getItem('masir-theme'); if(t) applyTheme(t); }catch(_){}
+$('#themeBtn').onclick=()=>{ const cur=document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'); const nt=cur==='light'?'dark':'light'; applyTheme(nt); try{ localStorage.setItem('masir-theme',nt); }catch(_){} };
+
+/* effects */
+let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600); }
+function celebrate(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c=$('#fx'), x=c.getContext('2d'), r=devicePixelRatio||1; c.width=innerWidth*r; c.height=innerHeight*r; x.setTransform(r,0,0,r,0,0);
+  const cols=['#8E7CFF','#00D4C8','#FF6FB5','#FFC857','#5CFFB0'];
+  const P=Array.from({length:120},()=>({x:innerWidth/2,y:innerHeight*.35,vx:(Math.random()-.5)*13,vy:Math.random()*-12-3,s:Math.random()*7+4,c:cols[Math.floor(Math.random()*5)],a:Math.random()*6,va:(Math.random()-.5)*.3}));
+  let f=0;(function tk(){ x.clearRect(0,0,innerWidth,innerHeight); P.forEach(p=>{ p.vy+=.35; p.x+=p.vx; p.y+=p.vy; p.vx*=.99; p.a+=p.va; x.save(); x.translate(p.x,p.y); x.rotate(p.a); x.fillStyle=p.c; x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); x.restore(); }); if(++f<110) requestAnimationFrame(tk); else x.clearRect(0,0,innerWidth,innerHeight); })();
+}
+
+render();
+connect();
+})();
+</script>
