@@ -67,6 +67,7 @@ const ku = (t, extra = {}) => ({ size: 26, bold: true, color: C.primary, ...extr
 C.primary = '1F4E79'; C.accent = 'C0392B'; C.head = 'DCE6F2'; C.line = 'B4C7DC'; C.soft = 'EAF1F8';
 const en = (o = {}) => ({ ltr: true, size: 22, ...o });
 const enB = (o = {}) => ({ ltr: true, size: 22, bold: true, color: C.primary, ...o });
+const { murphy, biz, vocabTask, irPlan } = require('./books.js');
 const sp = (s) => { const [a, b, c] = s.split('|'); return { a, b, c }; };
 
 const days = [];
@@ -107,8 +108,8 @@ const out = [];
 out.push(para('', { before: 1800 }));
 out.push(para([run('English B1 → B2', { ltr: true, size: 60, bold: true, color: C.primary })], { center: true, ltr: true }));
 out.push(para([run('برنامهٔ ۹۰ روزهٔ رسیدن از سطح B1 به B2', { size: 40, bold: true, color: C.accent })], { center: true, after: 200 }));
-out.push(para([run('روزی ۲ ساعت • ۱۲ هفته + ۶ روز آزمون نهایی • ۷۲۰ واژه و عبارت • ۷۲ درس گرامر و مهارت', { size: 24, color: C.grey })], { center: true }));
-out.push(para([run('Speaking • Listening • Reading • Writing', { ltr: true, size: 24, color: C.grey })], { center: true, ltr: true, after: 600 }));
+out.push(para([run('روزی ۲ ساعت • ۱۲ هفته + ۶ روز جمع‌بندی • با کتاب‌های Grammar in Use، Vocabulary in Use، Inside Reading و Oxford Word Skills', { size: 24, color: C.grey })], { center: true }));
+out.push(para([run('Speaking for Business • Trading • Fluency', { ltr: true, size: 24, color: C.grey })], { center: true, ltr: true, after: 600 }));
 out.push(para([run('You can do it!', { ltr: true, size: 36, bold: true, color: C.gold })], { center: true, ltr: true }));
 
 // Guide
@@ -122,23 +123,36 @@ out.push(h2('سطح B2 یعنی چه؟'));
   'ایمیل رسمی، essay و گزارش با ساختار درست بنویسی.',
   'با انگلیسی‌زبان‌ها بدون فشار زیاد برای هیچ‌کدام از دو طرف ارتباط برقرار کنی.',
 ].forEach(t => out.push(bullet(t)));
+out.push(h2('هدف: انگلیسی روان برای تجارت'));
+out.push(para('هدف تو تاجر شدن و روان صحبت کردن است. برای همین در این نسخه وزن «صحبت کردن» بیشتر است و هر روز یک «جملهٔ تجاری» برای مذاکره، سفارش، پرداخت، حمل و جلسه داری (۷۲ جمله در کل برنامه).'));
 out.push(h2('ساختار برنامه'));
 [
   'هفته‌های ۱ تا ۶: گرامر کلیدی B2 (زمان‌ها، modals، شرطی‌ها، مجهول، نقل قول، الگوهای فعل)',
-  'هفته‌های ۷ و ۸: روانی گفتار و ساختارهای پیشرفته (تأکید، inversion، discourse markers)',
-  'هفته‌های ۹ تا ۱۱: موضوعات روز، نوشتن در سطح B2 و واژگان پیشرفته (idiom، collocation، phrasal verb)',
-  'هفتهٔ ۱۲ و روزهای ۸۵ تا ۹۰: ارائه، مذاکره، مهارت‌های آزمون و آزمون‌های شبیه‌سازی‌شده',
-  'روز هفتم هر هفته: مرور و آزمون',
+  'هفته‌های ۷ و ۸: روانی گفتار و ساختارهای پیشرفته (نظر دادن، small talk، تأکید، discourse markers)',
+  'هفته‌های ۹ تا ۱۱: موضوعات روز، ایمیل و نامهٔ رسمی، گزارش، idiomها و collocationها',
+  'هفتهٔ ۱۲: ارائه، مذاکره و بحث؛ روزهای ۸۵ تا ۹۰: آزمون‌های شبیه‌سازی و جمع‌بندی',
+  'روز هفتم هر هفته: مرور، آزمون و تمرین‌های تکمیلی کتاب‌ها',
 ].forEach(t => out.push(bullet(t)));
+out.push(h2('کتاب‌ها و نقش هر کدام'));
+out.push(table([3300, 1800, 4538], ['کتاب', 'سطح/جلد', 'نقش در برنامه'], [
+  [cell('English Grammar in Use (Murphy)', 3300, { ltr: true, bold: true, color: C.primary }), 'Intermediate (آبی)', 'تمرین گرامر روز. شمارهٔ یونیت‌ها برای هر روز مشخص شده (بر اساس ویرایش پنجم).'],
+  [cell('English Vocabulary in Use', 3300, { ltr: true, bold: true, color: C.primary }), 'Upper-Intermediate', 'کتاب اصلی واژگان: یونیت‌های ۱ تا ۵۴ در ۹۰ روز. بقیه برای ماه‌های بعد.'],
+  [cell('Inside Reading', 3300, { ltr: true, bold: true, color: C.primary }), 'Level 2 ← Level 3', 'خواندن: Level 2 کامل در هفته‌های ۱ تا ۶ و Level 3 کامل در هفته‌های ۷ تا ۱۲.'],
+  [cell('Oxford Word Skills: Idioms & Phrasal Verbs', 3300, { ltr: true, bold: true, color: C.primary }), 'Intermediate', 'از هفتهٔ ۷، هفته‌ای ۳ یونیت، برای صحبت طبیعی و روان.'],
+  [cell('Oxford Word Skills', 3300, { ltr: true, bold: true, color: C.primary }), 'Intermediate', 'در روزهای مرور: یک یونیت هم‌موضوع با درس‌های همان هفته (از فهرست کتاب انتخاب کن).'],
+  [cell('Vocabulary for IELTS', 3300, { ltr: true, bold: true, color: C.primary }), '—', 'چون هدفت آیلتس نیست، در برنامهٔ اصلی نیست. بعد از ۹۰ روز اختیاری است.'],
+], { zebra: true }));
+out.push(para('اگر شمارهٔ یونیت‌های Murphy در ویرایش تو کمی فرق دارد، با فهرست اول کتاب یونیت هم‌موضوع را پیدا کن. Inside Reading را اگر یونیت ۱ از Level 2 خیلی راحت بود (بیش از ۹۰٪ را فهمیدی)، از Level 3 شروع کن و در هفته‌های ۷ تا ۱۲ یونیت‌های باقی‌ماندهٔ Level 3 و سپس Level 4 را بخوان.', { fill: C.soft2, before: 80 }));
 out.push(h2('برنامهٔ ثابت ۲ ساعتهٔ هر روز'));
 out.push(table([1700, 2400, 5538], ['زمان', 'بخش', 'چه کار کنم؟'], [
-  ['۱۵ دقیقه', '۱. مرور', 'کارت‌های واژهٔ روزهای قبل (روش لایتنر یا اپ Anki) + جمله‌های دیروز از حفظ'],
-  ['۲۰ دقیقه', '۲. واژگان', '۱۰ واژه/عبارت جدید: تلفظ را در فرهنگ لغت آنلاین (Cambridge/Oxford) گوش کن، مثال را بلند بخوان، کارت بساز.'],
-  ['۲۵ دقیقه', '۳. گرامر', 'نکته را بخوان، مثال‌ها را تحلیل کن، تمرین‌های جای خالی و ترجمه را انجام بده.'],
-  ['۲۵ دقیقه', '۴. شنیداری و خواندن', 'منبع پیشنهادی روز + یادداشت ۵ عبارت جدید'],
-  ['۲۰ دقیقه', '۵. نوشتن', 'تکلیف نوشتاری روز؛ هفته‌ای ۲-۳ بار برای Claude بفرست تا اصلاح کند.'],
-  ['۱۵ دقیقه', '۶. صحبت کردن', 'تکلیف گفتاری روز با Claude یا ضبط صدای خودت + shadowing جمله‌ها'],
+  ['۱۰ دقیقه', '۱. مرور', 'کارت‌های واژهٔ روزهای قبل (لایتنر یا اپ Anki) + جمله‌های دیروز از حفظ'],
+  ['۳۰ دقیقه', '۲. گرامر', 'نکتهٔ گرامر درس + یونیت‌های Murphy (توضیح صفحهٔ چپ و تمرین صفحهٔ راست)'],
+  ['۲۵ دقیقه', '۳. واژگان کتاب', 'یونیت روز از Vocabulary in Use یا Oxford Word Skills + کارت‌سازی'],
+  ['۲۵ دقیقه', '۴. خواندن', 'بخش روز از Inside Reading'],
+  ['۱۰ دقیقه', '۵. درس روز', '۱۰ واژهٔ درس + جمله‌های کاربردی + جملهٔ تجاری (shadowing بلند)'],
+  ['۲۰ دقیقه', '۶. صحبت / نوشتن', 'هر روز تکلیف گفتاری (با Claude یا ضبط صدا). روزهای زوج ۱۰ دقیقه از این بخش را به تکلیف نوشتاری بده.'],
 ], { colOpts: [{ center: true, bold: true }, { bold: true, color: C.primary }, {}], zebra: true }));
+out.push(para('شنیداری: روزی ۱۵ تا ۲۰ دقیقه خارج از این ۲ ساعت (در راه، هنگام آشپزی یا پیاده‌روی) منبع شنیداری روز را گوش کن. این کار بسیار مهم است!', { fill: C.soft, before: 80 }));
 out.push(h2('قانون‌های طلایی'));
 [
   'هر روز صحبت کن، حتی ۱۰ دقیقه. صحبت کردن مهم‌ترین تفاوت B1 و B2 است.',
@@ -167,14 +181,25 @@ function lessonDay({ n, wi, ls }) {
   r.push(titlePara(n, ls.t));
   r.push(para([run(weeks[wi].title + '  |  موضوع: ', { color: C.grey, size: 20 }), run(ls.topic, { ltr: true, color: C.grey, size: 20 })], { after: 120 }));
   const rev = [n - 1, n - 3, n - 7].filter(x => x >= 1 && byN[x].kind === 'lesson').map(x => `روز ${fa(x)}`);
+  const k = wi * 6 + (n - wi * 7 - 1);
+  const mu = murphy[k], vt = vocabTask(k), ir = irPlan[k], bz = sp(biz[k]);
   r.push(table([1500, 8138], ['زمان', 'برنامهٔ امروز'], [
-    ['۱۵ دقیقه', rev.length ? `مرور کارت‌های ${rev.join('، ')} + جمله‌های دیروز از حفظ` : 'اولین روز است! ۵ دقیقه دربارهٔ خودت به انگلیسی صحبت کن و ضبط کن (برای مقایسه در روز ۹۰).'],
-    ['۲۰ دقیقه', 'بخش ۲: ۱۰ واژهٔ جدید + کارت‌سازی'],
-    ['۲۵ دقیقه', 'بخش ۱ (گرامر) + تمرین‌های ب و ج'],
-    ['۲۵ دقیقه', 'بخش ۴: ' + ls.read],
-    ['۲۰ دقیقه', 'بخش ۵: تکلیف نوشتاری'],
-    ['۱۵ دقیقه', 'بخش ۶: تکلیف گفتاری + shadowing جمله‌ها'],
+    ['۱۰ دقیقه', rev.length ? `مرور کارت‌های ${rev.join('، ')} + جمله‌های دیروز از حفظ` : 'اولین روز است! ۵ دقیقه دربارهٔ خودت به انگلیسی صحبت کن و ضبط کن (برای مقایسه در روز ۹۰).'],
+    ['۳۰ دقیقه', mu ? `گرامر: بخش ۱ + Murphy یونیت‌های ${mu}` : 'گرامر: بخش ۱ (این مبحث در Murphy نیست) + تمرین‌های الف و ب'],
+    ['۲۵ دقیقه', `واژگان: ${vt.book} — ${vt.task}`],
+    ['۲۵ دقیقه', `خواندن: Inside Reading ${ir.level} — Unit ${ir.unit} (مرحلهٔ ${ir.step})`],
+    ['۱۰ دقیقه', 'درس روز: بخش‌های ۲ و ۳ + جملهٔ تجاری'],
+    ['۲۰ دقیقه', n % 2 === 0 ? 'صحبت (۱۰ دقیقه) + نوشتن (۱۰ دقیقه)' : 'صحبت کردن: تکلیف گفتاری + جملهٔ تجاری'],
   ], { colOpts: [{ center: true, bold: true, color: C.primary }, {}], zebra: true }));
+
+  r.push(h2('📚 کتاب‌های امروز'));
+  r.push(table([3600, 6038], ['کتاب', 'تکلیف'], [
+    [cell('English Grammar in Use', 3600, { ltr: true, bold: true, color: C.primary }), mu ? `یونیت‌های ${mu} — توضیح را بخوان، همهٔ تمرین‌ها را حل کن و با پاسخ‌نامه چک کن.` : 'امروز یونیت Murphy نداری؛ وقت گرامر را به بخش ۱ و تمرین‌های این درس بده.'],
+    [cell(vt.book, 3600, { ltr: true, bold: true, color: C.primary }), `${vt.task} — هر عبارت جدید را با یک جملهٔ مثال روی کارت بنویس.`],
+    [cell(`Inside Reading ${ir.level}`, 3600, { ltr: true, bold: true, color: C.primary }), `Unit ${ir.unit} (مرحلهٔ ${ir.step}): ${ir.task}`],
+  ], { zebra: true }));
+  r.push(para([run('💼 جملهٔ تجاری امروز: ', { bold: true, color: C.gold }), run(bz.a, { ltr: true, bold: true, color: C.primary })], { fill: C.soft2, before: 120, after: 0 }));
+  r.push(para([run(bz.b, { color: C.grey })], { fill: C.soft2, before: 0, after: 80 }));
 
   r.push(h2('۱. گرامر و نکتهٔ کلیدی'));
   ls.g.forEach(g => r.push(bullet(g)));
@@ -187,7 +212,7 @@ function lessonDay({ n, wi, ls }) {
   r.push(table([500, 5000, 4138], ['#', 'English', 'فارسی'], ls.s.map((x, i) => { const p = sp(x); return [fa(i + 1), p.a, p.b]; }),
     { colOpts: [{ center: true, color: C.grey }, enB({ size: 22 }), {}], zebra: true }));
 
-  r.push(h2('۴. شنیداری و خواندن'));
+  r.push(h2('۴. شنیداری (۱۵ تا ۲۰ دقیقه، خارج از ۲ ساعت)'));
   r.push(para(ls.read, { fill: C.soft }));
   r.push(para('روش: ۱) یک بار برای ایدهٔ کلی ۲) یک بار برای جزئیات ۳) با متن یا زیرنویس. ۵ عبارت جدید را یادداشت کن.', { after: 60 }));
 
@@ -203,10 +228,10 @@ function lessonDay({ n, wi, ls }) {
   r.push(para([run('ج) جمله‌سازی: ', { bold: true }), run('با ۵ واژه از واژه‌های امروز و با گرامر امروز، ۵ جمله دربارهٔ زندگی خودت بنویس.')], { before: 120 }));
   for (let i = 0; i < 3; i++) r.push(para([run('……………………………………………………………………………………………………', { color: 'BBBBBB' })], { after: 20 }));
   r.push(para([run('د) نوشتن: ', { bold: true, color: C.primary }), run(ls.write)], { before: 120, fill: C.soft }));
-  r.push(para([run('هـ) صحبت کردن: ', { bold: true, color: C.accent }), run(ls.task)], { before: 80, fill: C.soft2 }));
+  r.push(para([run('هـ) صحبت کردن: ', { bold: true, color: C.accent }), run(ls.task + ' در پایان، جملهٔ تجاری امروز را در یک مکالمهٔ کوتاه خرید و فروش به کار ببر.')], { before: 80, fill: C.soft2 }));
 
   r.push(h2('✔ چک‌لیست امروز'));
-  ['مرور کارت‌های قبلی', '۱۰ واژهٔ جدید + کارت', 'گرامر + تمرین‌ها', 'شنیداری / خواندن', 'تکلیف نوشتاری', 'تکلیف گفتاری + ضبط صدا'].forEach(t => r.push(check(t)));
+  ['مرور کارت‌ها', 'گرامر + یونیت‌های Murphy', 'یونیت واژگان کتاب', 'Inside Reading', 'درس روز + جملهٔ تجاری', 'صحبت کردن (و نوشتن در روزهای زوج)', 'شنیداری (خارج از ۲ ساعت)'].forEach(t => r.push(check(t)));
   return r;
 }
 
@@ -218,9 +243,11 @@ function reviewDay({ n, wi }) {
     ['۲۰ دقیقه', 'مرور همهٔ ۶۰ کارت این هفته؛ کارت‌های سخت را جدا کن.'],
     ['۲۰ دقیقه', 'نکته‌های گرامر ۶ درس را دوباره بخوان؛ برای هر کدام ۲ جملهٔ جدید بساز.'],
     ['۲۵ دقیقه', 'آزمون واژه (بخش ۱) و آزمون ترجمه (بخش ۲) بدون نگاه کردن به درس‌ها'],
-    ['۲۵ دقیقه', 'یک متن طولانی‌تر (۲۵۰ کلمه) با موضوع یکی از درس‌ها بنویس و برای Claude بفرست.'],
+    ['۲۵ دقیقه', 'کتاب‌ها: Murphy — بخش Additional exercises مربوط به یونیت‌های این هفته + Oxford Word Skills (Intermediate) — یک یونیت هم‌موضوع با این هفته'],
     ['۳۰ دقیقه', 'آزمون صحبت با Claude (بخش ۳)'],
   ], { colOpts: [{ center: true, bold: true, color: C.primary }, {}], zebra: true }));
+  r.push(h2('مرور کتاب‌ها'));
+  [`Inside Reading: متن‌های این هفته را یک بار دیگر بلند بخوان و واژه‌های آکادمیک را مرور کن.`, `جمله‌های تجاری ۶ روز گذشته را از حفظ بگو و با هر کدام یک جملهٔ جدید بساز.`, `یک متن ۲۵۰ کلمه‌ای (ایمیل تجاری یا essay) با موضوع یکی از درس‌ها بنویس و برای Claude بفرست.`].forEach(t => r.push(bullet(t)));
   r.push(h2('درس‌های این هفته'));
   wk.lessons.forEach((ls, i) => r.push(para([run(`روز ${fa(wi * 7 + i + 1)}: `, { bold: true }), run(ls.t, { ltr: true })], { bullet: true, after: 40 })));
 
@@ -259,6 +286,24 @@ function finalDay({ n, f }) {
 }
 
 days.forEach(d => out.push(...(d.kind === 'lesson' ? lessonDay(d) : d.kind === 'review' ? reviewDay(d) : finalDay(d))));
+
+// Appendix 0 — book map
+out.push(h1('پیوست — نقشهٔ کامل کتاب‌ها'));
+out.push(para('این جدول نشان می‌دهد هر روز کدام بخش از هر کتاب را کار کنی (روزهای مرور در جدول نیامده‌اند).', { after: 120 }));
+{
+  const rows = [];
+  days.filter(d => d.kind === 'lesson').forEach(d => {
+    const k = d.wi * 6 + (d.n - d.wi * 7 - 1); const vt = vocabTask(k), ir = irPlan[k];
+    rows.push([fa(d.n), cell(murphy[k] || '—', 2400, { ltr: true, size: 18 }), cell((vt.book.startsWith('English') ? 'EVIU ' : 'OWS Idioms ') + (vt.task.startsWith('Unit') ? vt.task : 'next unit'), 3000, { ltr: true, size: 18 }), cell(`IR${ir.level} U${ir.unit} (${ir.step})`, 3138, { ltr: true, size: 18 })]);
+  });
+  out.push(table([1100, 2400, 3000, 3138], ['روز', 'Grammar in Use', 'Vocabulary', 'Inside Reading'], rows, { colOpts: [{ center: true, bold: true }], zebra: true }));
+}
+out.push(h2('بعد از ۹۰ روز: ادامهٔ کتاب‌ها'));
+['English Vocabulary in Use Upper-Intermediate: یونیت‌های ۵۵ تا ۱۰۱ (روزی یک یونیت، حدود ۷ هفته)',
+ 'Oxford Word Skills Idioms & Phrasal Verbs: یونیت‌های باقی‌مانده',
+ 'Inside Reading Level 4 برای حرکت به سمت C1',
+ 'پیشنهاد برای هدف تجاری: کتاب Business Vocabulary in Use (Intermediate) و Business English (مثلاً Market Leader) — برای مذاکره و مکاتبات تجاری عالی هستند.',
+ 'Vocabulary for IELTS فقط اگر بعداً خواستی آیلتس بدهی.'].forEach(t => out.push(bullet(t)));
 
 // Appendix 1 — grammar reference
 out.push(h1('پیوست ۱ — مرجع گرامر'));
@@ -323,7 +368,7 @@ out.push(h2('بعد از ۹۰ روز'));
  'ماه ۶: اگر هدفت آزمون است (IELTS / B2 First)، یک ماه تمرین تخصصی آزمون؛ وگرنه شروع مسیر C1.'].forEach(t => out.push(bullet(t)));
 
 const doc = new Document({
-  creator: 'Claude', title: 'English B1 to B2 — 90-Day Plan',
+  creator: 'Claude', title: 'English B1 to B2 — 90-Day Plan with Books',
   styles: {
     default: { document: { run: { font: FONT, size: 22 }, paragraph: { spacing: { line: 300 } } } },
     paragraphStyles: [
