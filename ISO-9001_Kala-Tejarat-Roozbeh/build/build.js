@@ -13,7 +13,8 @@ const OUT = path.join(__dirname, "..");
 const LOGO = fs.readFileSync(path.join(OUT, "logo.png"));
 const FONT = "Tahoma";
 const RED = "C8102E", DARK = "1E1E1E", GREY = "F2F2F2", BORDER = "8C8C8C";
-const DATE = "اردیبهشت ۱۴۰۵";
+const { dateOf } = require("./dates");
+let DATE = "";
 let CUR_WIDTH = 9906, CUR_HEIGHT = 13000;
 const fa = (s) => String(s).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
 
@@ -172,6 +173,7 @@ async function build(doc) {
   const pageW = land ? 16838 : 11906, margin = 1000;
   const width = pageW - 2 * margin;
   const children = [];
+  DATE = dateOf(doc.code);
   CUR_WIDTH = width;
   CUR_HEIGHT = (land ? 11906 : 16838) - 2300 - 1100;
   // جداول محتوا با عرض متن پرتره طراحی شده‌اند؛ برای افقی مقیاس می‌دهیم

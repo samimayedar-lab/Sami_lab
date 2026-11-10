@@ -612,6 +612,11 @@ tbl.rows = tbl.rows.filter((r) => r[1] !== "JD-01" && !r[1].startsWith("F-01"));
 tbl.rows.splice(1, 0, ...extraRows.map((r) => ["", r[0], r[1], r[2], "۰۰", r[3]]));
 tbl.rows.push(["", "JD-01", "شرح مشاغل، اختیارات و شرایط احراز (۲۲ شغل)", "۵.۳، ۷.۲", "۰۰", "مدیر اداری و منابع انسانی"], ["", "F-01 تا F-20", "مجموعه فرم‌های سیستم مدیریت کیفیت", "۷.۵.۳", "۰۰", "نماینده مدیریت در سیستم کیفیت (QMR)"]);
 tbl.rows.forEach((r, i) => (r[0] = fa(i + 1)));
+// ستون تاریخ تصویب در فهرست اصلی مدارک
+const { dateOf } = require("./dates");
+tbl.head.splice(5, 0, "تاریخ تصویب");
+tbl.w = [750, 1100, 3250, 1200, 850, 1150, 1338];
+tbl.rows.forEach((r) => r.splice(5, 0, dateOf(r[1])));
 out.push(mdl);
 
 module.exports = out;
