@@ -3,13 +3,18 @@
 const fs = require("fs");
 const path = require("path");
 const D = require("docx");
-const { docs, CO, blank } = require("./content");
+const { docs: base, CO, blank } = require("./content");
+const extra = require("./content2");
+// اسناد جدید جایگزین اسناد هم‌کد می‌شوند و بقیه به انتهای فهرست (پیش از فرم‌ها) اضافه می‌شوند
+const docs = base.map((d) => extra.find((e) => e.code === d.code) || d);
+extra.filter((e) => !base.some((d) => d.code === e.code)).forEach((e) => docs.splice(docs.length - 1, 0, e));
 
 const OUT = path.join(__dirname, "..");
 const LOGO = fs.readFileSync(path.join(OUT, "logo.png"));
 const FONT = "Tahoma";
 const RED = "C8102E", DARK = "1E1E1E", GREY = "F2F2F2", BORDER = "8C8C8C";
 const DATE = "[تاریخ تصویب]";
+let CUR_WIDTH = 9906, CUR_HEIGHT = 13000;
 const fa = (s) => String(s).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
 
 const run = (text, o = {}) =>
@@ -77,8 +82,39 @@ function blocks(list) {
     else if (b.ul) b.ul.forEach((t) => out.push(bullet(t)));
     else if (b.h3) out.push(H3(b.h3));
     else if (b.table) { out.push(table(b.table)); out.push(gap()); }
+    else if (b.grid) { out.push(grid(b.grid)); out.push(gap()); }
+    else if (b.pb) out.push(new D.Paragraph({ children: [new D.PageBreak()] }));
+    else if (b.img) {
+      const buf = fs.readFileSync(path.join(__dirname, b.img));
+      const pw = buf.readUInt32BE(16), ph = buf.readUInt32BE(20);
+      const maxH = CUR_HEIGHT / 15 - (b.caption ? 110 : 80);
+      const w = Math.round(Math.min(CUR_WIDTH / 15 * (b.frac || 1), maxH * pw / ph));
+      out.push(new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { before: 60, after: 60 }, children: [new D.ImageRun({ type: "png", data: buf, transformation: { width: w, height: Math.round(w * ph / pw) } })] }));
+      if (b.caption) out.push(P(b.caption, { size: 16, color: "666666", align: D.AlignmentType.CENTER }));
+    }
   }
   return out;
+}
+
+// جدول با خانه‌های رنگی / فهرست‌دار: خانه = متن | {t, fill, color, bold, ul, span, align}
+function grid({ w, rows }) {
+  const total = w.reduce((a, b) => a + b, 0);
+  return new D.Table({
+    visuallyRightToLeft: true, width: { size: total, type: D.WidthType.DXA }, columnWidths: w,
+    rows: rows.map((r) => {
+      let ci = 0;
+      return new D.TableRow({ cantSplit: true, children: r.map((c) => {
+        const o = typeof c === "string" ? { t: c } : c;
+        const span = o.span || 1;
+        const cw = w.slice(ci, ci + span).reduce((a, b) => a + b, 0); ci += span;
+        const paras = [];
+        if (o.t) paras.push(P(o.t, { size: o.size || 18, bold: o.bold, color: o.color, align: o.align || D.AlignmentType.RIGHT, before: 0, after: o.ul ? 40 : 0, line: 260 }));
+        (o.ul || []).forEach((t) => paras.push(P(t, { size: 17, color: o.color, numbering: { reference: "bul", level: 0 }, before: 0, after: 20, line: 250, align: D.AlignmentType.RIGHT })));
+        if (!paras.length) paras.push(P("", { before: 0, after: 0 }));
+        return cell(paras, cw, { fill: o.fill, span: span > 1 ? span : undefined });
+      }) });
+    }),
+  });
 }
 
 // سربرگ سند
@@ -135,12 +171,19 @@ async function build(doc) {
   const pageW = land ? 16838 : 11906, margin = 1000;
   const width = pageW - 2 * margin;
   const children = [];
+  CUR_WIDTH = width;
+  CUR_HEIGHT = (land ? 11906 : 16838) - 2300 - 1100;
   // جداول محتوا با عرض متن پرتره طراحی شده‌اند؛ برای افقی مقیاس می‌دهیم
   const scaleTables = (list) => list.map((b) => {
     if (b.table) {
       const s = width / b.table.w.reduce((a, c) => a + c, 0);
       const w = b.table.w.map((x) => Math.floor(x * s)); w[w.length - 1] += width - w.reduce((a, c) => a + c, 0);
       return { table: { ...b.table, w } };
+    }
+    if (b.grid) {
+      const s = width / b.grid.w.reduce((a, c) => a + c, 0);
+      const w = b.grid.w.map((x) => Math.floor(x * s)); w[w.length - 1] += width - w.reduce((a, c) => a + c, 0);
+      return { grid: { ...b.grid, w } };
     }
     return b;
   });
