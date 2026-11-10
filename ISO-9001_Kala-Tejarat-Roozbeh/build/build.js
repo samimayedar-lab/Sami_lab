@@ -18,12 +18,21 @@ let DATE = "";
 let CUR_WIDTH = 9906, CUR_HEIGHT = 13000;
 const fa = (s) => String(s).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
 
-const run = (text, o = {}) =>
-  new D.TextRun({ text, rightToLeft: true, font: { ascii: FONT, hAnsi: FONT, cs: FONT, eastAsia: FONT }, size: o.size || 20, sizeComplexScript: o.size || 20, bold: !!o.bold, boldComplexScript: !!o.bold, color: o.color });
+const run1 = (text, o = {}) =>
+  new D.TextRun({ text, rightToLeft: !o.ltr, font: { ascii: FONT, hAnsi: FONT, cs: FONT, eastAsia: FONT }, size: o.size || 20, sizeComplexScript: o.size || 20, bold: !!o.bold, boldComplexScript: !!o.bold, color: o.color });
+
+// تاریخ‌های ۱۴۰۵/۰۲/۰۳ در Word داخل متن راست‌به‌چپ برعکس نمایش داده می‌شوند؛
+// بنابراین هر تاریخ در یک run چپ‌به‌راست با نشانه LRM قرار می‌گیرد تا سال در ابتدا بماند.
+const DATE_RE = /([۰-۹0-9]{4}\/[۰-۹0-9]{2}\/[۰-۹0-9]{2})/;
+const run = (text, o = {}) => {
+  const parts = String(text).split(DATE_RE).filter((x) => x !== "");
+  if (parts.length === 1 && !DATE_RE.test(parts[0])) return run1(text, o);
+  return parts.map((x) => (DATE_RE.test(x) ? run1("\u200E" + x + "\u200E", { ...o, ltr: true }) : run1(x, o)));
+};
 
 // پشتیبانی از **پررنگ**
 const runs = (text, o = {}) =>
-  String(text).split(/(\*\*[^*]+\*\*)/).filter(Boolean).map((s) =>
+  String(text).split(/(\*\*[^*]+\*\*)/).filter(Boolean).flatMap((s) =>
     s.startsWith("**") ? run(s.slice(2, -2), { ...o, bold: true }) : run(s, o));
 
 const P = (text, o = {}) =>
