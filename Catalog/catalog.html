@@ -1,0 +1,447 @@
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><title>کاتالوگ کالا تجارت روزبه</title><style>@font-face { font-family: V; src: url(fonts/Vazirmatn-NL-Regular.woff2); font-weight: 400; }
+@font-face { font-family: V; src: url(fonts/Vazirmatn-NL-Bold.woff2); font-weight: 700; }
+@page { size: A4; margin: 0; }
+:root { --red: #C8102E; --dark: #1A1A1A; --ink: #222; --mute: #666; --line: #E4E4E4; --soft: #F6F6F6; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: V, Tahoma, sans-serif; color: var(--ink); background: #fff; direction: rtl; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; padding: 16mm 15mm 18mm; page-break-after: always; background: #fff; }
+.page:last-child { page-break-after: auto; }
+b { font-weight: 700; }
+.ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+/* سربرگ صفحات داخلی */
+.ph { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--red); padding-bottom: 4mm; margin-bottom: 6mm; }
+.kicker { color: var(--red); font-weight: 700; font-size: 11pt; letter-spacing: .5px; }
+.kicker.light { color: #ffb3bd; }
+h2 { font-size: 22pt; font-weight: 700; color: var(--dark); line-height: 1.35; }
+.hlogo { height: 15mm; }
+.lead { font-size: 11pt; line-height: 2; text-align: justify; margin-bottom: 4mm; }
+h3.sec { font-size: 14pt; margin: 6mm 0 4mm; padding-right: 3mm; border-right: 4px solid var(--red); }
+.note { position: absolute; bottom: 20mm; left: 15mm; right: 15mm; font-size: 8pt; color: var(--mute); line-height: 1.7; }
+.small { font-size: 8.5pt; color: var(--mute); margin-top: 3mm; line-height: 1.8; }
+.foot { position: absolute; bottom: 8mm; left: 15mm; right: 15mm; display: flex; justify-content: space-between; font-size: 8.5pt; color: var(--mute); border-top: 1px solid var(--line); padding-top: 2.5mm; }
+.pn { background: var(--red); color: #fff; border-radius: 50%; width: 7mm; height: 7mm; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; margin-top: -1mm; }
+
+/* آیکون */
+.ic { width: 9mm; height: 9mm; flex: none; fill: none; stroke: var(--red); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ic.big { width: 12mm; height: 12mm; }
+h3 .ic { width: 6.5mm; height: 6.5mm; vertical-align: -1.6mm; margin-left: 1.5mm; }
+
+/* جلد */
+.cover, .back { background: radial-gradient(120% 80% at 80% 0%, #2d2d2d 0%, #111 60%, #000 100%); color: #fff; padding: 0; }
+.cv-stripe { position: absolute; top: 0; left: -20mm; width: 120mm; height: 297mm; background: linear-gradient(160deg, var(--red) 0%, #7d0a1d 100%); transform: skewX(-12deg); opacity: .95; }
+.cv-logo { position: absolute; top: 22mm; right: 18mm; width: 72mm; background: #fff; border-radius: 6mm; padding: 4mm 6mm; box-shadow: 0 6mm 14mm rgba(0,0,0,.45); }
+.cv-text { position: absolute; top: 88mm; right: 18mm; width: 120mm; }
+.cv-kicker { color: #ffb3bd; font-weight: 700; font-size: 12pt; margin-bottom: 3mm; }
+.cover h1 { font-size: 40pt; line-height: 1.2; font-weight: 700; margin-bottom: 6mm; }
+.cv-sub { font-size: 15pt; line-height: 1.7; }
+.cv-sub2 { font-size: 12.5pt; line-height: 1.8; color: #ddd; margin-top: 2mm; }
+.cv-car { position: absolute; bottom: 38mm; left: 8mm; width: 185mm; filter: drop-shadow(0 4mm 6mm rgba(0,0,0,.5)); }
+.cv-car .car path:first-of-type { stroke: #555; stroke-width: 1; }
+.cv-bottom { position: absolute; bottom: 12mm; right: 18mm; left: 18mm; display: flex; align-items: center; justify-content: center; gap: 4mm; font-size: 10.5pt; color: #eee; }
+.cv-bottom i { width: 2mm; height: 2mm; border-radius: 50%; background: var(--red); display: inline-block; }
+.car { width: 100%; height: auto; display: block; }
+
+/* درباره ما */
+.vm { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0 2mm; }
+.vm-box { border-radius: 4mm; padding: 5mm 6mm; color: #fff; }
+.vm-box h3 { font-size: 13pt; margin-bottom: 2mm; }
+.vm-box p { font-size: 10pt; line-height: 1.9; }
+.vm-box.dark { background: var(--dark); }
+.vm-box.red { background: var(--red); }
+.why { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; }
+.why-i { display: flex; gap: 3.5mm; align-items: flex-start; background: var(--soft); border-radius: 3mm; padding: 4mm; }
+.why-i h4 { font-size: 11pt; margin-bottom: 1mm; }
+.why-i p { font-size: 9.2pt; line-height: 1.8; color: #444; }
+
+/* لندکروز */
+.lc-list { display: flex; flex-direction: column; gap: 5mm; }
+.lc { display: grid; grid-template-columns: 72mm 1fr; gap: 5mm; border: 1px solid var(--line); border-radius: 4mm; overflow: hidden; }
+.lc-img { background: linear-gradient(135deg, #f2f2f2, #dcdcdc); position: relative; display: flex; align-items: center; padding: 6mm 4mm 4mm; }
+.lc-img .tag { position: absolute; top: 3mm; right: 3mm; background: var(--red); color: #fff; font-size: 8pt; font-weight: 700; padding: 1mm 3mm; border-radius: 10mm; }
+.lc-body { padding: 4mm 0 4mm 5mm; }
+.lc-body h3 { font-size: 15pt; color: var(--dark); }
+.lc-body h3 small { font-size: 9pt; color: var(--mute); font-weight: 400; direction: ltr; unicode-bidi: isolate; margin-right: 2mm; }
+.lc-body p { font-size: 9.5pt; line-height: 1.85; margin: 1.5mm 0 2.5mm; color: #444; }
+.lc-body table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+.lc-body th { text-align: right; width: 28mm; color: var(--red); font-weight: 700; padding: 1mm 0; border-bottom: 1px dashed var(--line); }
+.lc-body td { padding: 1mm 0; border-bottom: 1px dashed var(--line); }
+
+/* سایر مدل‌ها */
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+.mc { border: 1px solid var(--line); border-radius: 4mm; padding: 4mm; display: flex; flex-direction: column; }
+.mc-img { background: linear-gradient(135deg, #f4f4f4, #e2e2e2); border-radius: 3mm; padding: 4mm 3mm 2mm; margin-bottom: 3mm; }
+.mc h3 { font-size: 13pt; }
+.mc .en { font-size: 8.5pt; color: var(--mute); direction: ltr; text-align: right; margin-bottom: 1.5mm; }
+.mc p { font-size: 9pt; line-height: 1.8; color: #444; flex: 1; }
+.mc .spec { margin-top: 2.5mm; font-size: 8.5pt; font-weight: 700; color: var(--red); border-top: 1px solid var(--line); padding-top: 2mm; }
+.order-box { margin-top: 7mm; display: flex; gap: 5mm; align-items: center; background: var(--dark); color: #fff; border-radius: 4mm; padding: 6mm; }
+.order-box .ic { stroke: #fff; }
+.order-box h3 { font-size: 13pt; margin-bottom: 1.5mm; }
+.order-box p { font-size: 9.8pt; line-height: 1.9; color: #ddd; }
+
+/* خدمات */
+.svc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+.svc-i { border: 1px solid var(--line); border-radius: 4mm; padding: 5mm; }
+.svc-i h3 { font-size: 12pt; margin: 2.5mm 0 1.5mm; }
+.svc-i p { font-size: 9.2pt; line-height: 1.85; color: #444; }
+.svc-i.hl { background: var(--red); color: #fff; border-color: var(--red); }
+.svc-i.hl p { color: #fde; }
+.svc-i.hl .ic { stroke: #fff; }
+.steps { list-style: none; display: grid; grid-template-columns: repeat(7, 1fr); gap: 2mm; position: relative; }
+.steps li { text-align: center; font-size: 9pt; line-height: 1.6; font-weight: 700; position: relative; }
+.steps li span { display: flex; margin: 0 auto 2mm; width: 11mm; height: 11mm; border-radius: 50%; background: var(--dark); color: #fff; align-items: center; justify-content: center; font-size: 12pt; position: relative; z-index: 1; border: 2px solid #fff; box-shadow: 0 0 0 2px var(--red); }
+.steps::before { content: ""; position: absolute; top: 5.5mm; right: 6%; left: 6%; height: 2px; background: var(--red); }
+
+/* جانبازان */
+.vet-hero { margin: -16mm -15mm 7mm; padding: 16mm 15mm 9mm; background: linear-gradient(135deg, #111 0%, #2b2b2b 55%, var(--red) 140%); color: #fff; display: flex; gap: 6mm; align-items: center; }
+.vet-hero h2 { color: #fff; font-size: 24pt; margin: 1mm 0 3mm; }
+.vet-hero p { font-size: 10.5pt; line-height: 2; color: #eee; text-align: justify; }
+.hero-ic { width: 34mm; height: 34mm; stroke: #fff; stroke-width: 1.1; flex: none; opacity: .9; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 5mm; }
+.card { border: 1px solid var(--line); border-top: 4px solid var(--red); border-radius: 3mm; padding: 5mm; }
+.card h3 { font-size: 12pt; margin-bottom: 3mm; }
+.chk { list-style: none; }
+.chk li { font-size: 9.4pt; line-height: 1.8; padding-right: 6mm; position: relative; margin-bottom: 1.5mm; }
+.chk li::before { content: ""; position: absolute; right: 0; top: 2.2mm; width: 3.2mm; height: 3.2mm; border-radius: 50%; background: var(--red); box-shadow: inset 0 0 0 1mm #fff, 0 0 0 .3mm var(--red); }
+.timeline { display: flex; flex-direction: column; gap: 2.6mm; position: relative; padding-right: 2mm; }
+.timeline::before { content: ""; position: absolute; right: 7.5mm; top: 4mm; bottom: 4mm; width: 2px; background: var(--red); }
+.tl { display: flex; gap: 4mm; align-items: center; }
+.tl-n { width: 11mm; height: 11mm; flex: none; border-radius: 50%; background: var(--red); color: #fff; font-weight: 700; font-size: 12pt; display: flex; align-items: center; justify-content: center; z-index: 1; border: 2px solid #fff; }
+.tl h4 { font-size: 11pt; }
+.tl p { font-size: 9.2pt; color: #555; line-height: 1.6; }
+
+/* پس از خرید */
+.quote { margin: 8mm 0 4mm; background: var(--soft); border-right: 5px solid var(--red); padding: 6mm 7mm; border-radius: 2mm; }
+.quote p { font-size: 15pt; font-weight: 700; color: var(--dark); }
+.quote span { font-size: 9.5pt; color: var(--mute); }
+.mini-cars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; margin-top: 8mm; opacity: .95; }
+
+/* پشت جلد */
+.back { text-align: center; }
+.back .cv-stripe { left: auto; right: -30mm; transform: skewX(12deg); }
+.bk-logo { position: relative; width: 64mm; margin-top: 26mm; background: #fff; border-radius: 6mm; padding: 4mm 6mm; }
+.back h2 { color: #fff; font-size: 24pt; margin-top: 10mm; position: relative; }
+.bk-sub { position: relative; font-size: 11pt; color: #ddd; margin-top: 2mm; }
+.contact { position: relative; margin: 9mm auto 0; width: 150mm; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 4mm; padding: 6mm 8mm; text-align: right; display: grid; gap: 3mm; font-size: 11pt; }
+.contact b { color: #ffb3bd; }
+.back-car { bottom: 30mm; left: 12mm; width: 186mm; }
+</style></head><body><section class="page cover">
+  <div class="cv-stripe"></div>
+  <img src="logo.png" class="cv-logo"/>
+  <div class="cv-text">
+    <div class="cv-kicker">کاتالوگ معرفی شرکت | ۱۴۰۵</div>
+    <h1>کالا تجارت روزبه</h1>
+    <p class="cv-sub">واردکننده تخصصی خودروهای <b>تویوتا</b> و <b>لندکروز</b></p>
+    <p class="cv-sub2">و ارائه‌دهنده خدمات ویژه واردات خودروی <b>جانبازان عزیز</b></p>
+  </div>
+  <div class="cv-car"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M18 100 L16 70 Q18 60 32 58 L80 54 L106 22 L274 22 Q286 22 290 34 L298 62 Q304 66 304 76 L304 100 Z" fill="#1a1a1a"/>
+    <path d="M112 30 L90 54 L184 54 L184 30 Z" fill="#cfd6dd" opacity=".9"/><path d="M192 30 L192 54 L290 54 L283 30 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg></div>
+  <div class="cv-bottom"><span>واردات</span><i></i><span>ترخیص</span><i></i><span>تحویل</span><i></i><span>خدمات پس از فروش</span></div>
+</section>
+<section class="page">
+  <header class="ph"><div><div class="kicker">درباره ما</div><h2>اعتماد، تخصص و تعهد</h2></div><img src="logo.png" class="hlogo"/></header>
+  <p class="lead">شرکت <b>کالا تجارت روزبه</b> با تمرکز بر واردات خودروهای <b>تویوتا</b>، به‌ویژه خانواده افسانه‌ای <b>لندکروز</b>، فعالیت می‌کند. ما تمام مراحل واردات را از انتخاب خودرو و ثبت سفارش تا حمل، ترخیص، شماره‌گذاری و تحویل، به‌صورت شفاف و قانونی انجام می‌دهیم تا خریدی مطمئن و بی‌دغدغه را تجربه کنید.</p>
+  <p class="lead">افتخار ما خدمت‌رسانی به <b>جانبازان عزیز</b> است؛ با تیمی آشنا به ضوابط واردات خودروی جانبازان، تمامی مراحل اداری را برای این عزیزان ساده، سریع و دقیق انجام می‌دهیم.</p>
+  <div class="vm">
+    <div class="vm-box dark"><h3>چشم‌انداز</h3><p>یکی از سه واردکننده برتر خودرو در کشور از نظر رضایت مشتری، با حضور در تولید و صادرات منطقه‌ای.</p></div>
+    <div class="vm-box red"><h3>مأموریت</h3><p>تأمین خودروهای ایمن، باکیفیت و اصل از طریق واردات قانونی، همراه با خدمات پس از فروش مطمئن و شفافیت کامل در تعهدات.</p></div>
+  </div>
+  <h3 class="sec">چرا کالا تجارت روزبه؟</h3>
+  <div class="why">
+    <div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3zm-3 10l2 2 4-4"/></svg><div><h4>خودروی اصل و قانونی</h4><p>تمام خودروها با اسناد کامل گمرکی، ثبت سفارش رسمی و قابلیت شماره‌گذاری تحویل می‌شوند.</p></div></div><div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zm10-3a3 3 0 110 6 3 3 0 010-6z"/></svg><div><h4>شفافیت کامل</h4><p>قیمت، زمان تحویل و شرایط قرارداد پیش از امضا به‌طور مکتوب اعلام می‌شود.</p></div></div><div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M12 3a9 9 0 110 18 9 9 0 010-18zm0 4v5l3 3"/></svg><div><h4>اطلاع‌رسانی مرحله‌به‌مرحله</h4><p>در هر مرحله از سفارش تا تحویل، وضعیت خودروی شما اطلاع‌رسانی می‌شود.</p></div></div><div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M4 12l5 5L20 6"/></svg><div><h4>بازرسی پیش از تحویل</h4><p>هر خودرو پیش از تحویل با چک‌لیست تخصصی (PDI) بازرسی کامل می‌شود.</p></div></div><div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M14.7 6.3a4 4 0 005.4 5.4l-8.8 8.8a2 2 0 01-2.8-2.8l8.8-8.8zM4 4l3 3"/></svg><div><h4>خدمات پس از فروش</h4><p>پشتیبانی فنی، گارانتی و تأمین قطعات اصلی پس از خرید.</p></div></div><div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M8 2h8l-2 6h-4L8 2zm4 7a6 6 0 110 12 6 6 0 010-12zm0 3l1.2 2.4 2.6.4-1.9 1.8.5 2.6L12 18l-2.4 1.2.5-2.6-1.9-1.8 2.6-.4L12 12z"/></svg><div><h4>سیستم مدیریت کیفیت</h4><p>فرایندهای شرکت بر پایه استاندارد بین‌المللی ISO 9001:2015 طراحی شده است.</p></div></div>
+  </div>
+  <div class="foot"><span>شرکت کالا تجارت روزبه</span><span class="pn">۲</span></div>
+</section>
+<section class="page">
+  <header class="ph"><div><div class="kicker">خانواده لندکروز</div><h2>اسطوره شاسی‌بلندها</h2></div><img src="logo.png" class="hlogo"/></header>
+  <p class="lead">لندکروز بیش از هفت دهه نماد استحکام، دوام و توانایی عبور از سخت‌ترین مسیرهاست. کالا تجارت روزبه نسخه‌های مختلف این خانواده را مطابق با نیاز شما وارد می‌کند.</p>
+  <div class="lc-list">
+    <article class="lc">
+      <div class="lc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M18 100 L16 70 Q18 60 32 58 L80 54 L106 22 L274 22 Q286 22 290 34 L298 62 Q304 66 304 76 L304 100 Z" fill="#2b2b2b"/>
+    <path d="M112 30 L90 54 L184 54 L184 30 Z" fill="#cfd6dd" opacity=".9"/><path d="M192 30 L192 54 L290 54 L283 30 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg><span class="tag">پرچمدار خانواده لندکروز</span></div>
+      <div class="lc-body">
+        <h3>لندکروز ۳۰۰ <small>Land Cruiser 300</small></h3>
+        <p>شاسی‌بلند تمام‌عیار با شاسی نردبانی، توان آفرود افسانه‌ای و کابین لوکس؛ انتخاب اول برای سفرهای طولانی و مسیرهای دشوار.</p>
+        <table><tr><th>موتور</th><td>V6 توئین‌توربو بنزینی / دیزلی</td></tr><tr><th>گیربکس</th><td>اتوماتیک ۱۰ سرعته</td></tr><tr><th>انتقال قدرت</th><td>چهارچرخ محرک دائمی</td></tr><tr><th>ظرفیت</th><td>۵ یا ۷ نفر</td></tr></table>
+      </div>
+    </article><article class="lc">
+      <div class="lc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M18 100 L16 68 Q18 58 32 57 L86 54 L104 20 L280 20 Q292 20 294 32 L300 60 Q304 64 304 76 L304 100 Z" fill="#3b3f45"/>
+    <path d="M110 28 L95 54 L188 54 L188 28 Z" fill="#cfd6dd" opacity=".9"/><path d="M196 28 L196 54 L292 54 L288 28 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg><span class="tag">نسل جدید با طراحی کلاسیک</span></div>
+      <div class="lc-body">
+        <h3>لندکروز پرادو <small>Land Cruiser Prado</small></h3>
+        <p>ترکیب طراحی جسورانه و مربعی با فناوری‌های روز؛ مناسب استفاده روزمره در شهر و توانمند در جاده‌های خاکی و کوهستانی.</p>
+        <table><tr><th>موتور</th><td>بنزینی توربو / دیزلی ۲٫۸ لیتری</td></tr><tr><th>گیربکس</th><td>اتوماتیک ۸ سرعته</td></tr><tr><th>انتقال قدرت</th><td>چهارچرخ محرک</td></tr><tr><th>ظرفیت</th><td>۵ یا ۷ نفر</td></tr></table>
+      </div>
+    </article><article class="lc">
+      <div class="lc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M16 100 L16 66 Q18 58 30 56 L96 54 L108 18 L290 18 L294 100 Z" fill="#5a4a3a"/>
+    <path d="M114 26 L102 54 L190 54 L190 26 Z" fill="#cfd6dd" opacity=".9"/><path d="M198 26 L198 54 L286 54 L286 26 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg><span class="tag">مقاوم برای سخت‌ترین شرایط</span></div>
+      <div class="lc-body">
+        <h3>لندکروز ۷۰ <small>Land Cruiser 70</small></h3>
+        <p>خودروی کاری و صنعتی با دوام شناخته‌شده؛ مناسب معادن، پروژه‌های عمرانی، کشاورزی و مناطق صعب‌العبور.</p>
+        <table><tr><th>موتور</th><td>دیزلی</td></tr><tr><th>گیربکس</th><td>دستی / اتوماتیک</td></tr><tr><th>انتقال قدرت</th><td>چهارچرخ محرک</td></tr><tr><th>نسخه‌ها</th><td>استیشن، وانت تک‌کابین و دوکابین</td></tr></table>
+      </div>
+    </article>
+  </div>
+  <p class="note">مشخصات فنی، تیپ‌ها و آپشن‌ها بسته به سال ساخت و بازار مبدأ متفاوت است. برای فهرست به‌روز مدل‌ها، رنگ‌ها و قیمت با ما تماس بگیرید. تصاویر نمادین است.</p>
+  <div class="foot"><span>شرکت کالا تجارت روزبه</span><span class="pn">۳</span></div>
+</section>
+<section class="page">
+  <header class="ph"><div><div class="kicker">سبد محصولات تویوتا</div><h2>از وانت کاری تا سدان هیبریدی</h2></div><img src="logo.png" class="hlogo"/></header>
+  <div class="grid3">
+    <article class="mc">
+      <div class="mc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M16 100 L16 68 Q18 59 32 58 L84 54 L106 24 L194 24 L198 60 L304 60 L304 100 Z" fill="#7a1018"/>
+    <path d="M112 32 L92 54 L190 54 L188 32 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg></div>
+      <h3>هایلوکس</h3><div class="en">Hilux</div>
+      <p>وانت دوکابین مقاوم و چندمنظوره برای کار و تفریح.</p>
+      <div class="spec">دیزلی / بنزینی • دو یا چهارچرخ محرک</div>
+    </article><article class="mc">
+      <div class="mc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M18 100 L16 72 Q18 62 34 60 L84 56 L112 26 L266 26 Q280 27 286 38 L298 64 Q304 68 304 78 L304 100 Z" fill="#4a5560"/>
+    <path d="M118 34 L96 56 L188 56 L188 34 Z" fill="#cfd6dd" opacity=".9"/><path d="M196 34 L196 56 L290 56 L278 34 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg></div>
+      <h3>فورچونر</h3><div class="en">Fortuner</div>
+      <p>شاسی‌بلند ۷ نفره بر پایه شاسی هایلوکس؛ اقتصادی و بادوام.</p>
+      <div class="spec">۷ نفره • چهارچرخ محرک</div>
+    </article><article class="mc">
+      <div class="mc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M18 100 Q16 76 36 70 L84 64 L122 34 Q130 30 142 30 L250 30 Q270 32 284 52 L298 66 Q304 72 304 100 Z" fill="#1f4e79"/>
+    <path d="M128 38 L100 62 L190 62 L190 38 Z" fill="#cfd6dd" opacity=".9"/><path d="M198 38 L198 62 L284 62 Q274 44 252 38 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg></div>
+      <h3>راوفور هیبرید</h3><div class="en">RAV4 Hybrid</div>
+      <p>کراس‌اوور هیبریدی کم‌مصرف با سیستم ایمنی پیشرفته.</p>
+      <div class="spec">هیبرید • دیفرانسیل جلو یا چهارچرخ</div>
+    </article><article class="mc">
+      <div class="mc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M14 100 Q14 84 40 80 L94 74 L134 46 Q142 42 154 42 L224 42 Q238 44 256 66 L294 74 Q306 78 304 100 Z" fill="#2b2b2b"/>
+    <path d="M140 50 L110 72 L196 72 L196 50 Z" fill="#cfd6dd" opacity=".9"/><path d="M204 50 L204 72 L254 72 Q240 54 226 50 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="78" cy="102" r="21" fill="#111"/><circle cx="78" cy="102" r="11" fill="#9aa1a8"/><circle cx="78" cy="102" r="4" fill="#333"/><circle cx="244" cy="102" r="21" fill="#111"/><circle cx="244" cy="102" r="11" fill="#9aa1a8"/><circle cx="244" cy="102" r="4" fill="#333"/>
+  </svg></div>
+      <h3>کمری هیبرید</h3><div class="en">Camry Hybrid</div>
+      <p>سدان بزرگ، راحت و بسیار کم‌مصرف برای مدیران و خانواده.</p>
+      <div class="spec">هیبرید • گیربکس اتوماتیک</div>
+    </article><article class="mc">
+      <div class="mc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M18 100 Q16 76 36 70 L84 64 L122 34 Q130 30 142 30 L250 30 Q270 32 284 52 L298 66 Q304 72 304 100 Z" fill="#8a8f96"/>
+    <path d="M128 38 L100 62 L190 62 L190 38 Z" fill="#cfd6dd" opacity=".9"/><path d="M198 38 L198 62 L284 62 Q274 44 252 38 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg></div>
+      <h3>کرولا کراس هیبرید</h3><div class="en">Corolla Cross Hybrid</div>
+      <p>کراس‌اوور جمع‌وجور شهری با مصرف سوخت بسیار پایین.</p>
+      <div class="spec">هیبرید • اتوماتیک</div>
+    </article><article class="mc">
+      <div class="mc-img"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M14 100 Q14 84 40 80 L94 74 L134 46 Q142 42 154 42 L224 42 Q238 44 256 66 L294 74 Q306 78 304 100 Z" fill="#6b0f17"/>
+    <path d="M140 50 L110 72 L196 72 L196 50 Z" fill="#cfd6dd" opacity=".9"/><path d="M204 50 L204 72 L254 72 Q240 54 226 50 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="78" cy="102" r="21" fill="#111"/><circle cx="78" cy="102" r="11" fill="#9aa1a8"/><circle cx="78" cy="102" r="4" fill="#333"/><circle cx="244" cy="102" r="21" fill="#111"/><circle cx="244" cy="102" r="11" fill="#9aa1a8"/><circle cx="244" cy="102" r="4" fill="#333"/>
+  </svg></div>
+      <h3>کرولا</h3><div class="en">Corolla</div>
+      <p>سدان پرفروش جهان؛ قابل‌اعتماد، کم‌هزینه و خوش‌قیمت.</p>
+      <div class="spec">بنزینی / هیبرید • اتوماتیک</div>
+    </article>
+  </div>
+  <div class="order-box">
+    <svg viewBox="0 0 24 24" class="ic big"><path d="M4 4h16v12H8l-4 4V4zm4 5h8M8 12h5"/></svg>
+    <div><h3>سفارش مدل دلخواه</h3><p>علاوه بر مدل‌های بالا، سایر مدل‌ها و تیپ‌های تویوتا نیز در چارچوب مقررات واردات، قابل سفارش است. کارشناسان ما شما را در انتخاب مناسب‌ترین گزینه راهنمایی می‌کنند.</p></div>
+  </div>
+  <p class="note">تویوتا (Toyota) و لندکروز (Land Cruiser) علائم تجاری متعلق به شرکت Toyota Motor Corporation هستند. مشخصات بسته به نسخه و بازار مبدأ متفاوت است. تصاویر نمادین است.</p>
+  <div class="foot"><span>شرکت کالا تجارت روزبه</span><span class="pn">۴</span></div>
+</section>
+<section class="page">
+  <header class="ph"><div><div class="kicker">خدمات ما</div><h2>همراه شما از سفارش تا سال‌ها پس از خرید</h2></div><img src="logo.png" class="hlogo"/></header>
+  <div class="svc">
+    <div class="svc-i "><svg viewBox="0 0 24 24" class="ic big"><path d="M3 17l2 4h14l2-4H3zm2-2h14l-2-6h-4V5h-2v4H7l-2 6z"/></svg><h3>واردات خودرو</h3><p>واردات خودروهای سواری، شاسی‌بلند و وانت تویوتا با اسناد کامل و از مسیرهای قانونی.</p></div><div class="svc-i hl"><svg viewBox="0 0 24 24" class="ic big"><path d="M8 2h8l-2 6h-4L8 2zm4 7a6 6 0 110 12 6 6 0 010-12zm0 3l1.2 2.4 2.6.4-1.9 1.8.5 2.6L12 18l-2.4 1.2.5-2.6-1.9-1.8 2.6-.4L12 12z"/></svg><h3>واردات خودروی جانبازان</h3><p>انجام کامل مراحل واردات خودرو برای جانبازان مشمول، مطابق ضوابط بنیاد شهید و امور ایثارگران و مقررات گمرک.</p></div><div class="svc-i "><svg viewBox="0 0 24 24" class="ic big"><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5M9 12h8M9 16h8"/></svg><h3>ثبت سفارش و ترخیص</h3><p>ثبت سفارش، اخذ مجوزها، تأییدیه‌های استاندارد، حمل، بیمه و ترخیص گمرکی.</p></div><div class="svc-i "><svg viewBox="0 0 24 24" class="ic big"><path d="M4 12l5 5L20 6"/></svg><h3>بازرسی و تحویل</h3><p>بازرسی تخصصی پیش از تحویل (PDI)، شماره‌گذاری و تحویل همراه با آموزش امکانات خودرو.</p></div><div class="svc-i "><svg viewBox="0 0 24 24" class="ic big"><path d="M14.7 6.3a4 4 0 005.4 5.4l-8.8 8.8a2 2 0 01-2.8-2.8l8.8-8.8zM4 4l3 3"/></svg><h3>خدمات پس از فروش و گارانتی</h3><p>عیب‌یابی با دستگاه تخصصی، تعمیرات، سرویس‌های دوره‌ای و پیگیری گارانتی.</p></div><div class="svc-i "><svg viewBox="0 0 24 24" class="ic big"><path d="M12 8a4 4 0 110 8 4 4 0 010-8zm0-6l1.5 3 3.2-.8.8 3.2 3 1.5-1.5 3 1.5 3-3 1.5-.8 3.2-3.2-.8L12 22l-1.5-3-3.2.8-.8-3.2-3-1.5 1.5-3-1.5-3 3-1.5.8-3.2 3.2.8L12 2z"/></svg><h3>تأمین قطعات اصلی</h3><p>تأمین قطعات یدکی اصلی تویوتا و لندکروز برای مشتریان و تعمیرگاه‌ها.</p></div>
+  </div>
+  <h3 class="sec">مراحل خرید خودرو</h3>
+  <ol class="steps">
+    <li><span>۱</span>مشاوره و انتخاب خودرو</li><li><span>۲</span>اعلام قیمت و عقد قرارداد</li><li><span>۳</span>ثبت سفارش و خرید از مبدأ</li><li><span>۴</span>حمل و بیمه</li><li><span>۵</span>ترخیص گمرکی</li><li><span>۶</span>بازرسی PDI و شماره‌گذاری</li><li><span>۷</span>تحویل و خدمات پس از فروش</li>
+  </ol>
+  <div class="foot"><span>شرکت کالا تجارت روزبه</span><span class="pn">۵</span></div>
+</section>
+<section class="page vet">
+  <div class="vet-hero">
+    <div>
+      <div class="kicker light">خدمات ویژه</div>
+      <h2>واردات خودروی جانبازان</h2>
+      <p>جانبازان عزیز، سرمایه‌های این سرزمین‌اند. کالا تجارت روزبه با شناخت دقیق قوانین و ضوابط، فرایند واردات خودروی جانبازان را از ابتدا تا تحویل، با احترام، دقت و کمترین رفت‌وآمد برای این عزیزان انجام می‌دهد.</p>
+    </div>
+    <svg viewBox="0 0 24 24" class="ic hero-ic"><path d="M8 2h8l-2 6h-4L8 2zm4 7a6 6 0 110 12 6 6 0 010-12zm0 3l1.2 2.4 2.6.4-1.9 1.8.5 2.6L12 18l-2.4 1.2.5-2.6-1.9-1.8 2.6-.4L12 12z"/></svg>
+  </div>
+  <div class="two">
+    <div class="card">
+      <h3><svg viewBox="0 0 24 24" class="ic "><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3zm-3 10l2 2 4-4"/></svg> چه کسانی می‌توانند استفاده کنند؟</h3>
+      <ul class="chk">
+        <li>جانبازانی که بر اساس قانون جامع خدمات‌رسانی به ایثارگران و ضوابط بنیاد شهید و امور ایثارگران، مشمول استفاده از سهمیه واردات خودرو هستند.</li>
+        <li>میزان درصد جانبازی، نوع خودرو و سقف‌های مجاز طبق آخرین ضوابط جاری تعیین می‌شود.</li>
+        <li>پیش از هر اقدام، شرایط شما به‌صورت رایگان توسط کارشناسان ما بررسی می‌شود.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><svg viewBox="0 0 24 24" class="ic "><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5M9 12h8M9 16h8"/></svg> مدارک مورد نیاز</h3>
+      <ul class="chk">
+        <li>کارت جانبازی و معرفی‌نامه بنیاد شهید و امور ایثارگران (با ذکر درصد جانبازی)</li>
+        <li>اصل و تصویر کارت ملی و شناسنامه</li>
+        <li>گواهینامه رانندگی (در صورت رانندگی شخص جانباز)</li>
+        <li>وکالت‌نامه رسمی (در صورت انجام امور توسط نماینده)</li>
+        <li>سایر مدارک مطابق اعلام مراجع ذی‌ربط در زمان اقدام</li>
+      </ul>
+    </div>
+  </div>
+  <h3 class="sec">چرا واردات خودروی جانبازان با ما؟</h3>
+  <div class="why">
+    <div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M4 4h16v12H8l-4 4V4zm4 5h8M8 12h5"/></svg><div><h4>مشاوره رایگان</h4><p>بررسی شرایط، سهمیه و مدارک پیش از هرگونه پرداخت.</p></div></div><div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5M9 12h8M9 16h8"/></svg><div><h4>پیگیری اداری کامل</h4><p>انجام مکاتبات با بنیاد، ثبت سفارش و گمرک توسط تیم ما.</p></div></div><div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3zm-3 10l2 2 4-4"/></svg><div><h4>بهره‌مندی از تسهیلات قانونی</h4><p>اعمال معافیت‌ها و تسهیلات پیش‌بینی‌شده در قانون برای جانبازان مشمول.</p></div></div><div class="why-i"><svg viewBox="0 0 24 24" class="ic "><path d="M12 8a4 4 0 110 8 4 4 0 010-8zm0-6l1.5 3 3.2-.8.8 3.2 3 1.5-1.5 3 1.5 3-3 1.5-.8 3.2-3.2-.8L12 22l-1.5-3-3.2.8-.8-3.2-3-1.5 1.5-3-1.5-3 3-1.5.8-3.2 3.2.8L12 2z"/></svg><div><h4>تجهیز خودرو متناسب با نیاز</h4><p>نصب تجهیزات کمکی رانندگی توسط مراکز مجاز.</p></div></div>
+  </div>
+  <p class="note">شرایط، معافیت‌ها و سقف‌ها تابع قوانین و ضوابط جاری بنیاد شهید و امور ایثارگران، وزارت صمت و گمرک جمهوری اسلامی ایران است و ممکن است تغییر کند.</p>
+  <div class="foot"><span>شرکت کالا تجارت روزبه</span><span class="pn">۶</span></div>
+</section>
+<section class="page">
+  <header class="ph"><div><div class="kicker">واردات خودروی جانبازان</div><h2>مراحل کار و تجهیزات ویژه</h2></div><img src="logo.png" class="hlogo"/></header>
+  <div class="timeline">
+    <div class="tl"><div class="tl-n">۱</div><div><h4>مشاوره و بررسی شرایط</h4><p>بررسی رایگان مدارک، درصد جانبازی و سهمیه قابل استفاده</p></div></div><div class="tl"><div class="tl-n">۲</div><div><h4>انتخاب خودرو</h4><p>انتخاب مدل مناسب در چارچوب ضوابط و نیاز جسمی جانباز</p></div></div><div class="tl"><div class="tl-n">۳</div><div><h4>تکمیل مدارک و معرفی‌نامه</h4><p>اخذ معرفی‌نامه از بنیاد شهید و امور ایثارگران و تشکیل پرونده</p></div></div><div class="tl"><div class="tl-n">۴</div><div><h4>قرارداد و ثبت سفارش</h4><p>عقد قرارداد شفاف و ثبت سفارش به نام جانباز</p></div></div><div class="tl"><div class="tl-n">۵</div><div><h4>حمل و ترخیص</h4><p>حمل، بیمه و ترخیص گمرکی با اعمال تسهیلات قانونی</p></div></div><div class="tl"><div class="tl-n">۶</div><div><h4>تجهیز خودرو</h4><p>نصب تجهیزات کمکی مورد نیاز در مراکز مجاز (در صورت نیاز)</p></div></div><div class="tl"><div class="tl-n">۷</div><div><h4>شماره‌گذاری و تحویل</h4><p>بازرسی پیش از تحویل، شماره‌گذاری و تحویل در محل دلخواه</p></div></div>
+  </div>
+  <div class="two">
+    <div class="card">
+      <h3><svg viewBox="0 0 24 24" class="ic "><path d="M12 8a4 4 0 110 8 4 4 0 010-8zm0-6l1.5 3 3.2-.8.8 3.2 3 1.5-1.5 3 1.5 3-3 1.5-.8 3.2-3.2-.8L12 22l-1.5-3-3.2.8-.8-3.2-3-1.5 1.5-3-1.5-3 3-1.5.8-3.2 3.2.8L12 2z"/></svg> تجهیزات کمکی قابل نصب</h3>
+      <ul class="chk">
+        <li>کنترل دستی گاز و ترمز</li>
+        <li>دستگیره (اسپینر) فرمان</li>
+        <li>انتقال پدال گاز به سمت چپ</li>
+        <li>صندلی گردان و بالارونده</li>
+        <li>بالابر یا رمپ ویلچر و محل نگهداری ویلچر</li>
+      </ul>
+      <p class="small">نصب تجهیزات فقط توسط مراکز دارای مجوز و مطابق الزامات قانونی شماره‌گذاری انجام می‌شود.</p>
+    </div>
+    <div class="card">
+      <h3><svg viewBox="0 0 24 24" class="ic "><path d="M4 12l5 5L20 6"/></svg> مدل‌های پیشنهادی</h3>
+      <ul class="chk">
+        <li><b>کمری هیبرید:</b> سدان راحت با گیربکس اتوماتیک و صندلی‌های عریض</li>
+        <li><b>راوفور هیبرید و کرولا کراس:</b> ارتفاع مناسب برای سوار و پیاده شدن آسان</li>
+        <li><b>لندکروز پرادو:</b> فضای وسیع برای ویلچر و تجهیزات</li>
+      </ul>
+      <p class="small">انتخاب نهایی مدل بر اساس ضوابط جاری واردات خودروی جانبازان و نیاز شخصی انجام می‌شود.</p>
+    </div>
+  </div>
+  <div class="foot"><span>شرکت کالا تجارت روزبه</span><span class="pn">۷</span></div>
+</section>
+<section class="page">
+  <header class="ph"><div><div class="kicker">پس از خرید</div><h2>خدمات پس از فروش و تعهدات ما</h2></div><img src="logo.png" class="hlogo"/></header>
+  <div class="two">
+    <div class="card">
+      <h3><svg viewBox="0 0 24 24" class="ic "><path d="M14.7 6.3a4 4 0 005.4 5.4l-8.8 8.8a2 2 0 01-2.8-2.8l8.8-8.8zM4 4l3 3"/></svg> خدمات پس از فروش</h3>
+      <ul class="chk">
+        <li>پذیرش و نوبت‌دهی تلفنی و حضوری</li>
+        <li>عیب‌یابی با دستگاه تخصصی و تعمیرات فنی</li>
+        <li>سرویس‌های دوره‌ای طبق دستورالعمل سازنده</li>
+        <li>تأمین قطعات اصلی و پیگیری گارانتی</li>
+        <li>اطلاع‌رسانی و اجرای فراخوان‌ها (Recall)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><svg viewBox="0 0 24 24" class="ic "><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3zm-3 10l2 2 4-4"/></svg> تعهدات ما به شما</h3>
+      <ul class="chk">
+        <li>اعلام مکتوب قیمت، مشخصات و زمان تحویل پیش از قرارداد</li>
+        <li>تحویل خودروی سالم و منطبق با قرارداد</li>
+        <li>رعایت کامل قانون حمایت از حقوق مصرف‌کنندگان خودرو</li>
+        <li>رسیدگی به شکایات حداکثر ظرف ۷ روز کاری</li>
+        <li>حفظ محرمانگی اطلاعات مشتریان</li>
+      </ul>
+    </div>
+  </div>
+  <div class="quote">
+    <p>«رضایت و اعتماد مشتری، مهم‌ترین سرمایه ماست.»</p>
+    <span>مدیریت شرکت کالا تجارت روزبه</span>
+  </div>
+  <div class="mini-cars"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M16 100 L16 66 Q18 58 30 56 L96 54 L108 18 L290 18 L294 100 Z" fill="#5a4a3a"/>
+    <path d="M114 26 L102 54 L190 54 L190 26 Z" fill="#cfd6dd" opacity=".9"/><path d="M198 26 L198 54 L286 54 L286 26 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M18 100 L16 68 Q18 58 32 57 L86 54 L104 20 L280 20 Q292 20 294 32 L300 60 Q304 64 304 76 L304 100 Z" fill="#3b3f45"/>
+    <path d="M110 28 L95 54 L188 54 L188 28 Z" fill="#cfd6dd" opacity=".9"/><path d="M196 28 L196 54 L292 54 L288 28 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M14 100 Q14 84 40 80 L94 74 L134 46 Q142 42 154 42 L224 42 Q238 44 256 66 L294 74 Q306 78 304 100 Z" fill="#2b2b2b"/>
+    <path d="M140 50 L110 72 L196 72 L196 50 Z" fill="#cfd6dd" opacity=".9"/><path d="M204 50 L204 72 L254 72 Q240 54 226 50 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="78" cy="102" r="21" fill="#111"/><circle cx="78" cy="102" r="11" fill="#9aa1a8"/><circle cx="78" cy="102" r="4" fill="#333"/><circle cx="244" cy="102" r="21" fill="#111"/><circle cx="244" cy="102" r="11" fill="#9aa1a8"/><circle cx="244" cy="102" r="4" fill="#333"/>
+  </svg></div>
+  <div class="foot"><span>شرکت کالا تجارت روزبه</span><span class="pn">۸</span></div>
+</section>
+<section class="page back">
+  <div class="cv-stripe"></div>
+  <img src="logo.png" class="bk-logo"/>
+  <h2>با ما در تماس باشید</h2>
+  <p class="bk-sub">برای مشاوره رایگان خرید خودرو و بررسی شرایط واردات خودروی جانبازان</p>
+  <div class="contact">
+    <div><b>دفتر مرکزی:</b> [نشانی دفتر مرکزی]</div>
+    <div><b>نمایشگاه:</b> [نشانی نمایشگاه / پارکینگ]</div>
+    <div><b>تلفن:</b> <span class="ltr">[شماره تلفن]</span></div>
+    <div><b>همراه / واتس‌اپ:</b> <span class="ltr">[شماره همراه / واتس‌اپ]</span></div>
+    <div><b>وب‌سایت:</b> <span class="ltr">[آدرس وب‌سایت]</span></div>
+    <div><b>اینستاگرام:</b> <span class="ltr">[آیدی اینستاگرام]</span></div>
+  </div>
+  <div class="cv-car back-car"><svg viewBox="0 0 320 130" class="car" aria-hidden="true">
+    <ellipse cx="160" cy="122" rx="150" ry="6" fill="#000" opacity=".18"/>
+    <path d="M18 100 L16 68 Q18 58 32 57 L86 54 L104 20 L280 20 Q292 20 294 32 L300 60 Q304 64 304 76 L304 100 Z" fill="#1a1a1a"/>
+    <path d="M110 28 L95 54 L188 54 L188 28 Z" fill="#cfd6dd" opacity=".9"/><path d="M196 28 L196 54 L292 54 L288 28 Z" fill="#cfd6dd" opacity=".9"/>
+    <rect x="20" y="84" width="284" height="3" fill="#C8102E"/>
+    <rect x="16" y="74" width="14" height="6" rx="2" fill="#f5f5f5"/>
+    <circle cx="76" cy="102" r="21" fill="#111"/><circle cx="76" cy="102" r="11" fill="#9aa1a8"/><circle cx="76" cy="102" r="4" fill="#333"/><circle cx="246" cy="102" r="21" fill="#111"/><circle cx="246" cy="102" r="11" fill="#9aa1a8"/><circle cx="246" cy="102" r="4" fill="#333"/>
+  </svg></div>
+  <div class="cv-bottom"><span>کالا تجارت روزبه</span><i></i><span>واردکننده تخصصی تویوتا و لندکروز</span><i></i><span>خدمات ویژه جانبازان</span></div>
+</section></body></html>

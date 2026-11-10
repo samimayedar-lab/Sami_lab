@@ -1,0 +1,128 @@
+@font-face { font-family: V; src: url(fonts/Vazirmatn-NL-Regular.woff2); font-weight: 400; }
+@font-face { font-family: V; src: url(fonts/Vazirmatn-NL-Bold.woff2); font-weight: 700; }
+@page { size: A4; margin: 0; }
+:root { --red: #C8102E; --dark: #1A1A1A; --ink: #222; --mute: #666; --line: #E4E4E4; --soft: #F6F6F6; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: V, Tahoma, sans-serif; color: var(--ink); background: #fff; direction: rtl; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; padding: 16mm 15mm 18mm; page-break-after: always; background: #fff; }
+.page:last-child { page-break-after: auto; }
+b { font-weight: 700; }
+.ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+/* سربرگ صفحات داخلی */
+.ph { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--red); padding-bottom: 4mm; margin-bottom: 6mm; }
+.kicker { color: var(--red); font-weight: 700; font-size: 11pt; letter-spacing: .5px; }
+.kicker.light { color: #ffb3bd; }
+h2 { font-size: 22pt; font-weight: 700; color: var(--dark); line-height: 1.35; }
+.hlogo { height: 15mm; }
+.lead { font-size: 11pt; line-height: 2; text-align: justify; margin-bottom: 4mm; }
+h3.sec { font-size: 14pt; margin: 6mm 0 4mm; padding-right: 3mm; border-right: 4px solid var(--red); }
+.note { position: absolute; bottom: 20mm; left: 15mm; right: 15mm; font-size: 8pt; color: var(--mute); line-height: 1.7; }
+.small { font-size: 8.5pt; color: var(--mute); margin-top: 3mm; line-height: 1.8; }
+.foot { position: absolute; bottom: 8mm; left: 15mm; right: 15mm; display: flex; justify-content: space-between; font-size: 8.5pt; color: var(--mute); border-top: 1px solid var(--line); padding-top: 2.5mm; }
+.pn { background: var(--red); color: #fff; border-radius: 50%; width: 7mm; height: 7mm; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; margin-top: -1mm; }
+
+/* آیکون */
+.ic { width: 9mm; height: 9mm; flex: none; fill: none; stroke: var(--red); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ic.big { width: 12mm; height: 12mm; }
+h3 .ic { width: 6.5mm; height: 6.5mm; vertical-align: -1.6mm; margin-left: 1.5mm; }
+
+/* جلد */
+.cover, .back { background: radial-gradient(120% 80% at 80% 0%, #2d2d2d 0%, #111 60%, #000 100%); color: #fff; padding: 0; }
+.cv-stripe { position: absolute; top: 0; left: -20mm; width: 120mm; height: 297mm; background: linear-gradient(160deg, var(--red) 0%, #7d0a1d 100%); transform: skewX(-12deg); opacity: .95; }
+.cv-logo { position: absolute; top: 22mm; right: 18mm; width: 72mm; background: #fff; border-radius: 6mm; padding: 4mm 6mm; box-shadow: 0 6mm 14mm rgba(0,0,0,.45); }
+.cv-text { position: absolute; top: 88mm; right: 18mm; width: 120mm; }
+.cv-kicker { color: #ffb3bd; font-weight: 700; font-size: 12pt; margin-bottom: 3mm; }
+.cover h1 { font-size: 40pt; line-height: 1.2; font-weight: 700; margin-bottom: 6mm; }
+.cv-sub { font-size: 15pt; line-height: 1.7; }
+.cv-sub2 { font-size: 12.5pt; line-height: 1.8; color: #ddd; margin-top: 2mm; }
+.cv-car { position: absolute; bottom: 38mm; left: 8mm; width: 185mm; filter: drop-shadow(0 4mm 6mm rgba(0,0,0,.5)); }
+.cv-car .car path:first-of-type { stroke: #555; stroke-width: 1; }
+.cv-bottom { position: absolute; bottom: 12mm; right: 18mm; left: 18mm; display: flex; align-items: center; justify-content: center; gap: 4mm; font-size: 10.5pt; color: #eee; }
+.cv-bottom i { width: 2mm; height: 2mm; border-radius: 50%; background: var(--red); display: inline-block; }
+.car { width: 100%; height: auto; display: block; }
+
+/* درباره ما */
+.vm { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0 2mm; }
+.vm-box { border-radius: 4mm; padding: 5mm 6mm; color: #fff; }
+.vm-box h3 { font-size: 13pt; margin-bottom: 2mm; }
+.vm-box p { font-size: 10pt; line-height: 1.9; }
+.vm-box.dark { background: var(--dark); }
+.vm-box.red { background: var(--red); }
+.why { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; }
+.why-i { display: flex; gap: 3.5mm; align-items: flex-start; background: var(--soft); border-radius: 3mm; padding: 4mm; }
+.why-i h4 { font-size: 11pt; margin-bottom: 1mm; }
+.why-i p { font-size: 9.2pt; line-height: 1.8; color: #444; }
+
+/* لندکروز */
+.lc-list { display: flex; flex-direction: column; gap: 5mm; }
+.lc { display: grid; grid-template-columns: 72mm 1fr; gap: 5mm; border: 1px solid var(--line); border-radius: 4mm; overflow: hidden; }
+.lc-img { background: linear-gradient(135deg, #f2f2f2, #dcdcdc); position: relative; display: flex; align-items: center; padding: 6mm 4mm 4mm; }
+.lc-img .tag { position: absolute; top: 3mm; right: 3mm; background: var(--red); color: #fff; font-size: 8pt; font-weight: 700; padding: 1mm 3mm; border-radius: 10mm; }
+.lc-body { padding: 4mm 0 4mm 5mm; }
+.lc-body h3 { font-size: 15pt; color: var(--dark); }
+.lc-body h3 small { font-size: 9pt; color: var(--mute); font-weight: 400; direction: ltr; unicode-bidi: isolate; margin-right: 2mm; }
+.lc-body p { font-size: 9.5pt; line-height: 1.85; margin: 1.5mm 0 2.5mm; color: #444; }
+.lc-body table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+.lc-body th { text-align: right; width: 28mm; color: var(--red); font-weight: 700; padding: 1mm 0; border-bottom: 1px dashed var(--line); }
+.lc-body td { padding: 1mm 0; border-bottom: 1px dashed var(--line); }
+
+/* سایر مدل‌ها */
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+.mc { border: 1px solid var(--line); border-radius: 4mm; padding: 4mm; display: flex; flex-direction: column; }
+.mc-img { background: linear-gradient(135deg, #f4f4f4, #e2e2e2); border-radius: 3mm; padding: 4mm 3mm 2mm; margin-bottom: 3mm; }
+.mc h3 { font-size: 13pt; }
+.mc .en { font-size: 8.5pt; color: var(--mute); direction: ltr; text-align: right; margin-bottom: 1.5mm; }
+.mc p { font-size: 9pt; line-height: 1.8; color: #444; flex: 1; }
+.mc .spec { margin-top: 2.5mm; font-size: 8.5pt; font-weight: 700; color: var(--red); border-top: 1px solid var(--line); padding-top: 2mm; }
+.order-box { margin-top: 7mm; display: flex; gap: 5mm; align-items: center; background: var(--dark); color: #fff; border-radius: 4mm; padding: 6mm; }
+.order-box .ic { stroke: #fff; }
+.order-box h3 { font-size: 13pt; margin-bottom: 1.5mm; }
+.order-box p { font-size: 9.8pt; line-height: 1.9; color: #ddd; }
+
+/* خدمات */
+.svc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+.svc-i { border: 1px solid var(--line); border-radius: 4mm; padding: 5mm; }
+.svc-i h3 { font-size: 12pt; margin: 2.5mm 0 1.5mm; }
+.svc-i p { font-size: 9.2pt; line-height: 1.85; color: #444; }
+.svc-i.hl { background: var(--red); color: #fff; border-color: var(--red); }
+.svc-i.hl p { color: #fde; }
+.svc-i.hl .ic { stroke: #fff; }
+.steps { list-style: none; display: grid; grid-template-columns: repeat(7, 1fr); gap: 2mm; position: relative; }
+.steps li { text-align: center; font-size: 9pt; line-height: 1.6; font-weight: 700; position: relative; }
+.steps li span { display: flex; margin: 0 auto 2mm; width: 11mm; height: 11mm; border-radius: 50%; background: var(--dark); color: #fff; align-items: center; justify-content: center; font-size: 12pt; position: relative; z-index: 1; border: 2px solid #fff; box-shadow: 0 0 0 2px var(--red); }
+.steps::before { content: ""; position: absolute; top: 5.5mm; right: 6%; left: 6%; height: 2px; background: var(--red); }
+
+/* جانبازان */
+.vet-hero { margin: -16mm -15mm 7mm; padding: 16mm 15mm 9mm; background: linear-gradient(135deg, #111 0%, #2b2b2b 55%, var(--red) 140%); color: #fff; display: flex; gap: 6mm; align-items: center; }
+.vet-hero h2 { color: #fff; font-size: 24pt; margin: 1mm 0 3mm; }
+.vet-hero p { font-size: 10.5pt; line-height: 2; color: #eee; text-align: justify; }
+.hero-ic { width: 34mm; height: 34mm; stroke: #fff; stroke-width: 1.1; flex: none; opacity: .9; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 5mm; }
+.card { border: 1px solid var(--line); border-top: 4px solid var(--red); border-radius: 3mm; padding: 5mm; }
+.card h3 { font-size: 12pt; margin-bottom: 3mm; }
+.chk { list-style: none; }
+.chk li { font-size: 9.4pt; line-height: 1.8; padding-right: 6mm; position: relative; margin-bottom: 1.5mm; }
+.chk li::before { content: ""; position: absolute; right: 0; top: 2.2mm; width: 3.2mm; height: 3.2mm; border-radius: 50%; background: var(--red); box-shadow: inset 0 0 0 1mm #fff, 0 0 0 .3mm var(--red); }
+.timeline { display: flex; flex-direction: column; gap: 2.6mm; position: relative; padding-right: 2mm; }
+.timeline::before { content: ""; position: absolute; right: 7.5mm; top: 4mm; bottom: 4mm; width: 2px; background: var(--red); }
+.tl { display: flex; gap: 4mm; align-items: center; }
+.tl-n { width: 11mm; height: 11mm; flex: none; border-radius: 50%; background: var(--red); color: #fff; font-weight: 700; font-size: 12pt; display: flex; align-items: center; justify-content: center; z-index: 1; border: 2px solid #fff; }
+.tl h4 { font-size: 11pt; }
+.tl p { font-size: 9.2pt; color: #555; line-height: 1.6; }
+
+/* پس از خرید */
+.quote { margin: 8mm 0 4mm; background: var(--soft); border-right: 5px solid var(--red); padding: 6mm 7mm; border-radius: 2mm; }
+.quote p { font-size: 15pt; font-weight: 700; color: var(--dark); }
+.quote span { font-size: 9.5pt; color: var(--mute); }
+.mini-cars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; margin-top: 8mm; opacity: .95; }
+
+/* پشت جلد */
+.back { text-align: center; }
+.back .cv-stripe { left: auto; right: -30mm; transform: skewX(12deg); }
+.bk-logo { position: relative; width: 64mm; margin-top: 26mm; background: #fff; border-radius: 6mm; padding: 4mm 6mm; }
+.back h2 { color: #fff; font-size: 24pt; margin-top: 10mm; position: relative; }
+.bk-sub { position: relative; font-size: 11pt; color: #ddd; margin-top: 2mm; }
+.contact { position: relative; margin: 9mm auto 0; width: 150mm; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 4mm; padding: 6mm 8mm; text-align: right; display: grid; gap: 3mm; font-size: 11pt; }
+.contact b { color: #ffb3bd; }
+.back-car { bottom: 30mm; left: 12mm; width: 186mm; }
