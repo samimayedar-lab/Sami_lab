@@ -13,7 +13,7 @@ const OUT = path.join(__dirname, "..");
 const LOGO = fs.readFileSync(path.join(OUT, "logo.png"));
 const FONT = "Tahoma";
 const RED = "C8102E", DARK = "1E1E1E", GREY = "F2F2F2", BORDER = "8C8C8C";
-const DATE = "[تاریخ تصویب]";
+const DATE = "اردیبهشت ۱۴۰۵";
 let CUR_WIDTH = 9906, CUR_HEIGHT = 13000;
 const fa = (s) => String(s).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
 
@@ -28,7 +28,8 @@ const runs = (text, o = {}) =>
 const P = (text, o = {}) =>
   new D.Paragraph({
     bidirectional: true,
-    alignment: o.align || D.AlignmentType.BOTH,
+    // در پاراگراف راست‌به‌چپ، jc="right" در Word چپ‌چین نمایش داده می‌شود؛ بنابراین برای راست‌چین jc درج نمی‌شود (شروع سطر = راست)
+    alignment: o.align === D.AlignmentType.CENTER || o.align === "center" ? D.AlignmentType.CENTER : undefined,
     spacing: { before: o.before ?? 60, after: o.after ?? 100, line: o.line || 300 },
     children: runs(text, o),
     ...(o.numbering ? { numbering: o.numbering } : {}),
@@ -122,7 +123,7 @@ function header(doc, width) {
   const w = [Math.round(width * 0.24), Math.round(width * 0.48)];
   w.push(width - w[0] - w[1]);
   const logo = new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.ImageRun({ type: "png", data: LOGO, transformation: { width: 96, height: 60 } })] });
-  const pageP = new D.Paragraph({ bidirectional: true, alignment: D.AlignmentType.RIGHT, children: [run("صفحه: ", { size: 16 }), new D.TextRun({ children: [D.PageNumber.CURRENT], size: 16, font: FONT }), run(" از ", { size: 16 }), new D.TextRun({ children: [D.PageNumber.TOTAL_PAGES], size: 16, font: FONT })] });
+  const pageP = new D.Paragraph({ bidirectional: true, children: [run("صفحه: ", { size: 16 }), new D.TextRun({ children: [D.PageNumber.CURRENT], size: 16, font: FONT }), run(" از ", { size: 16 }), new D.TextRun({ children: [D.PageNumber.TOTAL_PAGES], size: 16, font: FONT })] });
   const info = [P(`کد مدرک: ${doc.code}`, { size: 16, before: 0, after: 0, align: D.AlignmentType.RIGHT }), P("شماره ویرایش: ۰۰", { size: 16, before: 0, after: 0, align: D.AlignmentType.RIGHT }), P(`تاریخ: ${DATE}`, { size: 16, before: 0, after: 0, align: D.AlignmentType.RIGHT }), pageP];
   const mid = [P(CO, { size: 22, bold: true, color: RED, align: D.AlignmentType.CENTER, before: 0, after: 40 }), P(doc.title, { size: 20, bold: true, align: D.AlignmentType.CENTER, before: 0, after: 0 }), P("سیستم مدیریت کیفیت ISO 9001:2015", { size: 15, color: "666666", align: D.AlignmentType.CENTER, before: 20, after: 0 })];
   return new D.Header({
@@ -141,7 +142,7 @@ function approval(width) {
   const c = Math.floor(width / 3), w = [c, c, width - 2 * c];
   return [
     gap(),
-    table({ head: ["تهیه‌کننده", "تأییدکننده", "تصویب‌کننده"], w, rows: [["نام: [.....]\nسمت: نماینده مدیریت", "نام: [.....]\nسمت: مدیر واحد مربوط", "نام: [.....]\nسمت: مدیرعامل"].map((s) => s.split("\n")), ["امضا و تاریخ:", "امضا و تاریخ:", "امضا و تاریخ:"]] }, { rowHeight: 700 }),
+    table({ head: ["تهیه‌کننده", "تأییدکننده", "تصویب‌کننده"], w, rows: [["نام: [.....]\nسمت: نماینده مدیریت", "نام: [.....]\nسمت: مدیر واحد مربوط", "نام: [.....]\nسمت: مدیرعامل"].map((s) => s.split("\n")), [["امضا:", `تاریخ: ${DATE}`], ["امضا:", `تاریخ: ${DATE}`], ["امضا:", `تاریخ: ${DATE}`]]] }, { rowHeight: 700 }),
   ];
 }
 function revisionTable(width) {
@@ -162,7 +163,7 @@ function formBlocks(f, width) {
     out.push(table({ head: f.head, w, rows }, { rowHeight: 420 }));
   }
   if (f.after) { out.push(gap()); f.after.forEach((t) => out.push(P(t, { align: D.AlignmentType.RIGHT }))); }
-  out.push(gap(), P(`کد فرم: ${f.code}   |   ویرایش: ۰۰`, { size: 14, color: "777777", align: D.AlignmentType.LEFT }));
+  out.push(gap(), P(`کد فرم: ${f.code}   |   ویرایش: ۰۰   |   تاریخ: ${DATE}`, { size: 14, color: "777777", align: D.AlignmentType.LEFT }));
   return out;
 }
 
@@ -201,7 +202,7 @@ async function build(doc) {
         { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true, run: { font: FONT, size: 22, bold: true, color: DARK }, paragraph: { spacing: { before: 160, after: 60 }, keepNext: true, outlineLevel: 1 } },
       ],
     },
-    numbering: { config: [{ reference: "bul", levels: [{ level: 0, format: D.LevelFormat.BULLET, text: "●", alignment: D.AlignmentType.RIGHT, style: { paragraph: { indent: { left: 500, hanging: 300 } }, run: { color: RED, size: 14 } } }] }] },
+    numbering: { config: [{ reference: "bul", levels: [{ level: 0, format: D.LevelFormat.BULLET, text: "●", alignment: D.AlignmentType.LEFT, style: { paragraph: { indent: { left: 500, hanging: 300 } }, run: { color: RED, size: 14 } } }] }] },
     sections: [{
       properties: { page: { size: { width: 11906, height: 16838, orientation: land ? D.PageOrientation.LANDSCAPE : D.PageOrientation.PORTRAIT }, margin: { top: 2300, bottom: 1100, left: margin, right: margin, header: 500, footer: 400 } } },
       headers: { default: header(doc, width) },
