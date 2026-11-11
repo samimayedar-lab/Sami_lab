@@ -4,13 +4,21 @@ const fs = require("fs");
 const path = require("path");
 const D = require("docx");
 const { docs: base, CO, blank } = require("./content");
-const extra = require("./content2");
-// اسناد جدید جایگزین اسناد هم‌کد می‌شوند و بقیه به انتهای فهرست (پیش از فرم‌ها) اضافه می‌شوند
-const docs = base.map((d) => extra.find((e) => e.code === d.code) || d);
-extra.filter((e) => !base.some((d) => d.code === e.code)).forEach((e) => docs.splice(docs.length - 1, 0, e));
+// مجموعه دیگر (مثلاً ISO 10002): node build.js --set <مسیر فایل محتوا>
+const setIdx = process.argv.indexOf("--set");
+const SET = setIdx > 0 ? require(path.resolve(process.argv[setIdx + 1])) : null;
+let docs;
+if (SET) docs = SET.docs;
+else {
+  const extra = require("./content2");
+  // اسناد جدید جایگزین اسناد هم‌کد می‌شوند و بقیه به انتهای فهرست (پیش از فرم‌ها) اضافه می‌شوند
+  docs = base.map((d) => extra.find((e) => e.code === d.code) || d);
+  extra.filter((e) => !base.some((d) => d.code === e.code)).forEach((e) => docs.splice(docs.length - 1, 0, e));
+}
 
-const OUT = path.join(__dirname, "..");
-const LOGO = fs.readFileSync(path.join(OUT, "logo.png"));
+const OUT = SET ? SET.out : path.join(__dirname, "..");
+const STD = SET ? SET.std : "سیستم مدیریت کیفیت ISO 9001:2015";
+const LOGO = fs.readFileSync(path.join(__dirname, "..", "logo.png"));
 const FONT = "Tahoma";
 const RED = "C8102E", DARK = "1E1E1E", GREY = "F2F2F2", BORDER = "8C8C8C";
 const { dateOf } = require("./dates");
@@ -96,7 +104,7 @@ function blocks(list) {
     else if (b.grid) { out.push(grid(b.grid)); out.push(gap()); }
     else if (b.pb) out.push(new D.Paragraph({ children: [new D.PageBreak()] }));
     else if (b.img) {
-      const buf = fs.readFileSync(path.join(__dirname, b.img));
+      const buf = fs.readFileSync(path.isAbsolute(b.img) ? b.img : path.join(__dirname, b.img));
       const pw = buf.readUInt32BE(16), ph = buf.readUInt32BE(20);
       const maxH = CUR_HEIGHT / 15 - (b.caption ? 110 : 80);
       const w = Math.round(Math.min(CUR_WIDTH / 15 * (b.frac || 1), maxH * pw / ph));
@@ -135,7 +143,7 @@ function header(doc, width) {
   const logo = new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.ImageRun({ type: "png", data: LOGO, transformation: { width: 96, height: 60 } })] });
   const pageP = new D.Paragraph({ bidirectional: true, children: [run("صفحه: ", { size: 16 }), new D.TextRun({ children: [D.PageNumber.CURRENT], size: 16, font: FONT }), run(" از ", { size: 16 }), new D.TextRun({ children: [D.PageNumber.TOTAL_PAGES], size: 16, font: FONT })] });
   const info = [P(`کد مدرک: ${doc.code}`, { size: 16, before: 0, after: 0, align: D.AlignmentType.RIGHT }), P("شماره ویرایش: ۰۰", { size: 16, before: 0, after: 0, align: D.AlignmentType.RIGHT }), P(`تاریخ: ${DATE}`, { size: 16, before: 0, after: 0, align: D.AlignmentType.RIGHT }), pageP];
-  const mid = [P(CO, { size: 22, bold: true, color: RED, align: D.AlignmentType.CENTER, before: 0, after: 40 }), P(doc.title, { size: 20, bold: true, align: D.AlignmentType.CENTER, before: 0, after: 0 }), P("سیستم مدیریت کیفیت ISO 9001:2015", { size: 15, color: "666666", align: D.AlignmentType.CENTER, before: 20, after: 0 })];
+  const mid = [P(CO, { size: 22, bold: true, color: RED, align: D.AlignmentType.CENTER, before: 0, after: 40 }), P(doc.title, { size: 20, bold: true, align: D.AlignmentType.CENTER, before: 0, after: 0 }), P(STD, { size: 15, color: "666666", align: D.AlignmentType.CENTER, before: 20, after: 0 })];
   return new D.Header({
     children: [
       new D.Table({
@@ -148,11 +156,11 @@ function header(doc, width) {
 }
 const footer = () => new D.Footer({ children: [P(`این مدرک متعلق به ${CO} است و هرگونه تکثیر بدون مجوز ممنوع است. نسخه چاپی فاقد مهر «کنترل‌شده» فاقد اعتبار است.`, { size: 14, color: "777777", align: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: RED, space: 2 } } })] });
 
-function approval(width) {
+function approval(width, doc = {}) {
   const c = Math.floor(width / 3), w = [c, c, width - 2 * c];
   return [
     gap(),
-    table({ head: ["تهیه‌کننده", "تأییدکننده", "تصویب‌کننده"], w, rows: [["نام: [.....]\nسمت: نماینده مدیریت", "نام: [.....]\nسمت: مدیر واحد مربوط", "نام: [.....]\nسمت: مدیرعامل"].map((s) => s.split("\n")), [["امضا:", `تاریخ: ${DATE}`], ["امضا:", `تاریخ: ${DATE}`], ["امضا:", `تاریخ: ${DATE}`]]] }, { rowHeight: 700 }),
+    table({ head: ["تهیه‌کننده", "تأییدکننده", "تصویب‌کننده"], w, rows: [[`نام: [.....]\nسمت: ${doc.preparer || "نماینده مدیریت"}`, "نام: [.....]\nسمت: مدیر واحد مربوط", "نام: [.....]\nسمت: مدیرعامل"].map((s) => s.split("\n")), [["امضا:", `تاریخ: ${DATE}`], ["امضا:", `تاریخ: ${DATE}`], ["امضا:", `تاریخ: ${DATE}`]]] }, { rowHeight: 700 }),
   ];
 }
 function revisionTable(width) {
@@ -182,7 +190,7 @@ async function build(doc) {
   const pageW = land ? 16838 : 11906, margin = 1000;
   const width = pageW - 2 * margin;
   const children = [];
-  DATE = dateOf(doc.code);
+  DATE = doc.date || dateOf(doc.code);
   CUR_WIDTH = width;
   CUR_HEIGHT = (land ? 11906 : 16838) - 2300 - 1100;
   // جداول محتوا با عرض متن پرتره طراحی شده‌اند؛ برای افقی مقیاس می‌دهیم
@@ -202,7 +210,7 @@ async function build(doc) {
   if (!doc.forms) children.push(...revisionTable(width));
   for (const s of doc.sections) { children.push(H1(s.h)); children.push(...blocks(scaleTables(s.blocks))); }
   if (doc.forms) doc.forms.forEach((f, i) => { if (i) children.push(new D.Paragraph({ children: [new D.PageBreak()] })); children.push(...formBlocks(f, width)); });
-  if (!doc.noApproval) children.push(...approval(width));
+  if (!doc.noApproval) children.push(...approval(width, doc));
 
   const d = new D.Document({
     creator: CO, title: doc.title,
